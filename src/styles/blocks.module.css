@@ -3,7 +3,7 @@
 }
 
 .block {
-  width: min(10vw, 30px);
+  width:  min(10vw, 30px);
   height: min(10vw, 30px);
   background-color: orange;
   box-shadow:
