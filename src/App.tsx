@@ -1,12 +1,12 @@
 import './App.css';
 
-import Shape from './components/Shape';
+import BlockGroup from './components/BlockGroup';
 
 function App() {
   return (
-    <div className="App">
-      <Shape></Shape>
-    </div>
+    <>
+      <BlockGroup></BlockGroup>
+    </>
   );
 }
 
