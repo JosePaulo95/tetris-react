@@ -2,6 +2,12 @@
   display: block;
 }
 
+.empty_block {
+  background-color: white !important;
+  box-shadow: none !important;
+  opacity: 0.1;
+}
+
 .block {
   width:  min(10vw, 30px);
   height: min(10vw, 30px);
