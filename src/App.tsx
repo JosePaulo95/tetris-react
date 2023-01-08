@@ -3,9 +3,14 @@ import './App.css';
 import BlockGroup from './components/BlockGroup';
 
 function App() {
+  const shape: number[][] = [
+    [1, 0],
+    [1, 1],
+  ];
   return (
     <>
-      <BlockGroup></BlockGroup>
+      <BlockGroup shape={shape}></BlockGroup>
+      <BlockGroup shape={shape}></BlockGroup>
     </>
   );
 }

@@ -1,11 +1,10 @@
 import styles from '../styles/blocks.module.css';
 
-const BlockGroup = () => {
-  const shape = [
-    [1, 0],
-    [1, 1],
-  ];
+interface BlockGroupProps {
+  shape: number[][];
+}
 
+const BlockGroup = ({ shape }: BlockGroupProps) => {
   return (
     <table>
       <tbody className={styles.BlockGroup}>
