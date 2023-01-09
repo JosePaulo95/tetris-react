@@ -2,6 +2,10 @@
   display: block;
 }
 
+.void_block {
+  opacity: 0;
+}
+
 .empty_block {
   background-color: white !important;
   box-shadow: none !important;
