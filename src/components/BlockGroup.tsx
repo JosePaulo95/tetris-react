@@ -1,23 +1,27 @@
 import styles from '../styles/blocks.module.css';
+import EmptyBlock from './EmptyBlock';
 
 interface BlockGroupProps {
-  shape: number[][];
-  Block?: any;
+  grid: number[][];
 }
 
-const BlockGroup = ({ shape, Block }: BlockGroupProps) => {
+const BlockGroup = ({ grid }: BlockGroupProps) => {
   return (
     <table>
       <tbody className={styles.BlockGroup}>
-        {shape.map((row, i) => (
+        {grid.map((row, i) => (
           <tr key={i}>
-            {row.map((block, j) =>
-              block ? (
-                Block()
-              ) : (
-                <td key={j} className={`${styles.void_block} ${styles.block}`}></td>
-              ),
-            )}
+            {row.map((block, j) => {
+              switch (block) {
+                case -1:
+                  return EmptyBlock();
+                default:
+                  return (
+                    <td key={j} className={`${styles.void_block} ${styles.block}`}></td>
+                  );
+                  break;
+              }
+            })}
           </tr>
         ))}
       </tbody>
