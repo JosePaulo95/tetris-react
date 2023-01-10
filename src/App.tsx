@@ -1,6 +1,7 @@
 import './App.css';
 
 import BlockGroup from './components/BlockGroup';
+import BoardContainer from './components/BoardContainer';
 
 function App() {
   const current_board: number[][] = [
@@ -24,11 +25,10 @@ function App() {
     [-1, -1, -1, -1, -1],
   ];
   return (
-    <>
-      {/* <BlockGroup shape={shape} Block={Color1Block}></BlockGroup> */}
+    <BoardContainer>
       <BlockGroup grid={current_board}></BlockGroup>
       <BlockGroup grid={empty_board}></BlockGroup>
-    </>
+    </BoardContainer>
   );
 }
 

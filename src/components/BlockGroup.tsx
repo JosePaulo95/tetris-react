@@ -7,8 +7,8 @@ interface BlockGroupProps {
 
 const BlockGroup = ({ grid }: BlockGroupProps) => {
   return (
-    <table>
-      <tbody className={styles.BlockGroup}>
+    <table className={styles.blockGroup}>
+      <tbody>
         {grid.map((row, i) => (
           <tr key={i}>
             {row.map((block, j) => (
