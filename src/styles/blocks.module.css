@@ -17,6 +17,36 @@
     10px 10px rgb(255, 115, 0);
 }
 
+.block_b {
+  background-color: rgb(221, 21, 21);
+  box-shadow:
+    1px 1px rgb(158, 11, 0),
+    2px 2px rgb(158, 11, 0),
+    3px 3px rgb(158, 11, 0),
+    4px 4px rgb(158, 11, 0),
+    5px 5px rgb(158, 11, 0),
+    6px 6px rgb(158, 11, 0),
+    7px 7px rgb(158, 11, 0),
+    8px 8px rgb(158, 11, 0),
+    9px 9px rgb(158, 11, 0),
+    10px 10px rgb(158, 11, 0);
+}
+
+.block_c {
+  background-color: rgb(255, 0, 149);
+  box-shadow:
+    1px 1px rgb(192, 11, 116),
+    2px 2px rgb(192, 11, 116),
+    3px 3px rgb(192, 11, 116),
+    4px 4px rgb(192, 11, 116),
+    5px 5px rgb(192, 11, 116),
+    6px 6px rgb(192, 11, 116),
+    7px 7px rgb(192, 11, 116),
+    8px 8px rgb(192, 11, 116),
+    9px 9px rgb(192, 11, 116),
+    10px 10px rgb(192, 11, 116);
+}
+
 .void_block {
   opacity: 0;
 }
