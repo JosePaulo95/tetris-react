@@ -62,6 +62,9 @@
 }
 
 .boardContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: relative;
   width: min(100vw, 300px);
   height: 100vh;
