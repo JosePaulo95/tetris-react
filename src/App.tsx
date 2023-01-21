@@ -5,8 +5,9 @@ import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { applyDownMove, willBottomCollide } from './actions/moves';
 import BlockGroup from './components/BlockGroup';
 import BoardContainer from './components/BoardContainer';
+import { CLEAR_BOARD } from './constants';
 import { randomPiece } from './factories/PieceFactory';
-import { isColliding, join, removeMatches } from './utils';
+import { clear, isColliding, join, removeMatches } from './utils';
 
 function App() {
   const [piece, setPiece]: [number[][], Dispatch<SetStateAction<number[][]>>] = useState(
@@ -15,16 +16,7 @@ function App() {
   const [current_board, setCurrentBoard]: [
     number[][],
     Dispatch<SetStateAction<number[][]>>,
-  ] = useState([
-    [0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0],
-  ]);
+  ] = useState(CLEAR_BOARD);
   const outer_top: number[][] = [
     [1, 1, 1, 1, 1],
     [1, 1, 1, 1, 1],
@@ -57,16 +49,7 @@ function App() {
         const game_over = isColliding(board_after_matches, outer_top);
 
         if (game_over) {
-          setCurrentBoard([
-            [0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0],
-          ]);
+          setCurrentBoard(clear(current_board));
         } else {
           setCurrentBoard(board_after_matches);
         }
