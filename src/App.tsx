@@ -56,12 +56,14 @@ function App() {
   useEffect(() => {
     const interval = setInterval(() => {
       const wrapped_piece = wrap(falling_piece);
-      const pos_move = transform(wrapped_piece, 0, 1);
-      const colliding = checksCollision(pos_move, outer_walls);
-      if (!colliding) {
+      const wrapped_pos_move = transform(wrapped_piece, 0, 1);
+      const ground_colliding = checksCollision(wrapped_pos_move, outer_walls);
+      const pos_move = transform(falling_piece, 0, 1);
+      const current_board_colliding = checksCollision(pos_move, current_board);
+      if (!ground_colliding && !current_board_colliding) {
         setFallingPiece((falling_piece) => transform(falling_piece, 0, 1));
       }
-    }, 100);
+    }, 1000);
     return () => clearInterval(interval);
   }, [falling_piece]);
   return (
