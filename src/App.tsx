@@ -2,27 +2,16 @@ import './App.css';
 
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 
+import { applyDownMove, willBottomCollide } from './actions/moves';
 import BlockGroup from './components/BlockGroup';
 import BoardContainer from './components/BoardContainer';
 import { randomPiece } from './factories/PieceFactory';
-import { isColliding, join, removeMatches, transform, wrap } from './utils';
+import { isColliding, join, removeMatches } from './utils';
 
 function App() {
   const [piece, setPiece]: [number[][], Dispatch<SetStateAction<number[][]>>] = useState(
     randomPiece(),
   );
-  const outer_bottom: number[][] = [
-    [0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0],
-    [1, 1, 1, 1, 1, 1, 1],
-  ];
   const [current_board, setCurrentBoard]: [
     number[][],
     Dispatch<SetStateAction<number[][]>>,
@@ -59,13 +48,10 @@ function App() {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      const wrapped_piece = wrap(piece);
-      const wrapped_pos_down_move = transform(wrapped_piece, 0, 1);
-      const piece_pos_down_move = transform(piece, 0, 1);
-      const will_ground_collide = isColliding(wrapped_pos_down_move, outer_bottom);
-      const will_board_collide = isColliding(piece_pos_down_move, current_board);
-
-      if (will_ground_collide || will_board_collide) {
+      if (!willBottomCollide(piece, current_board)) {
+        const down_move = applyDownMove(piece, current_board);
+        setPiece(down_move);
+      } else {
         const board_plus_piece = join(current_board, piece);
         const board_after_matches = removeMatches(board_plus_piece);
         const game_over = isColliding(board_after_matches, outer_top);
@@ -85,8 +71,6 @@ function App() {
           setCurrentBoard(board_after_matches);
         }
         setPiece(randomPiece());
-      } else {
-        setPiece(piece_pos_down_move);
       }
     }, 50);
     return () => clearInterval(interval);
