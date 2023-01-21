@@ -80,3 +80,19 @@ export const join = (boardA: number[][], boardB: number[][]) => {
 const hasSameDimensions = (boardA: number[][], boardB: number[][]) => {
   return boardA.length == boardB.length && boardA[0]?.length == boardB[0]?.length;
 };
+
+export const removeMatches = (board: number[][]) => {
+  const b = board;
+  for (let i = board.length - 1; i >= 0; i--) {
+    if (!b[i].includes(0)) {
+      b[i] = b[i].map((_) => 0);
+      for (let j = i; j > 0; j--) {
+        const aux = b[j];
+        b[j] = b[j - 1];
+        b[j - 1] = aux;
+      }
+    }
+  }
+
+  return b;
+};

@@ -5,7 +5,7 @@ import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import BlockGroup from './components/BlockGroup';
 import BoardContainer from './components/BoardContainer';
 import { randomPiece } from './factories/PieceFactory';
-import { isColliding, join, transform, wrap } from './utils';
+import { isColliding, join, removeMatches, transform, wrap } from './utils';
 
 function App() {
   const [falling_piece, setFallingPiece]: [
@@ -67,8 +67,10 @@ function App() {
       const current_board_colliding = isColliding(pos_move, current_board);
 
       if (ground_colliding || current_board_colliding) {
-        const post = join(current_board, falling_piece);
-        const game_over = isColliding(post, outer_top);
+        const post_move = join(current_board, falling_piece);
+        const post_matches = removeMatches(post_move);
+        const game_over = isColliding(post_matches, outer_top);
+
         if (game_over) {
           setCurrentBoard([
             [0, 0, 0, 0, 0],
@@ -81,13 +83,13 @@ function App() {
             [0, 0, 0, 0, 0],
           ]);
         } else {
-          setCurrentBoard(post);
+          setCurrentBoard(post_matches);
         }
         setFallingPiece(randomPiece());
       } else {
         setFallingPiece(pos_move);
       }
-    }, 500);
+    }, 100);
     return () => clearInterval(interval);
   }, [falling_piece]);
   return (
