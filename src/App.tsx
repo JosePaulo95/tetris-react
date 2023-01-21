@@ -37,10 +37,20 @@ function App() {
     [0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0],
   ]);
+  const outer_top: number[][] = [
+    [1, 1, 1, 1, 1],
+    [1, 1, 1, 1, 1],
+    [1, 1, 1, 1, 1],
+    [0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0],
+  ];
   const empty_board: number[][] = [
-    [-1, -1, -1, -1, -1],
-    [-1, -1, -1, -1, -1],
-    [-1, -1, -1, -1, -1],
+    [0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0],
     [-1, -1, -1, -1, -1],
     [-1, -1, -1, -1, -1],
     [-1, -1, -1, -1, -1],
@@ -57,13 +67,27 @@ function App() {
       const current_board_colliding = isColliding(pos_move, current_board);
 
       if (ground_colliding || current_board_colliding) {
-        setCurrentBoard(join(current_board, falling_piece));
+        const post = join(current_board, falling_piece);
+        const game_over = isColliding(post, outer_top);
+        if (game_over) {
+          setCurrentBoard([
+            [0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0],
+          ]);
+        } else {
+          setCurrentBoard(post);
+        }
         setFallingPiece(randomPiece());
-        //instantiateNewPiece()
       } else {
         setFallingPiece(pos_move);
       }
-    }, 100);
+    }, 500);
     return () => clearInterval(interval);
   }, [falling_piece]);
   return (
