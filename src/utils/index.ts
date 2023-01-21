@@ -40,8 +40,8 @@ export const wrap = (board: number[][]) => {
   return wrapped;
 };
 
-export const checksCollision = (boardA: number[][], boardB: number[][]) => {
-  if (boardA.length != boardB.length || boardA[0]?.length != boardB[0]?.length) {
+export const isColliding = (boardA: number[][], boardB: number[][]) => {
+  if (!hasSameDimensions(boardA, boardB)) {
     throw new Error('Comparing boards with different sizes is not allowed.');
   }
 
@@ -54,4 +54,29 @@ export const checksCollision = (boardA: number[][], boardB: number[][]) => {
   }
 
   return false;
+};
+
+export const join = (boardA: number[][], boardB: number[][]) => {
+  if (!hasSameDimensions(boardA, boardB)) {
+    throw new Error('Joining boards with different sizes is not allowed.');
+  }
+  if (!isColliding(boardA, boardB)) {
+    //throw new Error('Joining colliding boards is not allowed.');
+  }
+
+  const join = boardA;
+
+  for (let i = 0; i < boardB.length; i++) {
+    for (let j = 0; j < boardB[i].length; j++) {
+      if (boardB[i][j] > 0) {
+        join[i][j] = boardB[i][j];
+      }
+    }
+  }
+
+  return join;
+};
+
+const hasSameDimensions = (boardA: number[][], boardB: number[][]) => {
+  return boardA.length == boardB.length && boardA[0]?.length == boardB[0]?.length;
 };
