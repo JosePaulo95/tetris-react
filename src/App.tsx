@@ -10,11 +10,10 @@ import { randomPiece } from './factories/PieceFactory';
 import { clear, isColliding, join, removeMatches, transform } from './utils';
 
 function App() {
-  type PieceAction = {
+  type Action = {
     type: string;
   };
-
-  const pieceReducer = (state: number[][], action: PieceAction) => {
+  const pieceReducer = (state: number[][], action: Action) => {
     switch (action.type) {
       case 'restart':
         return randomPiece();
@@ -28,7 +27,7 @@ function App() {
         return state;
     }
   };
-  const [piece, dispatch]: [number[][], Dispatch<PieceAction>] = useReducer(
+  const [piece, dispatch]: [number[][], Dispatch<Action>] = useReducer(
     pieceReducer,
     randomPiece(),
   );
@@ -58,21 +57,30 @@ function App() {
     [-1, -1, -1, -1, -1],
   ];
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      const input = -1;
-      if (willSideCollide(piece, current_board, input)) {
-        return;
-      }
-      dispatch({ type: 'side_move' });
-    }, 400);
-    return () => clearInterval(interval);
-  }, [piece]);
+  const tickReducer = (state: number, action: Action) => {
+    switch (action.type) {
+      case 'increment':
+        return state + 1;
+        break;
+      default:
+        return state;
+    }
+  };
+
+  const [ticks, ticksDispatch]: [number, Dispatch<Action>] = useReducer(tickReducer, 0);
 
   useEffect(() => {
     const interval = setInterval(() => {
+      ticksDispatch({ type: 'increment' });
+    }, 100);
+    return () => clearInterval(interval);
+  }, [ticks]);
+
+  useEffect(() => {
+    if (ticks % 5 == 0) {
       if (!willBottomCollide(piece, current_board)) {
         dispatch({ type: 'down_move' });
+        console.log(ticks);
       } else {
         const board_plus_piece = join(current_board, piece);
         const board_after_matches = removeMatches(board_plus_piece);
@@ -85,9 +93,8 @@ function App() {
         }
         dispatch({ type: 'restart' });
       }
-    }, 500);
-    return () => clearInterval(interval);
-  }, [piece]);
+    }
+  }, [ticks]);
   return (
     <BoardContainer>
       <BlockGroup grid={piece}></BlockGroup>
