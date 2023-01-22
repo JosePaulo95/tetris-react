@@ -2,7 +2,7 @@ import './App.css';
 
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 
-import { applyDownMove, willBottomCollide } from './actions/moves';
+import { applyDownMove, applySideMove, willBottomCollide, willSideCollide } from './actions/moves';
 import BlockGroup from './components/BlockGroup';
 import BoardContainer from './components/BoardContainer';
 import { CLEAR_BOARD } from './constants';
@@ -40,6 +40,18 @@ function App() {
 
   useEffect(() => {
     const interval = setInterval(() => {
+      const input = -1;
+      if (willSideCollide(piece, current_board, input)) {
+        return;
+      }
+      const side_move = applySideMove(piece, current_board, input);
+      setPiece(side_move);
+    }, 400);
+    return () => clearInterval(interval);
+  }, [piece]);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
       if (!willBottomCollide(piece, current_board)) {
         const down_move = applyDownMove(piece, current_board);
         setPiece(down_move);
@@ -55,7 +67,7 @@ function App() {
         }
         setPiece(randomPiece());
       }
-    }, 50);
+    }, 500);
     return () => clearInterval(interval);
   }, [piece]);
   return (
