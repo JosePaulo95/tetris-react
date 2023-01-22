@@ -105,4 +105,4 @@ export const clear = (board: number[][]) => {
     }
   }
   return b;
-}
+};
