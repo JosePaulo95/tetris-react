@@ -20,7 +20,9 @@ function App() {
         return randomPiece();
       case 'down_move':
         return transform(state, 0, 1);
-      case 'side_move':
+      case 'right_move':
+        return transform(state, 1, 0);
+      case 'left_move':
         return transform(state, -1, 0);
       default:
         return state;
