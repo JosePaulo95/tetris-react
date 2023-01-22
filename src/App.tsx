@@ -1,18 +1,36 @@
 import './App.css';
 
-import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useReducer, useState } from 'react';
 
-import { applyDownMove, applySideMove, willBottomCollide, willSideCollide } from './actions/moves';
+import { willBottomCollide, willSideCollide } from './actions/moves';
 import BlockGroup from './components/BlockGroup';
 import BoardContainer from './components/BoardContainer';
 import { CLEAR_BOARD } from './constants';
 import { randomPiece } from './factories/PieceFactory';
-import { clear, isColliding, join, removeMatches } from './utils';
+import { clear, isColliding, join, removeMatches, transform } from './utils';
 
 function App() {
-  const [piece, setPiece]: [number[][], Dispatch<SetStateAction<number[][]>>] = useState(
+  type PieceAction = {
+    type: string;
+  };
+
+  const pieceReducer = (state: number[][], action: PieceAction) => {
+    switch (action.type) {
+      case 'restart':
+        return randomPiece();
+      case 'down_move':
+        return transform(state, 0, 1);
+      case 'side_move':
+        return transform(state, -1, 0);
+      default:
+        return state;
+    }
+  };
+  const [piece, dispatch]: [number[][], Dispatch<PieceAction>] = useReducer(
+    pieceReducer,
     randomPiece(),
   );
+
   const [current_board, setCurrentBoard]: [
     number[][],
     Dispatch<SetStateAction<number[][]>>,
@@ -44,8 +62,7 @@ function App() {
       if (willSideCollide(piece, current_board, input)) {
         return;
       }
-      const side_move = applySideMove(piece, current_board, input);
-      setPiece(side_move);
+      dispatch({ type: 'side_move' });
     }, 400);
     return () => clearInterval(interval);
   }, [piece]);
@@ -53,8 +70,7 @@ function App() {
   useEffect(() => {
     const interval = setInterval(() => {
       if (!willBottomCollide(piece, current_board)) {
-        const down_move = applyDownMove(piece, current_board);
-        setPiece(down_move);
+        dispatch({ type: 'down_move' });
       } else {
         const board_plus_piece = join(current_board, piece);
         const board_after_matches = removeMatches(board_plus_piece);
@@ -65,7 +81,7 @@ function App() {
         } else {
           setCurrentBoard(board_after_matches);
         }
-        setPiece(randomPiece());
+        dispatch({ type: 'restart' });
       }
     }, 500);
     return () => clearInterval(interval);
