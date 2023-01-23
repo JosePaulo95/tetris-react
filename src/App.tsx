@@ -9,11 +9,17 @@ import { CLEAR_BOARD } from './constants';
 import { randomPiece } from './factories/PieceFactory';
 import { clear, isColliding, join, removeMatches, transform } from './utils';
 
-function App() {
+type NewType = {
+  userController: { popLastInput: () => any };
+};
+
+function App({ userController }: NewType) {
   type Action = {
     type: string;
   };
+
   const pieceReducer = (state: number[][], action: Action) => {
+    console.log(action.type);
     switch (action.type) {
       case 'restart':
         return randomPiece();
@@ -27,6 +33,15 @@ function App() {
         return state;
     }
   };
+  const tickReducer = (state: number, action: Action) => {
+    switch (action.type) {
+      case 'increment':
+        return state + 1;
+      default:
+        return state;
+    }
+  };
+  const [ticks, ticksDispatch]: [number, Dispatch<Action>] = useReducer(tickReducer, 0);
   const [piece, dispatch]: [number[][], Dispatch<Action>] = useReducer(
     pieceReducer,
     randomPiece(),
@@ -57,30 +72,28 @@ function App() {
     [-1, -1, -1, -1, -1],
   ];
 
-  const tickReducer = (state: number, action: Action) => {
-    switch (action.type) {
-      case 'increment':
-        return state + 1;
-        break;
-      default:
-        return state;
-    }
-  };
-
-  const [ticks, ticksDispatch]: [number, Dispatch<Action>] = useReducer(tickReducer, 0);
-
   useEffect(() => {
     const interval = setInterval(() => {
       ticksDispatch({ type: 'increment' });
-    }, 100);
+    }, 50);
     return () => clearInterval(interval);
   }, [ticks]);
 
   useEffect(() => {
-    if (ticks % 5 == 0) {
+    if (ticks % 2 == 0) {
+      const input = userController.popLastInput();
+      if (input) {
+        if (!willSideCollide(piece, current_board, input)) {
+          dispatch({ type: input == -1 ? 'left_move' : 'right_move' });
+        }
+      }
+    }
+  }, [ticks]);
+
+  useEffect(() => {
+    if (ticks % 8 == 1) {
       if (!willBottomCollide(piece, current_board)) {
         dispatch({ type: 'down_move' });
-        console.log(ticks);
       } else {
         const board_plus_piece = join(current_board, piece);
         const board_after_matches = removeMatches(board_plus_piece);
