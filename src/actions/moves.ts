@@ -43,5 +43,10 @@ export const willSideCollide = (
 ): boolean => {
   const wrapped_piece = wrap(piece);
   const wrapped_pos_side_move = transform(wrapped_piece, direction, 0);
-  return isColliding(wrapped_pos_side_move, outer_laterals);
+
+  const piece_pos_side_move = transform(piece, direction, 0);
+  return (
+    isColliding(wrapped_pos_side_move, outer_laterals) ||
+    isColliding(piece_pos_side_move, board)
+  );
 };
