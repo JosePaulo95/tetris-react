@@ -1,53 +1,33 @@
+import { Block } from '../types';
+import { transform } from '../utils';
+
 export const randomPiece = () => {
-  const type = Math.floor(Math.random() * 3);
-  switch (type) {
-    case 0:
-      return [
-        [0, 1, 1, 0, 0],
-        [0, 0, 1, 1, 0],
-        [0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0],
-      ];
-      break;
-    case 1:
-      return [
-        [0, 2, 2, 2, 0],
-        [0, 0, 2, 0, 0],
-        [0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0],
-      ];
-      break;
-    case 2:
-      return [
-        [0, 0, 3, 0, 0],
-        [0, 0, 3, 0, 0],
-        [0, 0, 3, 3, 0],
-        [0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0],
-      ];
-      break;
-    default:
-      break;
-  }
-  return [
-    [0, 2, 2, 2, 0],
-    [0, 0, 2, 0, 0],
+  return createBlock([
+    [0, 1, 1, 0, 0],
+    [0, 0, 1, 1, 0],
     [0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0],
-  ];
+  ]);
+};
+
+export const createBlock = (initial_grid: number[][]): Block => {
+  let pos = { x: 0, y: 0 };
+
+  const display = () => {
+    return transform(initial_grid, pos.x, pos.y);
+  };
+  const translate = (x: number, y: number) => {
+    pos = { x: pos.x + x, y: pos.y + y };
+  };
+  return {
+    grid: initial_grid,
+    x: 0,
+    y: 0,
+    display: display,
+    translate: translate,
+  };
 };

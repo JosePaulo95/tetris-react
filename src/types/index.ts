@@ -1,4 +1,3 @@
-import { Grid } from './grid';
-import { Piece } from './piece';
+import { Block } from './block';
 
-export type { Grid, Piece };
+export type { Block };

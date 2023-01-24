@@ -6,7 +6,8 @@ import { willBottomCollide, willSideCollide } from './actions/moves';
 import BlockGroup from './components/BlockGroup';
 import BoardContainer from './components/BoardContainer';
 import { CLEAR_BOARD } from './constants';
-import { randomPiece } from './factories/PieceFactory';
+import { createBlock, randomPiece } from './factories/PieceFactory';
+import { Block } from './types';
 import { clear, isColliding, join, removeMatches, transform } from './utils';
 
 type NewType = {
@@ -18,17 +19,11 @@ function App({ userController }: NewType) {
     type: string;
   };
 
-  const pieceReducer = (state: number[][], action: Action) => {
+  const pieceReducer = (state: Block, action: Action) => {
     console.log(action.type);
     switch (action.type) {
       case 'restart':
         return randomPiece();
-      case 'down_move':
-        return transform(state, 0, 1);
-      case 'right_move':
-        return transform(state, 1, 0);
-      case 'left_move':
-        return transform(state, -1, 0);
       default:
         return state;
     }
@@ -42,15 +37,13 @@ function App({ userController }: NewType) {
     }
   };
   const [ticks, ticksDispatch]: [number, Dispatch<Action>] = useReducer(tickReducer, 0);
-  const [piece, dispatch]: [number[][], Dispatch<Action>] = useReducer(
+  const [piece, dispatch]: [Block, Dispatch<Action>] = useReducer(
     pieceReducer,
     randomPiece(),
   );
 
-  const [current_board, setCurrentBoard]: [
-    number[][],
-    Dispatch<SetStateAction<number[][]>>,
-  ] = useState(CLEAR_BOARD);
+  const [current_board, setCurrentBoard]: [Block, Dispatch<SetStateAction<Block>>] =
+    useState(CLEAR_BOARD);
   const outer_top: number[][] = [
     [1, 1, 1, 1, 1],
     [1, 1, 1, 1, 1],
@@ -61,7 +54,7 @@ function App({ userController }: NewType) {
     [0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0],
   ];
-  const empty_board: number[][] = [
+  const empty_board: Block = createBlock([
     [0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0],
@@ -70,7 +63,7 @@ function App({ userController }: NewType) {
     [-1, -1, -1, -1, -1],
     [-1, -1, -1, -1, -1],
     [-1, -1, -1, -1, -1],
-  ];
+  ]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -83,8 +76,9 @@ function App({ userController }: NewType) {
     if (ticks % 2 == 0) {
       const input = userController.popLastInput();
       if (input) {
-        if (!willSideCollide(piece, current_board, input)) {
-          dispatch({ type: input == -1 ? 'left_move' : 'right_move' });
+        if (!willSideCollide(piece.display(), current_board.display(), input)) {
+          //dispatch({ type: input == -1 ? 'left_move' : 'right_move' });
+          piece.translate(input, 0);
         }
       }
     }
@@ -92,17 +86,19 @@ function App({ userController }: NewType) {
 
   useEffect(() => {
     if (ticks % 8 == 1) {
-      if (!willBottomCollide(piece, current_board)) {
-        dispatch({ type: 'down_move' });
+      if (!willBottomCollide(piece.display(), current_board.display())) {
+        // dispatch({ type: 'down_move' });
+        piece.translate(0, 1);
+        console.log(piece);
       } else {
-        const board_plus_piece = join(current_board, piece);
+        const board_plus_piece = join(current_board.display(), piece.display());
         const board_after_matches = removeMatches(board_plus_piece);
         const game_over = isColliding(board_after_matches, outer_top);
 
         if (game_over) {
-          setCurrentBoard(clear(current_board));
+          setCurrentBoard(CLEAR_BOARD);
         } else {
-          setCurrentBoard(board_after_matches);
+          //setCurrentBoard(board_after_matches);
         }
         dispatch({ type: 'restart' });
       }
@@ -110,9 +106,9 @@ function App({ userController }: NewType) {
   }, [ticks]);
   return (
     <BoardContainer>
-      <BlockGroup grid={piece}></BlockGroup>
-      <BlockGroup grid={current_board}></BlockGroup>
-      <BlockGroup grid={empty_board}></BlockGroup>
+      <BlockGroup block={piece}></BlockGroup>
+      <BlockGroup block={current_board}></BlockGroup>
+      <BlockGroup block={empty_board}></BlockGroup>
     </BoardContainer>
   );
 }
