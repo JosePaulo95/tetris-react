@@ -16,16 +16,23 @@ export const randomPiece = () => {
 
 export const createBlock = (initial_grid: number[][]): Block => {
   let pos = { x: 0, y: 0 };
+  let grid_ = initial_grid;
 
   const display = () => {
-    return transform(initial_grid, pos.x, pos.y);
+    return transform(grid_, pos.x, pos.y);
   };
   const translate = (x: number, y: number) => {
     pos = { x: pos.x + x, y: pos.y + y };
   };
+  const resetGrid = (grid: number[][]) => {
+    pos.x = 0;
+    pos.y = 0;
+    grid_ = grid;
+  };
   return {
+    resetGrid: resetGrid,
     grid: initial_grid,
-    x: 0,
+    x: pos.x,
     y: 0,
     display: display,
     translate: translate,

@@ -19,15 +19,6 @@ function App({ userController }: NewType) {
     type: string;
   };
 
-  const pieceReducer = (state: Block, action: Action) => {
-    console.log(action.type);
-    switch (action.type) {
-      case 'restart':
-        return randomPiece();
-      default:
-        return state;
-    }
-  };
   const tickReducer = (state: number, action: Action) => {
     switch (action.type) {
       case 'increment':
@@ -37,13 +28,8 @@ function App({ userController }: NewType) {
     }
   };
   const [ticks, ticksDispatch]: [number, Dispatch<Action>] = useReducer(tickReducer, 0);
-  const [piece, dispatch]: [Block, Dispatch<Action>] = useReducer(
-    pieceReducer,
-    randomPiece(),
-  );
-
-  const [current_board, setCurrentBoard]: [Block, Dispatch<SetStateAction<Block>>] =
-    useState(CLEAR_BOARD);
+  const [piece] = useState(randomPiece());
+  const [current_board] = useState(CLEAR_BOARD);
   const outer_top: number[][] = [
     [1, 1, 1, 1, 1],
     [1, 1, 1, 1, 1],
@@ -85,22 +71,33 @@ function App({ userController }: NewType) {
   }, [ticks]);
 
   useEffect(() => {
-    if (ticks % 8 == 1) {
+    if (ticks % 2 == 1) {
       if (!willBottomCollide(piece.display(), current_board.display())) {
-        // dispatch({ type: 'down_move' });
+        //dispatch({ type: 'move', x: 0, y: 1 });
         piece.translate(0, 1);
-        console.log(piece);
       } else {
         const board_plus_piece = join(current_board.display(), piece.display());
         const board_after_matches = removeMatches(board_plus_piece);
         const game_over = isColliding(board_after_matches, outer_top);
 
         if (game_over) {
-          setCurrentBoard(CLEAR_BOARD);
+          current_board.resetGrid(CLEAR_BOARD.grid);
+          //setCurrentBoard(CLEAR_BOARD);
         } else {
           //setCurrentBoard(board_after_matches);
         }
-        dispatch({ type: 'restart' });
+        //dispatch({ type: 'restart', x: 0, y: 0 });
+
+        piece.resetGrid([
+          [0, 1, 1, 0, 0],
+          [0, 0, 1, 1, 0],
+          [0, 0, 0, 0, 0],
+          [0, 0, 0, 0, 0],
+          [0, 0, 0, 0, 0],
+          [0, 0, 0, 0, 0],
+          [0, 0, 0, 0, 0],
+          [0, 0, 0, 0, 0],
+        ]);
       }
     }
   }, [ticks]);

@@ -4,4 +4,5 @@ export type Block = {
   y: number;
   display: () => number[][];
   translate: (x: number, y: number) => void;
+  resetGrid: (grid: number[][]) => void;
 };
