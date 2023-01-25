@@ -54,7 +54,7 @@ function App({ userController }: NewType) {
   useEffect(() => {
     const interval = setInterval(() => {
       ticksDispatch({ type: 'increment' });
-    }, 50);
+    }, 1000);
     return () => clearInterval(interval);
   }, [ticks]);
 
@@ -84,6 +84,7 @@ function App({ userController }: NewType) {
           current_board.resetGrid(CLEAR_BOARD.grid);
           //setCurrentBoard(CLEAR_BOARD);
         } else {
+          current_board.resetGrid(board_after_matches);
           //setCurrentBoard(board_after_matches);
         }
         //dispatch({ type: 'restart', x: 0, y: 0 });
