@@ -7,18 +7,16 @@ import ReactDOM from 'react-dom';
 import App from './App';
 
 const UserController = () => {
-  let stack: number | undefined;
-  const popLastInput = () => {
-    const aux = stack;
-    stack = undefined;
-    return aux;
+  let current_input: number | undefined;
+  const getInput = () => {
+    return current_input;
   };
-  const stackInput = (input: any) => {
-    stack = input;
+  const setInput = (input: any) => {
+    current_input = input;
   };
   return {
-    popLastInput,
-    stackInput,
+    getInput,
+    setInput,
   };
 };
 
@@ -35,11 +33,11 @@ inputs.bind('move-left', 'ArrowLeft');
 inputs.bind('move-right', 'ArrowRight');
 
 inputs.down.on('move-left', () => {
-  userController.stackInput(-1);
+  userController.setInput(-1);
 });
 
 inputs.down.on('move-right', () => {
-  userController.stackInput(1);
+  userController.setInput(1);
 });
 
 ReactDOM.render(

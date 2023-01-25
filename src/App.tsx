@@ -11,7 +11,7 @@ import { Block } from './types';
 import { clear, isColliding, join, removeMatches, transform } from './utils';
 
 type NewType = {
-  userController: { popLastInput: () => any };
+  userController: { getInput: () => any };
 };
 
 function App({ userController }: NewType) {
@@ -54,16 +54,15 @@ function App({ userController }: NewType) {
   useEffect(() => {
     const interval = setInterval(() => {
       ticksDispatch({ type: 'increment' });
-    }, 1000);
+    }, 200);
     return () => clearInterval(interval);
   }, [ticks]);
 
   useEffect(() => {
     if (ticks % 2 == 0) {
-      const input = userController.popLastInput();
+      const input = userController.getInput();
       if (input) {
         if (!willSideCollide(piece.display(), current_board.display(), input)) {
-          //dispatch({ type: input == -1 ? 'left_move' : 'right_move' });
           piece.translate(input, 0);
         }
       }
@@ -73,7 +72,6 @@ function App({ userController }: NewType) {
   useEffect(() => {
     if (ticks % 2 == 1) {
       if (!willBottomCollide(piece.display(), current_board.display())) {
-        //dispatch({ type: 'move', x: 0, y: 1 });
         piece.translate(0, 1);
       } else {
         const board_plus_piece = join(current_board.display(), piece.display());
@@ -82,12 +80,9 @@ function App({ userController }: NewType) {
 
         if (game_over) {
           current_board.resetGrid(CLEAR_BOARD.grid);
-          //setCurrentBoard(CLEAR_BOARD);
         } else {
           current_board.resetGrid(board_after_matches);
-          //setCurrentBoard(board_after_matches);
         }
-        //dispatch({ type: 'restart', x: 0, y: 0 });
 
         piece.resetGrid([
           [0, 1, 1, 0, 0],
