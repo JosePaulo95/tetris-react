@@ -1,13 +1,24 @@
-import { PIECE_A_GRIDS } from '../constants';
-import { transform, wrapGrid } from '../controller';
-import { Block, Grid } from '../types';
+import { configs } from '../configs';
+import { EMPTY_GRID, LIMIT_GRID, PIECE_A_GRIDS } from '../constants';
+import { transform, wrap, wrapGrid } from '../controller';
+import { Block as Piece, Grid } from '../types';
 
 export const randomPiece = () => {
   const grids: Grid[] = PIECE_A_GRIDS(1);
-  return createBlock(grids.map((g) => wrapGrid(g, 5, 8)));
+  return createPiece(grids.map((g) => wrapGrid(g, configs.width, configs.height)));
 };
 
-export const createBlock = (initial_grid: Grid[]): Block => {
+export const emptyPiece = () => {
+  const grid: Grid = EMPTY_GRID();
+  return createPiece([wrapGrid(grid, configs.width, configs.height)]);
+};
+
+export const limitsPiece = () => {
+  const grid: Grid = LIMIT_GRID(configs.width, configs.height, configs.playable_height);
+  return createPiece([wrapGrid(grid, configs.width, configs.height)]);
+};
+
+export const createPiece = (initial_grid: Grid[]): Piece => {
   let pos = { x: 0, y: 0 };
   const grid_ = initial_grid;
   let rotation = 0;

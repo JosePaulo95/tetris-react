@@ -1,15 +1,19 @@
 import { Grid } from '../types';
 
-export const wrapGrid = (original_grid: Grid, new_width: number, new_height: number) => {
-  if (original_grid.length > new_width || original_grid[0]?.length > new_height) {
+export const wrapGrid = (
+  original_grid: Grid,
+  new_width: number,
+  new_height: number,
+): Grid => {
+  if (original_grid.length > new_height || original_grid[0]?.length > new_width) {
     throw new Error('Wrapping a grid into a smaller is not allowed');
   }
 
   const padding = Math.ceil((new_width - original_grid.length) / 2);
   const grid = [];
-  for (let i = 0; i < new_width; i++) {
+  for (let i = 0; i < new_height; i++) {
     grid.push([]);
-    for (let j = 0; j < new_height; j++) {
+    for (let j = 0; j < new_width; j++) {
       grid[i].push(get(original_grid, i - padding, j));
     }
   }

@@ -1,17 +1,23 @@
 import { createBlock } from '../factories/PieceFactory';
 
-// export const CLEAR_BOARD = createBlock([
-//   [
-//     [0, 0, 0, 0, 0],
-//     [0, 0, 0, 0, 0],
-//     [0, 0, 0, 0, 0],
-//     [0, 0, 0, 0, 0],
-//     [0, 0, 0, 0, 0],
-//     [0, 0, 0, 0, 0],
-//     [0, 0, 0, 0, 0],
-//     [0, 0, 0, 0, 0],
-//   ],
-// ]);
+export const EMPTY_GRID = () => {
+  return [[0]];
+};
+
+export const LIMIT_GRID = (width, height, playable_height) => {
+  const grid = [];
+  for (let i = 0; i < height; i++) {
+    grid.push([]);
+    for (let j = 0; j < width; j++) {
+      if (i > playable_height) {
+        grid[i].push(0);
+      } else {
+        grid[i].push(-1);
+      }
+    }
+  }
+  return grid;
+};
 
 export const PIECE_A_GRIDS = (type) => {
   const o = type;

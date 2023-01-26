@@ -2,16 +2,22 @@ import './App.css';
 
 import { useReducer } from 'react';
 
+import BoardContainer from './components/BoardContainer';
 import GridView from './components/GridView';
-import { randomPiece } from './factories/PieceFactory';
+import { emptyPiece, limitsPiece, randomPiece } from './factories/PieceFactory';
 
 function App() {
-  const pieceReducer = (state: number, action: Action) => {
-    return state;
-  };
   // [PieceModel, Dispatch<PieceAction>]
   const piece = randomPiece();
-  return <GridView grid={piece.currentGrid()}></GridView>;
+  const board = emptyPiece();
+  const limits = limitsPiece();
+  return (
+    <BoardContainer>
+      <GridView grid={piece.currentGrid()}></GridView>
+      <GridView grid={board.currentGrid()}></GridView>
+      <GridView grid={limits.currentGrid()}></GridView>
+    </BoardContainer>
+  );
 }
 
 export default App;
