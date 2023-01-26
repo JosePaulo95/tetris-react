@@ -1,109 +1,17 @@
 import './App.css';
 
-import { Dispatch, SetStateAction, useEffect, useReducer, useState } from 'react';
+import { useReducer } from 'react';
 
-import { willBottomCollide, willSideCollide } from './actions/moves';
-import BlockGroup from './components/BlockGroup';
-import BoardContainer from './components/BoardContainer';
-import { CLEAR_BOARD } from './constants';
-import { createBlock, randomPiece } from './factories/PieceFactory';
-import { Block } from './types';
-import { clear, isColliding, join, removeMatches, transform } from './utils';
+import GridView from './components/GridView';
+import { randomPiece } from './factories/PieceFactory';
 
-type NewType = {
-  userController: { getInput: () => any };
-};
-
-function App({ userController }: NewType) {
-  type Action = {
-    type: string;
+function App() {
+  const pieceReducer = (state: number, action: Action) => {
+    return state;
   };
-
-  const tickReducer = (state: number, action: Action) => {
-    switch (action.type) {
-      case 'increment':
-        return state + 1;
-      default:
-        return state;
-    }
-  };
-  const [ticks, ticksDispatch]: [number, Dispatch<Action>] = useReducer(tickReducer, 0);
-  const [piece] = useState(randomPiece());
-  const [current_board] = useState(CLEAR_BOARD);
-  const outer_top: number[][] = [
-    [1, 1, 1, 1, 1],
-    [1, 1, 1, 1, 1],
-    [1, 1, 1, 1, 1],
-    [0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0],
-  ];
-  const empty_board: Block = createBlock([
-    [0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0],
-    [-1, -1, -1, -1, -1],
-    [-1, -1, -1, -1, -1],
-    [-1, -1, -1, -1, -1],
-    [-1, -1, -1, -1, -1],
-    [-1, -1, -1, -1, -1],
-  ]);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      ticksDispatch({ type: 'increment' });
-    }, 200);
-    return () => clearInterval(interval);
-  }, [ticks]);
-
-  useEffect(() => {
-    if (ticks % 2 == 0) {
-      const input = userController.getInput();
-      if (input) {
-        if (!willSideCollide(piece.display(), current_board.display(), input)) {
-          piece.translate(input, 0);
-        }
-      }
-    }
-  }, [ticks]);
-
-  useEffect(() => {
-    if (ticks % 2 == 1) {
-      if (!willBottomCollide(piece.display(), current_board.display())) {
-        piece.translate(0, 1);
-      } else {
-        const board_plus_piece = join(current_board.display(), piece.display());
-        const board_after_matches = removeMatches(board_plus_piece);
-        const game_over = isColliding(board_after_matches, outer_top);
-
-        if (game_over) {
-          current_board.resetGrid(CLEAR_BOARD.grid);
-        } else {
-          current_board.resetGrid(board_after_matches);
-        }
-
-        piece.resetGrid([
-          [0, 1, 1, 0, 0],
-          [0, 0, 1, 1, 0],
-          [0, 0, 0, 0, 0],
-          [0, 0, 0, 0, 0],
-          [0, 0, 0, 0, 0],
-          [0, 0, 0, 0, 0],
-          [0, 0, 0, 0, 0],
-          [0, 0, 0, 0, 0],
-        ]);
-      }
-    }
-  }, [ticks]);
-  return (
-    <BoardContainer>
-      <BlockGroup block={piece}></BlockGroup>
-      <BlockGroup block={current_board}></BlockGroup>
-      <BlockGroup block={empty_board}></BlockGroup>
-    </BoardContainer>
-  );
+  // [PieceModel, Dispatch<PieceAction>]
+  const piece = randomPiece();
+  return <GridView grid={piece.currentGrid()}></GridView>;
 }
 
 export default App;

@@ -1,4 +1,23 @@
-const get = (board: number[][], x: number, y: number) => {
+import { Grid } from '../types';
+
+export const wrapGrid = (original_grid: Grid, new_width: number, new_height: number) => {
+  if (original_grid.length > new_width || original_grid[0]?.length > new_height) {
+    throw new Error('Wrapping a grid into a smaller is not allowed');
+  }
+
+  const padding = Math.ceil((new_width - original_grid.length) / 2);
+  const grid = [];
+  for (let i = 0; i < new_width; i++) {
+    grid.push([]);
+    for (let j = 0; j < new_height; j++) {
+      grid[i].push(get(original_grid, i - padding, j));
+    }
+  }
+
+  return grid;
+};
+
+const get = (board: Grid, x: number, y: number) => {
   if (board[x] && board[x][y]) {
     return board[x][y];
   } else {

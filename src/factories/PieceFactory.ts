@@ -1,25 +1,19 @@
-import { Block } from '../types';
-import { transform } from '../utils';
+import { PIECE_A_GRIDS } from '../constants';
+import { transform, wrapGrid } from '../controller';
+import { Block, Grid } from '../types';
 
 export const randomPiece = () => {
-  return createBlock([
-    [0, 1, 1, 0, 0],
-    [0, 0, 1, 1, 0],
-    [0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0],
-  ]);
+  const grids: Grid[] = PIECE_A_GRIDS(1);
+  return createBlock(grids.map((g) => wrapGrid(g, 5, 8)));
 };
 
-export const createBlock = (initial_grid: number[][]): Block => {
+export const createBlock = (initial_grid: Grid[]): Block => {
   let pos = { x: 0, y: 0 };
-  let grid_ = initial_grid;
+  const grid_ = initial_grid;
+  let rotation = 0;
 
-  const display = () => {
-    return transform(grid_, pos.x, pos.y);
+  const currentGrid = () => {
+    return initial_grid[0]; //transform(grid_[rotation], pos.x, pos.y);
   };
   const translate = (x: number, y: number) => {
     pos = { x: pos.x + x, y: pos.y + y };
@@ -27,14 +21,18 @@ export const createBlock = (initial_grid: number[][]): Block => {
   const resetGrid = (grid: number[][]) => {
     pos.x = 0;
     pos.y = 0;
-    grid_ = grid;
+    grid_[0] = grid;
+  };
+  const rotate = () => {
+    rotation = (rotation + 1) % 2;
   };
   return {
     resetGrid: resetGrid,
     grid: initial_grid,
     x: pos.x,
     y: 0,
-    display: display,
+    currentGrid: currentGrid,
     translate: translate,
+    rotate: rotate,
   };
 };

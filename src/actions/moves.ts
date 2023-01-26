@@ -1,4 +1,5 @@
-import { isColliding, transform, wrap } from '../utils';
+import { isColliding, transform, wrap } from '../controller';
+import { Block } from '../types';
 
 const outer_laterals: number[][] = [
   [1, 0, 0, 0, 0, 0, 1],
@@ -49,4 +50,11 @@ export const willSideCollide = (
     isColliding(wrapped_pos_side_move, outer_laterals) ||
     isColliding(piece_pos_side_move, board)
   );
+};
+
+export const willRotationCollide = (b1: Block, b2: Block) => {
+  //b1.rotate();
+  const a = b1;
+  a.translate(1, 0);
+  return isColliding(b1.display(), b2.display());
 };

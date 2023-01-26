@@ -7,16 +7,30 @@ import ReactDOM from 'react-dom';
 import App from './App';
 
 const UserController = () => {
-  let current_input: number | undefined;
-  const getInput = () => {
-    return current_input;
+  let current_input_x: number | undefined;
+  let current_input_y: number | undefined;
+
+  const getInputX = () => {
+    const aux = current_input_x;
+    current_input_x = undefined;
+    return aux;
   };
-  const setInput = (input: any) => {
-    current_input = input;
+  const getInputY = () => {
+    const aux = current_input_y;
+    current_input_y = undefined;
+    return aux;
+  };
+  const setInputX = (input: any) => {
+    current_input_x = input;
+  };
+  const setInputY = (input: any) => {
+    current_input_y = input;
   };
   return {
-    getInput,
-    setInput,
+    getInputX,
+    setInputX,
+    getInputY,
+    setInputY,
   };
 };
 
@@ -31,13 +45,18 @@ const inputs = new GameInputs(dom, {
 });
 inputs.bind('move-left', 'ArrowLeft');
 inputs.bind('move-right', 'ArrowRight');
+inputs.bind('rotate', 'ArrowUp');
 
 inputs.down.on('move-left', () => {
-  userController.setInput(-1);
+  userController.setInputX(-1);
 });
 
 inputs.down.on('move-right', () => {
-  userController.setInput(1);
+  userController.setInputX(1);
+});
+
+inputs.down.on('rotate', () => {
+  userController.setInputY(-1);
 });
 
 ReactDOM.render(
