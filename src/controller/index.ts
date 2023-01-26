@@ -9,12 +9,12 @@ export const wrapGrid = (
     throw new Error('Wrapping a grid into a smaller is not allowed');
   }
 
-  const padding = Math.ceil((new_width - original_grid.length) / 2);
+  const padding = Math.floor((new_width - original_grid[0]?.length) / 2);
   const grid = [];
   for (let i = 0; i < new_height; i++) {
     grid.push([]);
     for (let j = 0; j < new_width; j++) {
-      grid[i].push(get(original_grid, i - padding, j));
+      grid[i].push(get(original_grid, i, j - padding));
     }
   }
 
