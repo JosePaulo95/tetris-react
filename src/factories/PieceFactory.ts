@@ -19,31 +19,17 @@ export const limitsPiece = () => {
 };
 
 export const createPiece = (initial_grid: Grid[]): Piece => {
-  let pos = { x: 0, y: 0 };
-  const grid_ = initial_grid;
-  let rotation = 0;
-
-  const currentGrid = () => {
-    return initial_grid[0]; //transform(grid_[rotation], pos.x, pos.y);
-  };
-  const translate = (x: number, y: number) => {
-    pos = { x: pos.x + x, y: pos.y + y };
-  };
-  const resetGrid = (grid: number[][]) => {
-    pos.x = 0;
-    pos.y = 0;
-    grid_[0] = grid;
-  };
-  const rotate = () => {
-    rotation = (rotation + 1) % 2;
-  };
-  return {
-    resetGrid: resetGrid,
-    grid: initial_grid,
-    x: pos.x,
+  const piece = {
+    x: 0,
     y: 0,
-    currentGrid: currentGrid,
-    translate: translate,
-    rotate: rotate,
+    rotations: 0,
+    currentGrid: function () {
+      return transform(
+        initial_grid[this.rotations % initial_grid.length],
+        this.x,
+        this.y,
+      );
+    },
   };
+  return piece;
 };
