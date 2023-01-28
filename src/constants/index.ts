@@ -12,7 +12,7 @@ export const LIMIT_GRID = (width, height, playable_height) => {
       if (i < height - playable_height) {
         grid[i].push(0);
       } else {
-        grid[i].push(3);
+        grid[i].push(-1);
       }
     }
   }
