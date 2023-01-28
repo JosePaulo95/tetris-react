@@ -1,17 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 
-import { emptyPiece, limitsPiece, randomPiece } from '../factories/PieceFactory';
+import rootReducer from './reducers';
 
-const INITIAL_STATE = {
-  piece: randomPiece(),
-  board: emptyPiece(),
-  limits: limitsPiece(),
-};
-
-const reducer = (state = INITIAL_STATE, action) => {
-  return state;
-};
-
-const store = configureStore({ reducer });
+const store = configureStore({ reducer: rootReducer });
 
 export default store;

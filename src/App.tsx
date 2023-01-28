@@ -1,36 +1,12 @@
 import './App.css';
 
-import { connect, useSelector } from 'react-redux';
+import Board from './Board';
 
-import BoardContainer from './components/BoardContainer';
-import GridView from './components/GridView';
-import { emptyPiece, limitsPiece, randomPiece } from './factories/PieceFactory';
-
-function App({ piece, board, limits }) {
-  // randomPiece();
-  // const board = emptyPiece();
-  // const limits = limitsPiece();
-
-  // handleTick = () => {
-  //   //this.setState({ newTodoText: "" });
-  // };
-
-  // handlePlayerInput = (input) => {
-  //   this.setState({ newTodoText: '' });
-  // };
-
+function App() {
   return (
-    <BoardContainer>
-      <GridView grid={piece.currentGrid()}></GridView>
-      <GridView grid={board.currentGrid()}></GridView>
-      <GridView grid={limits.currentGrid()}></GridView>
-    </BoardContainer>
+    <>
+      <Board></Board>
+    </>
   );
 }
-const mapStateToProps = (state) => ({
-  piece: state.piece,
-  board: state.board,
-  limits: state.limits,
-});
-
-export default connect(mapStateToProps)(App);
+export default App;

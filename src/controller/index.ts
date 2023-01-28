@@ -1,4 +1,13 @@
-import { Grid } from '../types';
+import { Block, Grid } from '../types';
+
+export const displayCurrentGrid = (block: Block) => {
+  const b = transform(
+    block.initial_grid[block.rotations % block.initial_grid.length],
+    block.x,
+    block.y,
+  );
+  return b;
+};
 
 export const wrapGrid = (
   original_grid: Grid,

@@ -20,16 +20,10 @@ export const limitsPiece = () => {
 
 export const createPiece = (initial_grid: Grid[]): Piece => {
   const piece = {
+    initial_grid: initial_grid,
     x: 0,
     y: 0,
     rotations: 0,
-    currentGrid: function () {
-      return transform(
-        initial_grid[this.rotations % initial_grid.length],
-        this.x,
-        this.y,
-      );
-    },
   };
   return piece;
 };
