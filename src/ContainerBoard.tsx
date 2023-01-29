@@ -1,13 +1,11 @@
 import './App.css';
 
 import { Dispatch, useEffect } from 'react';
-import { connect, useSelector } from 'react-redux';
+import { connect } from 'react-redux';
 
 import BoardContainer from './components/BoardContainer';
 import GridView from './components/GridView';
 import { displayCurrentGrid } from './controller';
-import { emptyPiece, limitsPiece, randomPiece } from './factories/PieceFactory';
-import { rightMove } from './store/actions/blocks';
 import { Block } from './types';
 
 type ContainerBoardProps = {
@@ -18,25 +16,57 @@ type ContainerBoardProps = {
 };
 
 function ContainerBoard({ blocks, ticks, dispatch }: ContainerBoardProps) {
+  const isTimeToMoveDown = (ticks) => {
+    return ticks % 10 == 0;
+  };
+
   useEffect(() => {
     try {
-      dispatch({ type: 'piece/move-down' });
+      // if (existsMatch(board)) {
+      //   dispatch({ type: 'board/combinations' });
+      // }
+      // if (existsFloatingBlocks(floating)) {
+      //   dispatch({ type: 'floating/move-down' });
+      // }
+      // const inputx = userController.getInputX();
+      // const inputy = userController.getInputY();
+      if (isTimeToMoveDown(ticks)) {
+        dispatch({ type: 'piece/move-down' });
+      }
+      // if (inputx > 0) {
+      //   dispatch({ type: 'piece/move-right' });
+      // }
+      // if (inputx < 0) {
+      //   dispatch({ type: 'piece/move-left' });
+      // }
+      // if (inputy > 0) {
+      //   dispatch({ type: 'piece/rotate' });
+      // }
+      // if (inputy < 0) {
+      //   dispatch({ type: 'piece/move-down-infinity' });
+      // }
     } catch (error) {
-      console.log('pegou o erro');
-      console.log(error);
+      // switch (error.type) {
+      //   case 'remaining-floating-blocks':
+      //     //do nothing but waits next tick
+      //     break;
+      //   case 'floating-down-move-collision':
+      //     dispatch({ type: 'floating/join' });
+      //     break;
+      //   case 'piece-down-move-collision':
+      //     dispatch({ type: 'pieces/join' });
+      //     break;
+      //   case 'piece-side-move-collision':
+      //   case 'piece-rotate-move-collision':
+      //     //add some feedback
+      //     break;
+      //   case 'board-breaks-top-limit':
+      //     gameOver();
+      //     break;
+      //   default:
+      // }
     }
   }, [ticks]);
-  // randomPiece();
-  // const board = emptyPiece();
-  // const limits = limitsPiece();
-
-  // handleTick = () => {
-  //   //this.setState({ newTodoText: "" });
-  // };
-
-  // handlePlayerInput = (input) => {
-  // };
-  //console.log();
 
   return (
     <BoardContainer>
