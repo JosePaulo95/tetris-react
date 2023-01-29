@@ -1,14 +1,13 @@
-import './App.css';
-
 import { useAnimationControls } from 'framer-motion';
 import { Dispatch, useEffect } from 'react';
 import { connect } from 'react-redux';
 
-import BoardContainer from './components/BoardContainer';
-import GridView from './components/GridView';
-import PieceView from './components/PieceView';
-import { displayCurrentGrid, isEmptyPiece } from './controller';
-import { Block, Grid } from './types';
+import { pieceAnimationController } from '../animations/piece';
+import BoardContainer from '../components/BoardContainer';
+import GridView from '../components/GridView';
+import PieceView from '../components/PieceView';
+import { displayCurrentGrid, isEmptyPiece } from '../controller';
+import { Block, Grid } from '../types';
 
 type ContainerBoardProps = {
   piece: Block;
@@ -21,8 +20,7 @@ function ContainerBoard({ blocks, ticks, dispatch }: ContainerBoardProps) {
   const isTimeToMoveDown = (ticks) => {
     return ticks % 10 == 0;
   };
-  const pieceAnimationController = useAnimationControls();
-
+  const anim = pieceAnimationController(blocks.piece);
   useEffect(() => {
     try {
       // if (existsMatch(board)) {
@@ -33,24 +31,14 @@ function ContainerBoard({ blocks, ticks, dispatch }: ContainerBoardProps) {
       // }
       if (isEmptyPiece(blocks.piece)) {
         dispatch({ type: 'piece/reset' });
-        pieceAnimationController.set({
-          x: 0,
-          y: 0,
-        });
-        pieceAnimationController.start({
-          scaleX: [0.5, 1.2, 1],
-          scaleY: [0.5, 1.2, 1],
-          transition: { duration: 0.3 },
-        });
+        anim.reset();
+        anim.start('show');
       }
       // const inputx = userController.getInputX();
       // const inputy = userController.getInputY();
       if (isTimeToMoveDown(ticks)) {
         dispatch({ type: 'piece/move-down' });
-        pieceAnimationController.start({
-          x: blocks.piece.x * (100 / 3),
-          y: 34 + blocks.piece.y + blocks.piece.y * (100 / 3),
-        });
+        anim.start('follow');
       }
       // if (inputx > 0) {
       //   dispatch({ type: 'piece/move-right' });
@@ -97,9 +85,9 @@ function ContainerBoard({ blocks, ticks, dispatch }: ContainerBoardProps) {
     <BoardContainer>
       <PieceView
         piece={blocks.piece}
-        pieceAnimationController={pieceAnimationController}
+        pieceAnimationController={anim.controller}
       ></PieceView>
-      {/* <GridView grid={displayCurrentGrid(blocks.piece)}></GridView> */}
+      <GridView grid={displayCurrentGrid(blocks.piece)}></GridView>
       <GridView grid={blocks.board}></GridView>
       <GridView grid={blocks.limits}></GridView>
     </BoardContainer>

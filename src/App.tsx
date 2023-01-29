@@ -1,7 +1,7 @@
 import './App.css';
 
-import ContainerBoard from './ContainerBoard';
 import ContainerKeyboardInput from './ContainerKeyboardInput';
+import ContainerBoard from './containers/ContainerBoard';
 import ContainerTicker from './ContainerTicker';
 
 function App() {
