@@ -17,7 +17,7 @@ const INITIAL_STATE = {
 const testCollisonsAndThrowException = (state, code) => {
   const grid_pos_move = displayCurrentGrid(state.piece);
   if (grid_pos_move == undefined || isColliding(grid_pos_move, state.board)) {
-    const error = new Error(`Collision detected!`);
+    const error = new Error(code);
     error.code = code;
     throw error;
   }
@@ -27,7 +27,7 @@ const testCollisonsAndThrowException = (state, code) => {
 };
 
 export default function blocks(state: BlocksState = INITIAL_STATE, action): BlocksState {
-  let pos_move;
+  let pos_move, pos_join;
   switch (action.type) {
     case 'piece/move-down':
       pos_move = {
@@ -37,8 +37,10 @@ export default function blocks(state: BlocksState = INITIAL_STATE, action): Bloc
       testCollisonsAndThrowException(pos_move, 'piece-down-move-collision');
       return pos_move;
     case 'piece/join':
+      testCollisonsAndThrowException(state, 'piece-joinning-collides-or-undefined');
       return {
         ...state,
+        board: join(displayCurrentGrid(state.piece)!, state.board),
         piece: randomPiece(),
       };
     default:
