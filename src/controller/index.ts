@@ -48,7 +48,14 @@ export const transform = (board: number[][], x: number, y: number) => {
     }
   }
 
-  return b;
+  if (
+    b.reduce((acc, cur) => acc + cur.reduce((acc1, cur1) => acc1 + cur1, 0), 0) ==
+    board.reduce((acc, cur) => acc + cur.reduce((acc1, cur1) => acc1 + cur1, 0), 0)
+  ) {
+    return b;
+  } else {
+    return undefined;
+  }
 };
 
 export const wrap = (board: number[][]) => {

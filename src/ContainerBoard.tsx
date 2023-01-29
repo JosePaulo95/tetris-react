@@ -46,25 +46,28 @@ function ContainerBoard({ blocks, ticks, dispatch }: ContainerBoardProps) {
       //   dispatch({ type: 'piece/move-down-infinity' });
       // }
     } catch (error) {
-      // switch (error.type) {
-      //   case 'remaining-floating-blocks':
-      //     //do nothing but waits next tick
-      //     break;
-      //   case 'floating-down-move-collision':
-      //     dispatch({ type: 'floating/join' });
-      //     break;
-      //   case 'piece-down-move-collision':
-      //     dispatch({ type: 'pieces/join' });
-      //     break;
-      //   case 'piece-side-move-collision':
-      //   case 'piece-rotate-move-collision':
-      //     //add some feedback
-      //     break;
-      //   case 'board-breaks-top-limit':
-      //     gameOver();
-      //     break;
-      //   default:
-      // }
+      console.log(error);
+
+      switch (error.code) {
+        // case 'remaining-floating-blocks':
+        //   //do nothing but waits next tick
+        //   break;
+        // case 'floating-down-move-collision':
+        //   dispatch({ type: 'floating/join' });
+        //   break;
+        case 'piece-down-move-collision':
+          dispatch({ type: 'pieces/join' });
+          break;
+        // case 'piece-side-move-collision':
+        // case 'piece-rotate-move-collision':
+        //   //add some feedback
+        //   break;
+        // case 'board-breaks-top-limit':
+        //   gameOver();
+        //   break;
+        default:
+          throw error;
+      }
     }
   }, [ticks]);
 
