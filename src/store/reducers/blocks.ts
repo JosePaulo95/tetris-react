@@ -1,11 +1,11 @@
-import { displayCurrentGrid, isColliding } from '../../controller';
+import { displayCurrentGrid, isColliding, join } from '../../controller';
 import { emptyPiece, limitsPiece, randomPiece } from '../../factories/PieceFactory';
-import { Block } from '../../types';
+import { Block, Grid } from '../../types';
 
 type BlocksState = {
   piece: Block;
-  board: Block;
-  limits: Block;
+  board: Grid;
+  limits: Grid;
 };
 
 const INITIAL_STATE = {
@@ -15,10 +15,8 @@ const INITIAL_STATE = {
 };
 
 const testCollisonsAndThrowException = (state, code) => {
-  if (
-    isColliding(state.piece, state.board) ||
-    displayCurrentGrid(state.piece) == undefined
-  ) {
+  const grid_pos_move = displayCurrentGrid(state.piece);
+  if (grid_pos_move == undefined || isColliding(grid_pos_move, state.board)) {
     const error = new Error(`Collision detected!`);
     error.code = code;
     throw error;
@@ -38,6 +36,11 @@ export default function blocks(state: BlocksState = INITIAL_STATE, action): Bloc
       };
       testCollisonsAndThrowException(pos_move, 'piece-down-move-collision');
       return pos_move;
+    case 'piece/join':
+      return {
+        ...state,
+        piece: randomPiece(),
+      };
     default:
       return state;
   }

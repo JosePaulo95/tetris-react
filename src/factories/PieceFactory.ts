@@ -10,12 +10,12 @@ export const randomPiece = () => {
 
 export const emptyPiece = () => {
   const grid: Grid = EMPTY_GRID();
-  return createPiece([wrapGrid(grid, configs.width, configs.height)]);
+  return wrapGrid(grid, configs.width, configs.height);
 };
 
 export const limitsPiece = () => {
   const grid: Grid = LIMIT_GRID(configs.width, configs.height, configs.playable_height);
-  return createPiece([wrapGrid(grid, configs.width, configs.height)]);
+  return wrapGrid(grid, configs.width, configs.height);
 };
 
 export const createPiece = (initial_grid: Grid[]): Piece => {

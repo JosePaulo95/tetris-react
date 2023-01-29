@@ -6,12 +6,12 @@ import { connect } from 'react-redux';
 import BoardContainer from './components/BoardContainer';
 import GridView from './components/GridView';
 import { displayCurrentGrid } from './controller';
-import { Block } from './types';
+import { Block, Grid } from './types';
 
 type ContainerBoardProps = {
   piece: Block;
-  board: Block;
-  limits: Block;
+  board: Grid;
+  limits: Grid;
   dispatch: Dispatch<any>;
 };
 
@@ -56,7 +56,7 @@ function ContainerBoard({ blocks, ticks, dispatch }: ContainerBoardProps) {
         //   dispatch({ type: 'floating/join' });
         //   break;
         case 'piece-down-move-collision':
-          dispatch({ type: 'pieces/join' });
+          dispatch({ type: 'piece/join' });
           break;
         // case 'piece-side-move-collision':
         // case 'piece-rotate-move-collision':
@@ -74,8 +74,8 @@ function ContainerBoard({ blocks, ticks, dispatch }: ContainerBoardProps) {
   return (
     <BoardContainer>
       <GridView grid={displayCurrentGrid(blocks.piece)}></GridView>
-      <GridView grid={displayCurrentGrid(blocks.board)}></GridView>
-      <GridView grid={displayCurrentGrid(blocks.limits)}></GridView>
+      <GridView grid={blocks.board}></GridView>
+      <GridView grid={blocks.limits}></GridView>
     </BoardContainer>
   );
 }

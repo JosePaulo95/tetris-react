@@ -3,22 +3,26 @@ import styles from '../styles/blocks.module.css';
 import { Block } from '../types';
 
 type GridViewProps = {
-  grid: number[][];
+  grid: number[][] | undefined;
 };
 
 const GridView = ({ grid }: GridViewProps) => {
   return (
-    <table className={styles.blockGroup}>
-      <tbody>
-        {grid.map((row, i) => (
-          <tr key={i}>
-            {row.map((block, j) => (
-              <BlockFactory key={j} type={block}></BlockFactory>
+    <>
+      {grid && (
+        <table className={styles.blockGroup}>
+          <tbody>
+            {grid.map((row, i) => (
+              <tr key={i}>
+                {row.map((block, j) => (
+                  <BlockFactory key={j} type={block}></BlockFactory>
+                ))}
+              </tr>
             ))}
-          </tr>
-        ))}
-      </tbody>
-    </table>
+          </tbody>
+        </table>
+      )}
+    </>
   );
 };
 
