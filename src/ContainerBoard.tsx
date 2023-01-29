@@ -1,23 +1,31 @@
 import './App.css';
 
-import { Dispatch } from 'react';
+import { Dispatch, useEffect } from 'react';
 import { connect, useSelector } from 'react-redux';
 
 import BoardContainer from './components/BoardContainer';
 import GridView from './components/GridView';
 import { displayCurrentGrid } from './controller';
 import { emptyPiece, limitsPiece, randomPiece } from './factories/PieceFactory';
-import { rightMove } from './store/actions';
+import { rightMove } from './store/actions/blocks';
 import { Block } from './types';
 
-type BoardProps = {
+type ContainerBoardProps = {
   piece: Block;
   board: Block;
   limits: Block;
   dispatch: Dispatch<any>;
 };
 
-function Board({ blocks, dispatch }: BoardProps) {
+function ContainerBoard({ blocks, ticks, dispatch }: ContainerBoardProps) {
+  useEffect(() => {
+    try {
+      dispatch({ type: 'piece/move-down' });
+    } catch (error) {
+      console.log('pegou o erro');
+      console.log(error);
+    }
+  }, [ticks]);
   // randomPiece();
   // const board = emptyPiece();
   // const limits = limitsPiece();
@@ -28,7 +36,6 @@ function Board({ blocks, dispatch }: BoardProps) {
 
   // handlePlayerInput = (input) => {
   // };
-  //dispatch(rightMove());
   //console.log();
 
   return (
@@ -41,6 +48,7 @@ function Board({ blocks, dispatch }: BoardProps) {
 }
 const mapStateToProps = (state) => ({
   blocks: state.blocks,
+  ticks: state.ticks,
 });
 
-export default connect(mapStateToProps)(Board);
+export default connect(mapStateToProps)(ContainerBoard);

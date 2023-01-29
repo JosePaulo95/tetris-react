@@ -1,11 +1,15 @@
 import './App.css';
 
-import Board from './Board';
+import ContainerBoard from './ContainerBoard';
+import ContainerKeyboardInput from './ContainerKeyboardInput';
+import ContainerTicker from './ContainerTicker';
 
 function App() {
   return (
     <>
-      <Board></Board>
+      <ContainerKeyboardInput></ContainerKeyboardInput>
+      <ContainerTicker></ContainerTicker>
+      <ContainerBoard></ContainerBoard>
     </>
   );
 }

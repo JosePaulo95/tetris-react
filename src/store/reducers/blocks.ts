@@ -14,10 +14,12 @@ const INITIAL_STATE = {
 };
 
 export default function blocks(state: BlocksState = INITIAL_STATE, action): BlocksState {
-  console.log(state);
   switch (action.type) {
-    case 'move':
-      return { ...state };
+    case 'piece/move-down':
+      return {
+        ...state,
+        piece: { ...state.piece, y: state.piece.y + 1 },
+      };
     default:
       return state;
   }
