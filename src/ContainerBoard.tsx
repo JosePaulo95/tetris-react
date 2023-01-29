@@ -37,6 +37,11 @@ function ContainerBoard({ blocks, ticks, dispatch }: ContainerBoardProps) {
           x: 0,
           y: 0,
         });
+        pieceAnimationController.start({
+          scaleX: [0.5, 1.2, 1],
+          scaleY: [0.5, 1.2, 1],
+          transition: { duration: 0.3 },
+        });
       }
       // const inputx = userController.getInputX();
       // const inputy = userController.getInputY();
@@ -94,7 +99,7 @@ function ContainerBoard({ blocks, ticks, dispatch }: ContainerBoardProps) {
         piece={blocks.piece}
         pieceAnimationController={pieceAnimationController}
       ></PieceView>
-      <GridView grid={displayCurrentGrid(blocks.piece)}></GridView>
+      {/* <GridView grid={displayCurrentGrid(blocks.piece)}></GridView> */}
       <GridView grid={blocks.board}></GridView>
       <GridView grid={blocks.limits}></GridView>
     </BoardContainer>
