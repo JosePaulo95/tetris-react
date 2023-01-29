@@ -8,6 +8,12 @@ export const randomPiece = () => {
   return createPiece(grids.map((g) => wrapGrid(g, configs.width, configs.height)));
 };
 
+export const erasedPiece = () => {
+  const grid: Grid = EMPTY_GRID();
+  const wrapped = wrapGrid(grid, configs.width, configs.height);
+  return createPiece([wrapped]);
+};
+
 export const emptyPiece = () => {
   const grid: Grid = EMPTY_GRID();
   return wrapGrid(grid, configs.width, configs.height);

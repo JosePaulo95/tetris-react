@@ -1,5 +1,10 @@
 import { displayCurrentGrid, isColliding, join } from '../../controller';
-import { emptyPiece, limitsPiece, randomPiece } from '../../factories/PieceFactory';
+import {
+  emptyPiece,
+  erasedPiece,
+  limitsPiece,
+  randomPiece,
+} from '../../factories/PieceFactory';
 import { Block, Grid } from '../../types';
 
 type BlocksState = {
@@ -41,6 +46,11 @@ export default function blocks(state: BlocksState = INITIAL_STATE, action): Bloc
       return {
         ...state,
         board: join(displayCurrentGrid(state.piece)!, state.board),
+        piece: erasedPiece(),
+      };
+    case 'piece/reset':
+      return {
+        ...state,
         piece: randomPiece(),
       };
     case 'blocks/reset':

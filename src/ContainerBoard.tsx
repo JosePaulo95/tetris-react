@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import BoardContainer from './components/BoardContainer';
 import GridView from './components/GridView';
 import PieceView from './components/PieceView';
-import { displayCurrentGrid } from './controller';
+import { displayCurrentGrid, isEmptyPiece } from './controller';
 import { Block, Grid } from './types';
 
 type ContainerBoardProps = {
@@ -29,6 +29,9 @@ function ContainerBoard({ blocks, ticks, dispatch }: ContainerBoardProps) {
       // if (existsFloatingBlocks(floating)) {
       //   dispatch({ type: 'floating/move-down' });
       // }
+      if (isEmptyPiece(blocks.piece)) {
+        dispatch({ type: 'piece/reset' });
+      }
       // const inputx = userController.getInputX();
       // const inputy = userController.getInputY();
       if (isTimeToMoveDown(ticks)) {
@@ -77,7 +80,6 @@ function ContainerBoard({ blocks, ticks, dispatch }: ContainerBoardProps) {
 
   return (
     <BoardContainer>
-      {/* <GridView grid={displayCurrentGrid(blocks.piece)}></GridView> */}
       <PieceView piece={blocks.piece}></PieceView>
       <GridView grid={blocks.board}></GridView>
       <GridView grid={blocks.limits}></GridView>

@@ -145,3 +145,12 @@ export const clear = (board: number[][]) => {
   }
   return b;
 };
+
+export const isEmptyPiece = (piece: Piece) => {
+  const grid = displayCurrentGrid(piece);
+  if (grid) {
+    return grid.every((row) => row.every((cell) => cell == 0));
+  } else {
+    return false;
+  }
+};
