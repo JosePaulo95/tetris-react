@@ -43,6 +43,8 @@ export default function blocks(state: BlocksState = INITIAL_STATE, action): Bloc
         board: join(displayCurrentGrid(state.piece)!, state.board),
         piece: randomPiece(),
       };
+    case 'blocks/reset':
+      return INITIAL_STATE;
     default:
       return state;
   }

@@ -17,7 +17,7 @@ type ContainerBoardProps = {
 
 function ContainerBoard({ blocks, ticks, dispatch }: ContainerBoardProps) {
   const isTimeToMoveDown = (ticks) => {
-    return ticks % 10 == 0;
+    return ticks % 3 == 0;
   };
 
   useEffect(() => {
@@ -56,15 +56,18 @@ function ContainerBoard({ blocks, ticks, dispatch }: ContainerBoardProps) {
         //   dispatch({ type: 'floating/join' });
         //   break;
         case 'piece-down-move-collision':
-          dispatch({ type: 'piece/join' });
+          try {
+            dispatch({ type: 'piece/join' });
+          } catch (error) {
+            dispatch({ type: 'blocks/reset' });
+          }
           break;
         // case 'piece-side-move-collision':
         // case 'piece-rotate-move-collision':
         //   //add some feedback
         //   break;
-        // case 'board-breaks-top-limit':
-        //   gameOver();
-        //   break;
+        case 'piece-joinning-collides-or-undefined':
+          break;
         default:
           throw error;
       }
