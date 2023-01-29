@@ -1,3 +1,5 @@
+import { motion } from 'framer-motion';
+
 import BlockFactory from '../factories/BlockFactory';
 import styles from '../styles/blocks.module.css';
 import { Block } from '../types';
@@ -10,7 +12,7 @@ const GridView = ({ grid }: GridViewProps) => {
   return (
     <>
       {grid && (
-        <table className={styles.blockGroup}>
+        <motion.table className={styles.blockGroup}>
           <tbody>
             {grid.map((row, i) => (
               <tr key={i}>
@@ -20,7 +22,7 @@ const GridView = ({ grid }: GridViewProps) => {
               </tr>
             ))}
           </tbody>
-        </table>
+        </motion.table>
       )}
     </>
   );

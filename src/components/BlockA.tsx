@@ -1,7 +1,9 @@
+import { motion } from 'framer-motion';
+
 import styles from '../styles/blocks.module.css';
 
 const BlockA = () => {
-  return <td className={`${styles.block_a} ${styles.block}`}></td>;
+  return <motion.td className={`${styles.block_a} ${styles.block}`}></motion.td>;
 };
 
 export default BlockA;

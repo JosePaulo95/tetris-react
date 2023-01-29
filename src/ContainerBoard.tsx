@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 
 import BoardContainer from './components/BoardContainer';
 import GridView from './components/GridView';
+import PieceView from './components/PieceView';
 import { displayCurrentGrid } from './controller';
 import { Block, Grid } from './types';
 
@@ -17,7 +18,7 @@ type ContainerBoardProps = {
 
 function ContainerBoard({ blocks, ticks, dispatch }: ContainerBoardProps) {
   const isTimeToMoveDown = (ticks) => {
-    return ticks % 3 == 0;
+    return ticks % 10 == 0;
   };
 
   useEffect(() => {
@@ -76,7 +77,8 @@ function ContainerBoard({ blocks, ticks, dispatch }: ContainerBoardProps) {
 
   return (
     <BoardContainer>
-      <GridView grid={displayCurrentGrid(blocks.piece)}></GridView>
+      {/* <GridView grid={displayCurrentGrid(blocks.piece)}></GridView> */}
+      <PieceView piece={blocks.piece}></PieceView>
       <GridView grid={blocks.board}></GridView>
       <GridView grid={blocks.limits}></GridView>
     </BoardContainer>
