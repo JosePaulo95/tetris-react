@@ -51,7 +51,9 @@ export default function blocks(state: BlocksState = INITIAL_STATE, action): Bloc
     case 'piece/reset':
       return {
         ...state,
-        piece: randomPiece(),
+        piece: {
+          ...randomPiece(),
+        },
       };
     case 'blocks/reset':
       return INITIAL_STATE;

@@ -1,3 +1,5 @@
+import { useAnimationControls } from 'framer-motion';
+
 import { configs } from '../configs';
 import { EMPTY_GRID, LIMIT_GRID, PIECE_A_GRIDS } from '../constants';
 import { transform, wrap, wrapGrid } from '../controller';

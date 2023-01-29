@@ -6,22 +6,20 @@ import { Block } from '../types';
 
 type PieceViewProps = {
   piece: Block;
+  pieceAnimationController: any;
 };
 
-const PieceView = ({ piece }: PieceViewProps) => {
+const PieceView = ({ piece, pieceAnimationController }: PieceViewProps) => {
   return (
     <>
       {piece && (
-        <motion.table
-          animate={{ x: piece.x * (100 / 3), y: piece.y * (100 / 3) }}
-          className={styles.blockGroup}
-        >
+        <motion.table animate={pieceAnimationController} className={styles.blockGroup}>
           <tbody>
             {piece.initial_grid[piece.rotations % piece.initial_grid.length].map(
               (row, i) => (
                 <tr key={i}>
                   {row.map((block, j) => (
-                    <BlockFactory key={j} type={block}></BlockFactory>
+                    <BlockFactory key={j} type={block ? block + 1 : 0}></BlockFactory>
                   ))}
                 </tr>
               ),

@@ -1,5 +1,6 @@
 import './App.css';
 
+import { useAnimationControls } from 'framer-motion';
 import { Dispatch, useEffect } from 'react';
 import { connect } from 'react-redux';
 
@@ -20,6 +21,7 @@ function ContainerBoard({ blocks, ticks, dispatch }: ContainerBoardProps) {
   const isTimeToMoveDown = (ticks) => {
     return ticks % 10 == 0;
   };
+  const pieceAnimationController = useAnimationControls();
 
   useEffect(() => {
     try {
@@ -31,11 +33,19 @@ function ContainerBoard({ blocks, ticks, dispatch }: ContainerBoardProps) {
       // }
       if (isEmptyPiece(blocks.piece)) {
         dispatch({ type: 'piece/reset' });
+        pieceAnimationController.set({
+          x: 0,
+          y: 0,
+        });
       }
       // const inputx = userController.getInputX();
       // const inputy = userController.getInputY();
       if (isTimeToMoveDown(ticks)) {
         dispatch({ type: 'piece/move-down' });
+        pieceAnimationController.start({
+          x: blocks.piece.x * (100 / 3),
+          y: 34 + blocks.piece.y + blocks.piece.y * (100 / 3),
+        });
       }
       // if (inputx > 0) {
       //   dispatch({ type: 'piece/move-right' });
@@ -80,7 +90,11 @@ function ContainerBoard({ blocks, ticks, dispatch }: ContainerBoardProps) {
 
   return (
     <BoardContainer>
-      <PieceView piece={blocks.piece}></PieceView>
+      <PieceView
+        piece={blocks.piece}
+        pieceAnimationController={pieceAnimationController}
+      ></PieceView>
+      <GridView grid={displayCurrentGrid(blocks.piece)}></GridView>
       <GridView grid={blocks.board}></GridView>
       <GridView grid={blocks.limits}></GridView>
     </BoardContainer>
