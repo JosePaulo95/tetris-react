@@ -7,6 +7,7 @@ import BoardContainer from '../components/BoardContainer';
 import GridView from '../components/GridView';
 import PieceView from '../components/PieceView';
 import { displayCurrentGrid, isEmptyPiece } from '../controller';
+import { keyboardInput, UserController, userController } from '../input/keyboardInput';
 import { Block, Grid } from '../types';
 
 type ContainerBoardProps = {
@@ -21,6 +22,7 @@ function ContainerBoard({ blocks, ticks, dispatch }: ContainerBoardProps) {
     return ticks % 10 == 0;
   };
   const anim = pieceAnimationController(blocks.piece);
+
   useEffect(() => {
     try {
       // if (existsMatch(board)) {
@@ -34,18 +36,24 @@ function ContainerBoard({ blocks, ticks, dispatch }: ContainerBoardProps) {
         anim.reset();
         anim.start('show');
       }
-      // const inputx = userController.getInputX();
-      // const inputy = userController.getInputY();
+      const inputx = userController.current_input_x;
+      console.log(inputx);
+      // console.log(inputx);
+      //const inputy = userController.getInputY();
       if (isTimeToMoveDown(ticks)) {
         dispatch({ type: 'piece/move-down' });
         anim.start('follow');
+        if (inputx > 0) {
+          dispatch({ type: 'piece/move-right' });
+          anim.start('follow');
+        }
+        if (inputx < 0) {
+          dispatch({ type: 'piece/move-left' });
+          anim.start('follow');
+        }
       }
-      // if (inputx > 0) {
-      //   dispatch({ type: 'piece/move-right' });
-      // }
-      // if (inputx < 0) {
-      //   dispatch({ type: 'piece/move-left' });
-      // }
+      //anim.start('follow');
+
       // if (inputy > 0) {
       //   dispatch({ type: 'piece/rotate' });
       // }
@@ -69,10 +77,10 @@ function ContainerBoard({ blocks, ticks, dispatch }: ContainerBoardProps) {
             dispatch({ type: 'blocks/reset' });
           }
           break;
-        // case 'piece-side-move-collision':
-        // case 'piece-rotate-move-collision':
-        //   //add some feedback
-        //   break;
+        case 'piece-side-move-collision':
+          // case 'piece-rotate-move-collision':
+          //   //add some feedback
+          break;
         case 'piece-joinning-collides-or-undefined':
           break;
         default:
@@ -83,10 +91,10 @@ function ContainerBoard({ blocks, ticks, dispatch }: ContainerBoardProps) {
 
   return (
     <BoardContainer>
-      <PieceView
+      {/* <PieceView
         piece={blocks.piece}
         pieceAnimationController={anim.controller}
-      ></PieceView>
+      ></PieceView> */}
       <GridView grid={displayCurrentGrid(blocks.piece)}></GridView>
       <GridView grid={blocks.board}></GridView>
       <GridView grid={blocks.limits}></GridView>
