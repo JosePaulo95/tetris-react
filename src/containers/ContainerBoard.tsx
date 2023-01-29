@@ -7,7 +7,7 @@ import BoardContainer from '../components/BoardContainer';
 import GridView from '../components/GridView';
 import PieceView from '../components/PieceView';
 import { displayCurrentGrid, isEmptyPiece } from '../controller';
-import { keyboardInput, UserController, userController } from '../input/keyboardInput';
+// import { keyboardInput, userController } from '../input/keyboardInput';
 import { Block, Grid } from '../types';
 
 type ContainerBoardProps = {
@@ -16,6 +16,8 @@ type ContainerBoardProps = {
   limits: Grid;
   dispatch: Dispatch<any>;
 };
+
+import { userController } from '../input/keyboardInput';
 
 function ContainerBoard({ blocks, ticks, dispatch }: ContainerBoardProps) {
   const isTimeToMoveDown = (ticks) => {
@@ -36,22 +38,24 @@ function ContainerBoard({ blocks, ticks, dispatch }: ContainerBoardProps) {
         anim.reset();
         anim.start('show');
       }
-      const inputx = userController.current_input_x;
-      console.log(inputx);
       // console.log(inputx);
       //const inputy = userController.getInputY();
       if (isTimeToMoveDown(ticks)) {
         dispatch({ type: 'piece/move-down' });
         anim.start('follow');
-        if (inputx > 0) {
-          dispatch({ type: 'piece/move-right' });
-          anim.start('follow');
-        }
-        if (inputx < 0) {
-          dispatch({ type: 'piece/move-left' });
-          anim.start('follow');
-        }
       }
+
+      const inputx = userController.current_input_x;
+
+      if (inputx && inputx > 0) {
+        dispatch({ type: 'piece/move-right' });
+        anim.start('follow');
+      }
+      if (inputx && inputx < 0) {
+        dispatch({ type: 'piece/move-left' });
+        anim.start('follow');
+      }
+
       //anim.start('follow');
 
       // if (inputy > 0) {
