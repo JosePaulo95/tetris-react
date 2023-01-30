@@ -5,4 +5,5 @@ export type Block = {
   x: number;
   y: number;
   rotations: number;
+  anim_state: string;
 };

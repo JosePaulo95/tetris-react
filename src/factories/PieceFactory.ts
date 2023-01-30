@@ -32,6 +32,7 @@ export const createPiece = (initial_grid: Grid[]): Piece => {
     x: 0,
     y: 0,
     rotations: 0,
+    anim_state: 'show',
   };
   return piece;
 };

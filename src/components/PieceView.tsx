@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { motion, Variants } from 'framer-motion';
 
 import BlockFactory from '../factories/BlockFactory';
 import styles from '../styles/blocks.module.css';
@@ -6,14 +6,29 @@ import { Block } from '../types';
 
 type PieceViewProps = {
   piece: Block;
-  pieceAnimationController: any;
 };
-
-const PieceView = ({ piece, pieceAnimationController }: PieceViewProps) => {
+const variants: Variants = {
+  follow: (piece) => ({
+    x: piece.x * (100 / 3),
+    y: piece.y * (100 / 3),
+    scaleX: 1,
+    scaleY: 1,
+  }),
+  show: (piece) => ({
+    scaleX: [0.5, 1.2, 1],
+    scaleY: [0.5, 1.2, 1],
+  }),
+};
+const PieceView = ({ piece }: PieceViewProps) => {
   return (
     <>
       {piece && (
-        <motion.table animate={pieceAnimationController} className={styles.blockGroup}>
+        <motion.table
+          animate={piece.anim_state}
+          custom={piece}
+          variants={variants}
+          className={styles.blockGroup}
+        >
           <tbody>
             {piece.initial_grid[piece.rotations % piece.initial_grid.length].map(
               (row, i) => (

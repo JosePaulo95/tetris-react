@@ -1,8 +1,7 @@
 import { useAnimationControls } from 'framer-motion';
 import { Dispatch, useEffect } from 'react';
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 
-import { pieceAnimationController } from '../animations/piece';
 import BoardContainer from '../components/BoardContainer';
 import GridView from '../components/GridView';
 import PieceView from '../components/PieceView';
@@ -23,7 +22,6 @@ function ContainerBoard({ blocks, ticks, dispatch }: ContainerBoardProps) {
   const isTimeToMoveDown = (ticks) => {
     return ticks % 10 == 0;
   };
-  const anim = pieceAnimationController(blocks.piece);
 
   useEffect(() => {
     try {
@@ -35,25 +33,25 @@ function ContainerBoard({ blocks, ticks, dispatch }: ContainerBoardProps) {
       // }
       if (isEmptyPiece(blocks.piece)) {
         dispatch({ type: 'piece/reset' });
-        anim.reset();
-        anim.start('show');
+        // anim.reset();
+        // anim.start('show');
       }
       // console.log(inputx);
       //const inputy = userController.getInputY();
       if (isTimeToMoveDown(ticks)) {
         dispatch({ type: 'piece/move-down' });
-        anim.start('follow');
+        // anim.start('follow');
       }
 
       const inputx = userController.current_input_x;
 
       if (inputx && inputx > 0) {
         dispatch({ type: 'piece/move-right' });
-        anim.start('follow');
+        // anim.start('follow');
       }
       if (inputx && inputx < 0) {
         dispatch({ type: 'piece/move-left' });
-        anim.start('follow');
+        // anim.start('follow');
       }
 
       //anim.start('follow');
@@ -95,10 +93,7 @@ function ContainerBoard({ blocks, ticks, dispatch }: ContainerBoardProps) {
 
   return (
     <BoardContainer>
-      {/* <PieceView
-        piece={blocks.piece}
-        pieceAnimationController={anim.controller}
-      ></PieceView> */}
+      <PieceView piece={blocks.piece}></PieceView>
       <GridView grid={displayCurrentGrid(blocks.piece)}></GridView>
       <GridView grid={blocks.board}></GridView>
       <GridView grid={blocks.limits}></GridView>

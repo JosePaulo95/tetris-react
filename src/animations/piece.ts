@@ -23,7 +23,7 @@ export const pieceAnimationController = (piece) => {
         case 'follow':
           controller.start({
             x: piece.x * (100 / 3),
-            y: 34 + piece.y + piece.y * (100 / 3),
+            y: piece.y * (100 / 3),
           });
           break;
         default:

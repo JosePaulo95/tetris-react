@@ -37,14 +37,14 @@ export default function blocks(state: BlocksState = INITIAL_STATE, action): Bloc
     case 'piece/move-down':
       pos_move = {
         ...state,
-        piece: { ...state.piece, y: state.piece.y + 1 },
+        piece: { ...state.piece, y: state.piece.y + 1, anim_state: 'follow' },
       };
       testCollisonsAndThrowException(pos_move, 'piece-down-move-collision');
       return pos_move;
     case 'piece/move-right':
       pos_move = {
         ...state,
-        piece: { ...state.piece, x: state.piece.x + 1 },
+        piece: { ...state.piece, x: state.piece.x + 1, anim_state: 'follow' },
       };
       testCollisonsAndThrowException(pos_move, 'piece-side-move-collision');
       return pos_move;
