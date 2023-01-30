@@ -14,7 +14,9 @@ export const userController = {
     this._current_input_x = value;
   },
   get current_input_y() {
-    return this._current_input_y;
+    const aux = Number(this._current_input_y);
+    this._current_input_y = undefined;
+    return aux;
   },
   set current_input_y(value) {
     this._current_input_y = value;
@@ -41,5 +43,5 @@ inputs.down.on('move-right', () => {
 });
 
 inputs.down.on('rotate', () => {
-  userController.setInputY(-1);
+  userController.current_input_y = 1;
 });

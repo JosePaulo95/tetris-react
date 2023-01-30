@@ -55,6 +55,13 @@ export default function blocks(state: BlocksState = INITIAL_STATE, action): Bloc
       };
       testCollisonsAndThrowException(pos_move, 'piece-side-move-collision');
       return pos_move;
+    case 'piece/rotate':
+      pos_move = {
+        ...state,
+        piece: { ...state.piece, rotations: state.piece.rotations + 1 },
+      };
+      testCollisonsAndThrowException(pos_move, 'piece-rotation-move-collision');
+      return pos_move;
     case 'piece/join':
       testCollisonsAndThrowException(state, 'piece-joinning-collides-or-undefined');
       return {

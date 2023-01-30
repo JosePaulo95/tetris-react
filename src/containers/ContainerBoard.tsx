@@ -44,6 +44,7 @@ function ContainerBoard({ blocks, ticks, dispatch }: ContainerBoardProps) {
       }
 
       const inputx = userController.current_input_x;
+      const inputy = userController.current_input_y;
 
       if (inputx && inputx > 0) {
         dispatch({ type: 'piece/move-right' });
@@ -53,12 +54,12 @@ function ContainerBoard({ blocks, ticks, dispatch }: ContainerBoardProps) {
         dispatch({ type: 'piece/move-left' });
         // anim.start('follow');
       }
+      if (inputy > 0) {
+        dispatch({ type: 'piece/rotate' });
+      }
 
       //anim.start('follow');
 
-      // if (inputy > 0) {
-      //   dispatch({ type: 'piece/rotate' });
-      // }
       // if (inputy < 0) {
       //   dispatch({ type: 'piece/move-down-infinity' });
       // }
@@ -80,7 +81,7 @@ function ContainerBoard({ blocks, ticks, dispatch }: ContainerBoardProps) {
           }
           break;
         case 'piece-side-move-collision':
-          // case 'piece-rotate-move-collision':
+        case 'piece-rotation-move-collision':
           //   //add some feedback
           break;
         case 'piece-joinning-collides-or-undefined':
