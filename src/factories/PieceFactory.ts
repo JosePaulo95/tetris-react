@@ -1,12 +1,19 @@
 import { useAnimationControls } from 'framer-motion';
 
 import { configs } from '../configs';
-import { EMPTY_GRID, LIMIT_GRID, PIECE_A_GRIDS } from '../constants';
+import {
+  EMPTY_GRID,
+  LIMIT_GRID,
+  PIECE_A_GRIDS,
+  PIECE_B_GRIDS,
+  PIECE_C_GRIDS,
+} from '../constants';
 import { transform, wrap, wrapGrid } from '../controller';
 import { Block as Piece, Grid } from '../types';
 
 export const randomPiece = () => {
-  const grids: Grid[] = PIECE_A_GRIDS(1);
+  const options = [PIECE_A_GRIDS(1), PIECE_B_GRIDS(2), PIECE_C_GRIDS(3)];
+  const grids: Grid[] = options[Math.floor(Math.random() * options.length)];
   return createPiece(grids.map((g) => wrapGrid(g, configs.width, configs.height)));
 };
 
