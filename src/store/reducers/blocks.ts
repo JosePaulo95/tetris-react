@@ -1,4 +1,10 @@
-import { displayCurrentGrid, isColliding, join } from '../../controller';
+import {
+  displayCurrentGrid,
+  hasAnyCombinations,
+  isColliding,
+  join,
+  removeMatches,
+} from '../../controller';
 import {
   emptyPiece,
   erasedPiece,
@@ -32,7 +38,9 @@ const testCollisonsAndThrowException = (state, code) => {
 };
 
 export default function blocks(state: BlocksState = INITIAL_STATE, action): BlocksState {
-  let pos_move, pos_join;
+  let pos_move, pos_join, board_pos_matches;
+  const floating_blocks = [],
+    matched_blocks = [];
   switch (action.type) {
     case 'piece/move-down':
       pos_move = {
@@ -75,6 +83,13 @@ export default function blocks(state: BlocksState = INITIAL_STATE, action): Bloc
         piece: {
           ...randomPiece(),
         },
+      };
+    case 'board/combinations':
+      // return state;
+      //avisar cada bloco q ele sera eliminado para ativar a animação
+      return {
+        ...state,
+        board: removeMatches(state.board),
       };
     case 'blocks/reset':
       return INITIAL_STATE;
