@@ -120,7 +120,15 @@ const hasSameDimensions = (boardA: number[][], boardB: number[][]) => {
   return boardA.length == boardB.length && boardA[0]?.length == boardB[0]?.length;
 };
 
-export const removeMatches = (board: number[][]) => {
+export const removeMatches = (board: number[][]): number[][] => {
+  const board_pos_matches = board.map((row) =>
+    row.every((cell) => cell > 0) ? new Array(board[0].length).fill(0) : [...row],
+  );
+
+  return board_pos_matches;
+};
+
+export const removeMatches1 = (board: number[][]) => {
   const b = board;
   for (let i = board.length - 1; i >= 0; i--) {
     if (!b[i].includes(0)) {
@@ -134,6 +142,10 @@ export const removeMatches = (board: number[][]) => {
   }
 
   return b;
+};
+
+export const hasAnyCombinations = (board: Grid) => {
+  return board.some((row) => row.every((i) => i > 0));
 };
 
 export const clear = (board: number[][]) => {
