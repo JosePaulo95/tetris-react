@@ -20,14 +20,12 @@ import { userController } from '../input/keyboardInput';
 
 function ContainerBoard({ blocks, ticks, dispatch }: ContainerBoardProps) {
   const isTimeToMoveDown = (ticks) => {
-    return ticks % 10 == 0;
+    return ticks % 1 == 0;
   };
 
   useEffect(() => {
     try {
-      // if (existsMatch(board)) {
-      //   dispatch({ type: 'board/combinations' });
-      // }
+      //dispatch({ type: 'floating/move-down' });
       // if (existsFloatingBlocks(floating)) {
       //   dispatch({ type: 'floating/move-down' });
       // }
@@ -67,15 +65,16 @@ function ContainerBoard({ blocks, ticks, dispatch }: ContainerBoardProps) {
       console.log(error);
 
       switch (error.code) {
-        // case 'remaining-floating-blocks':
-        //   //do nothing but waits next tick
-        //   break;
+        case 'remaining-floating-blocks':
+          //do nothing but waits next tick
+          break;
         // case 'floating-down-move-collision':
         //   dispatch({ type: 'floating/join' });
         //   break;
         case 'piece-down-move-collision':
           try {
             dispatch({ type: 'piece/join' });
+            dispatch({ type: 'board/combinations' });
           } catch (error) {
             dispatch({ type: 'blocks/reset' });
           }
@@ -95,7 +94,7 @@ function ContainerBoard({ blocks, ticks, dispatch }: ContainerBoardProps) {
   return (
     <BoardContainer>
       <PieceView piece={blocks.piece}></PieceView>
-      <GridView grid={displayCurrentGrid(blocks.piece)}></GridView>
+      {/* <GridView grid={displayCurrentGrid(blocks.piece)}></GridView> isso aqui mostra grid do dados ajuda a debugar*/}
       <GridView grid={blocks.board}></GridView>
       <GridView grid={blocks.limits}></GridView>
     </BoardContainer>
