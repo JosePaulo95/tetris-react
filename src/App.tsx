@@ -1,7 +1,7 @@
 import './App.css';
 
 import ContainerBoard from './containers/ContainerBoard';
-import ContainerTicker from './ContainerTicker';
+import ContainerTicker from './containers/ContainerTicker';
 
 function App() {
   return (

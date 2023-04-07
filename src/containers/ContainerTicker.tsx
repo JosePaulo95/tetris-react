@@ -9,7 +9,7 @@ function ContainerTicker({ ticks, dispatch }) {
       } catch (error) {
         console.log(error);
       }
-    }, 50);
+    }, 500);
     return () => clearInterval(interval);
   }, [ticks]);
 
