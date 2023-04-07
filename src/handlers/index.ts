@@ -29,6 +29,10 @@ export const handleUserInput = (
   if (inputy && inputy > 0) {
     dispatch({ type: 'piece/rotate' });
   }
+  if (inputy && inputy < 0) {
+    dispatch({ type: 'piece/move-down-max' });
+    dispatch({ type: 'piece/move-down' });
+  }
 };
 
 export const handleResetPiece = (blocks: any, dispatch: Dispatch<any>) => {

@@ -26,12 +26,28 @@ const INITIAL_STATE = {
 };
 
 export default function blocks(state: BlocksState = INITIAL_STATE, action): BlocksState {
+  let distance = 1;
   switch (action.type) {
     case 'piece/move-down':
       testDownCollision(state.piece, state.board);
       return {
         ...state,
         piece: { ...state.piece, y: state.piece.y + 1, anim_state: 'follow' },
+      };
+    case 'piece/move-down-max':
+      distance = 1;
+      // eslint-disable-next-line no-constant-condition
+      for (let i = 0; i < 20; i++) {
+        try {
+          testDownCollision({ ...state.piece, y: state.piece.y + distance }, state.board);
+          distance++;
+        } catch (error) {
+          break;
+        }
+      }
+      return {
+        ...state,
+        piece: { ...state.piece, y: state.piece.y + distance, anim_state: 'follow' },
       };
     case 'piece/move-right':
       testSideCollision(state.piece, state.board, 1);

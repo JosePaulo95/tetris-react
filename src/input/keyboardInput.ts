@@ -33,6 +33,7 @@ const inputs = new GameInputs(dom, {
 inputs.bind('move-left', 'ArrowLeft');
 inputs.bind('move-right', 'ArrowRight');
 inputs.bind('rotate', 'ArrowUp');
+inputs.bind('move-down', 'ArrowDown');
 
 inputs.down.on('move-left', () => {
   userController.current_input_x = -1;
@@ -44,4 +45,8 @@ inputs.down.on('move-right', () => {
 
 inputs.down.on('rotate', () => {
   userController.current_input_y = 1;
+});
+
+inputs.down.on('move-down', () => {
+  userController.current_input_y = -1;
 });
