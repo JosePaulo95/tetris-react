@@ -12,13 +12,16 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.1",
+    "audio-loader": "^1.0.3",
     "framer-motion": "^8.5.4",
     "game-inputs": "^0.7.0",
+    "howler": "^2.2.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-redux": "^8.0.5"
   },
   "devDependencies": {
+    "@types/howler": "^2.2.7",
     "@types/react": "^18.0.26",
     "@types/react-dom": "^18.0.10",
     "@typescript-eslint/eslint-plugin": "^5.10.2",

@@ -1,5 +1,6 @@
 import './App.css';
 
+import AudioContainer from './containers/AudioContainer';
 import ContainerBoard from './containers/ContainerBoard';
 import ContainerTicker from './containers/ContainerTicker';
 
@@ -8,6 +9,7 @@ function App() {
     <>
       <ContainerTicker></ContainerTicker>
       <ContainerBoard></ContainerBoard>
+      <AudioContainer></AudioContainer>
     </>
   );
 }

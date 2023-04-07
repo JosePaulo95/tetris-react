@@ -20,10 +20,12 @@ export const handleUserInput = (
 ) => {
   if (inputx && inputx > 0) {
     dispatch({ type: 'piece/move-right' });
+    dispatch({ type: 'audio/play', payload: 'side_move' });
     // anim.start('follow');
   }
   if (inputx && inputx < 0) {
     dispatch({ type: 'piece/move-left' });
+    dispatch({ type: 'audio/play', payload: 'side_move' });
     // anim.start('follow');
   }
   if (inputy && inputy > 0) {
