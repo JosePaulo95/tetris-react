@@ -64,7 +64,7 @@ function ContainerBoard({ blocks, ticks, dispatch }: ContainerBoardProps) {
     } catch (error) {
       console.log(error);
 
-      switch (error.code) {
+      switch ((error as Error).message) {
         case 'remaining-floating-blocks':
           //do nothing but waits next tick
           break;
