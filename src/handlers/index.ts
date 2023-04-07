@@ -5,7 +5,7 @@ import { isEmptyPiece } from '../controller';
 //TODO considerar o uso de UseCallbacks
 export const handlePieceGoingDown = (ticks: number, dispatch: Dispatch<any>) => {
   const isTimeToMoveDown = (ticks: number) => {
-    return ticks % 1 == 0;
+    return ticks % 10 == 0;
   };
   if (isTimeToMoveDown(ticks)) {
     dispatch({ type: 'piece/move-down' });
