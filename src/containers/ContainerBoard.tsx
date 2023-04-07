@@ -24,12 +24,12 @@ function ContainerBoard({ blocks, ticks, dispatch }: ContainerBoardProps) {
   useEffect(() => {
     try {
       handleResetPiece(blocks, dispatch);
+      handlePieceGoingDown(ticks, dispatch);
       handleUserInput(
         userController.current_input_x,
         userController.current_input_y,
         dispatch,
       );
-      handlePieceGoingDown(ticks, dispatch);
     } catch (error) {
       handleCollision(error as Error, dispatch);
     }
