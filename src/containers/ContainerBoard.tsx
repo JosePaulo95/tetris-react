@@ -16,78 +16,26 @@ type ContainerBoardProps = {
   dispatch: Dispatch<any>;
 };
 
+import {
+  handleCollision,
+  handlePieceGoingDown,
+  handleResetPiece,
+  handleUserInput,
+} from '../handlers';
 import { userController } from '../input/keyboardInput';
 
 function ContainerBoard({ blocks, ticks, dispatch }: ContainerBoardProps) {
-  const isTimeToMoveDown = (ticks) => {
-    return ticks % 1 == 0;
-  };
-
   useEffect(() => {
     try {
-      //dispatch({ type: 'floating/move-down' });
-      // if (existsFloatingBlocks(floating)) {
-      //   dispatch({ type: 'floating/move-down' });
-      // }
-      if (isEmptyPiece(blocks.piece)) {
-        dispatch({ type: 'piece/reset' });
-        // anim.reset();
-        // anim.start('show');
-      }
-      // console.log(inputx);
-      //const inputy = userController.getInputY();
-      if (isTimeToMoveDown(ticks)) {
-        dispatch({ type: 'piece/move-down' });
-        // anim.start('follow');
-      }
-
-      const inputx = userController.current_input_x;
-      const inputy = userController.current_input_y;
-
-      if (inputx && inputx > 0) {
-        dispatch({ type: 'piece/move-right' });
-        // anim.start('follow');
-      }
-      if (inputx && inputx < 0) {
-        dispatch({ type: 'piece/move-left' });
-        // anim.start('follow');
-      }
-      if (inputy > 0) {
-        dispatch({ type: 'piece/rotate' });
-      }
-
-      //anim.start('follow');
-
-      // if (inputy < 0) {
-      //   dispatch({ type: 'piece/move-down-infinity' });
-      // }
+      handleResetPiece(blocks, dispatch);
+      handlePieceGoingDown(ticks, dispatch);
+      handleUserInput(
+        userController.current_input_x,
+        userController.current_input_y,
+        dispatch,
+      );
     } catch (error) {
-      console.log(error);
-
-      switch ((error as Error).message) {
-        case 'remaining-floating-blocks':
-          //do nothing but waits next tick
-          break;
-        // case 'floating-down-move-collision':
-        //   dispatch({ type: 'floating/join' });
-        //   break;
-        case 'piece-down-move-collision':
-          try {
-            dispatch({ type: 'piece/join' });
-            dispatch({ type: 'board/combinations' });
-          } catch (error) {
-            dispatch({ type: 'blocks/reset' });
-          }
-          break;
-        case 'piece-side-move-collision':
-        case 'piece-rotation-move-collision':
-          //   //add some feedback
-          break;
-        case 'piece-joinning-collides-or-undefined':
-          break;
-        default:
-          throw error;
-      }
+      handleCollision(error as Error, dispatch);
     }
   }, [ticks]);
 
