@@ -1,12 +1,16 @@
-import { useAnimationControls } from 'framer-motion';
 import { Dispatch, useEffect } from 'react';
-import { connect, useSelector } from 'react-redux';
+import { connect } from 'react-redux';
 
 import BoardContainer from '../components/BoardContainer';
 import GridView from '../components/GridView';
 import PieceView from '../components/PieceView';
-import { displayCurrentGrid, isEmptyPiece } from '../controller';
-// import { keyboardInput, userController } from '../input/keyboardInput';
+import {
+  handleCollision,
+  handlePieceGoingDown,
+  handleResetPiece,
+  handleUserInput,
+} from '../handlers';
+import { userController } from '../input/keyboardInput';
 import { Block, Grid } from '../types';
 
 type ContainerBoardProps = {
@@ -15,14 +19,6 @@ type ContainerBoardProps = {
   limits: Grid;
   dispatch: Dispatch<any>;
 };
-
-import {
-  handleCollision,
-  handlePieceGoingDown,
-  handleResetPiece,
-  handleUserInput,
-} from '../handlers';
-import { userController } from '../input/keyboardInput';
 
 function ContainerBoard({ blocks, ticks, dispatch }: ContainerBoardProps) {
   useEffect(() => {
