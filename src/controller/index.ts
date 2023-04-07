@@ -121,11 +121,37 @@ const hasSameDimensions = (boardA: number[][], boardB: number[][]) => {
 };
 
 export const removeMatches = (board: number[][]): number[][] => {
-  const board_pos_matches = board.map((row) =>
-    row.every((cell) => cell > 0) ? new Array(board[0].length).fill(0) : [...row],
-  );
+  const numRows = board.length;
+  const numCols = board[0].length;
 
-  return board_pos_matches;
+  const rowsToRemove: number[] = [];
+
+  for (let row = 0; row < numRows; row++) {
+    if (board[row].every((cell) => cell > 0)) {
+      rowsToRemove.push(row);
+    }
+  }
+
+  if (rowsToRemove.length === 0) {
+    return board; // no rows to remove, return the original board
+  }
+
+  const newBoard: number[][] = [];
+
+  let newRow = numRows - 1; // start at the bottom of the board
+  for (let row = numRows - 1; row >= 0; row--) {
+    if (!rowsToRemove.includes(row)) {
+      newBoard[newRow] = [...board[row]]; // copy the row to its new position
+      newRow--;
+    }
+  }
+
+  // fill the top rows with zeros
+  for (let row = 0; row < rowsToRemove.length; row++) {
+    newBoard[row] = new Array(numCols).fill(0);
+  }
+
+  return newBoard;
 };
 
 export const removeMatches1 = (board: number[][]) => {
