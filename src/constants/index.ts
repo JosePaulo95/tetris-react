@@ -67,24 +67,29 @@ export const PIECE_C_GRIDS = (type) => {
   const _ = 0;
   const grids = [
     [
-      [_, o, _],
-      [o, o, o],
-      [_, _, _],
+      [o, o],
+      [o, o],
+    ],
+  ];
+
+  return grids;
+};
+
+export const PIECE_D_GRIDS = (type) => {
+  const o = type;
+  const _ = 0;
+  const grids = [
+    [
+      [o, _, _, _],
+      [o, _, _, _],
+      [o, _, _, _],
+      [o, _, _, _],
     ],
     [
-      [_, o, _],
-      [o, o, _],
-      [_, o, _],
-    ],
-    [
-      [_, _, _],
-      [o, o, o],
-      [_, o, _],
-    ],
-    [
-      [_, o, _],
-      [_, o, o],
-      [_, o, _],
+      [_, _, _, _],
+      [_, _, _, _],
+      [o, o, o, o],
+      [_, _, _, _],
     ],
   ];
 

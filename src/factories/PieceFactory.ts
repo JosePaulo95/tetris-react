@@ -7,12 +7,18 @@ import {
   PIECE_A_GRIDS,
   PIECE_B_GRIDS,
   PIECE_C_GRIDS,
+  PIECE_D_GRIDS,
 } from '../constants';
 import { transform, wrap, wrapGrid } from '../controller';
 import { Block as Piece, Grid } from '../types';
 
 export const randomPiece = () => {
-  const options = [PIECE_A_GRIDS(1), PIECE_B_GRIDS(2), PIECE_C_GRIDS(3)];
+  const options = [
+    PIECE_A_GRIDS(1),
+    PIECE_B_GRIDS(2),
+    PIECE_C_GRIDS(3),
+    PIECE_D_GRIDS(4),
+  ];
   const grids: Grid[] = options[Math.floor(Math.random() * options.length)];
   return createPiece(grids.map((g) => wrapGrid(g, configs.width, configs.height)));
 };

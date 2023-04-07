@@ -47,6 +47,21 @@
     10px 10px rgb(192, 11, 116);
 }
 
+.block_d {
+  background-color: rgb(36, 197, 122);
+  box-shadow:
+    1px 1px rgb(20, 114, 48),
+    2px 2px rgb(20, 114, 48),
+    3px 3px rgb(20, 114, 48),
+    4px 4px rgb(20, 114, 48),
+    5px 5px rgb(20, 114, 48),
+    6px 6px rgb(20, 114, 48),
+    7px 7px rgb(20, 114, 48),
+    8px 8px rgb(20, 114, 48),
+    9px 9px rgb(20, 114, 48),
+    10px 10px rgb(20, 114, 48);
+}
+
 .void_block {
   opacity: 0;
 }
