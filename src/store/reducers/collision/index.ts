@@ -35,10 +35,10 @@ export const testRotationCollision = (piece, board) => {
   }
 };
 
-export const testJoinCollision = (piece, board) => {
+export const testJoinCollision = (piece, limits) => {
   const posMove = displayCurrentGrid(piece);
-
-  if (!posMove || isColliding(posMove, board)) {
+  const limits_collider = limits.map((row) => row.map((c) => (c == 0 ? 1 : 0)));
+  if (!posMove || isColliding(posMove, limits_collider)) {
     throw new Error('piece-joining-collides');
   }
 };
