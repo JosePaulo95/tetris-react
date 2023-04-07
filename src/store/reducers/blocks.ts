@@ -35,7 +35,7 @@ export default function blocks(state: BlocksState = INITIAL_STATE, action): Bloc
         piece: { ...state.piece, y: state.piece.y + 1, anim_state: 'follow' },
       };
     case 'piece/move-down-max':
-      distance = 1;
+      distance = 0;
       // eslint-disable-next-line no-constant-condition
       for (let i = 0; i < 20; i++) {
         try {
