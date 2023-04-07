@@ -30,9 +30,11 @@ export const handleUserInput = (
   }
   if (inputy && inputy > 0) {
     dispatch({ type: 'piece/rotate' });
+    dispatch({ type: 'audio/play', payload: 'rotation_move' });
   }
   if (inputy && inputy < 0) {
     dispatch({ type: 'piece/move-down-max' });
+    dispatch({ type: 'audio/play', payload: 'max_down_move' });
     dispatch({ type: 'piece/move-down' });
   }
 };
@@ -50,6 +52,7 @@ export const handleCollision = (error: Error, dispatch: Dispatch<any>) => {
     case 'piece-down-move-collision':
       try {
         dispatch({ type: 'piece/join' });
+        dispatch({ type: 'audio/play', payload: 'piece_join' });
         dispatch({ type: 'board/combinations' });
       } catch (error) {
         dispatch({ type: 'blocks/reset' });

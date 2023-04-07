@@ -3,9 +3,10 @@ import { useEffect } from 'react';
 import { connect } from 'react-redux';
 
 const audioMap = {
-  side_move: 'maximize_001.ogg',
-  track2: 'audio2.mp3',
-  track3: 'audio3.mp3',
+  side_move: 'drop_002.ogg',
+  rotation_move: 'drop_001.ogg',
+  max_down_move: '',
+  piece_join: 'click_003.ogg',
 };
 
 function AudioContainer({ audio, dispatch }) {
@@ -16,6 +17,7 @@ function AudioContainer({ audio, dispatch }) {
     const sound = new Howl({
       src: `./resources/audio/${fileName}`,
       format: 'ogg',
+      volume: 0.3,
     });
 
     // Toca o áudio quando o componente é montado
