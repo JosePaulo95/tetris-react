@@ -1,6 +1,7 @@
 import BlockA from '../components/BlockA';
 import BlockB from '../components/BlockB';
 import BlockC from '../components/BlockC';
+import BlockD from '../components/BlockD';
 import EmptyBlock from '../components/EmptyBlock';
 import styles from '../styles/blocks.module.css';
 
@@ -18,6 +19,8 @@ const BlockFactory = (props: BlockFactoryInterface) => {
       return <BlockB />;
     case 3:
       return <BlockC />;
+    case 4:
+      return <BlockD />;
     default:
       return <td className={`${styles.void_block} ${styles.block}`}></td>;
   }
