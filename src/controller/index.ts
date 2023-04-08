@@ -121,6 +121,18 @@ const hasSameDimensions = (boardA: number[][], boardB: number[][]) => {
 };
 
 export const removeMatches = (board: number[][]): number[][] => {
+  const b = board.map((row) => {
+    if (row.every((cell) => cell !== 0)) {
+      return row.map(() => 0);
+    } else {
+      return row;
+    }
+  });
+
+  return b;
+};
+
+export const removeMatchesMoveDownBlocks = (board: number[][]): number[][] => {
   const numRows = board.length;
   const numCols = board[0].length;
 

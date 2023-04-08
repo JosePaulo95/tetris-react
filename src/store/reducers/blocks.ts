@@ -1,4 +1,9 @@
-import { displayCurrentGrid, join, removeMatches } from '../../controller';
+import {
+  displayCurrentGrid,
+  join,
+  removeMatches,
+  removeMatchesMoveDownBlocks,
+} from '../../controller';
 import {
   emptyPiece,
   erasedPiece,
@@ -86,7 +91,7 @@ export default function blocks(state: BlocksState = INITIAL_STATE, action): Bloc
       //avisar cada bloco q ele sera eliminado para ativar a animação
       return {
         ...state,
-        board: removeMatches(state.board),
+        board: removeMatchesMoveDownBlocks(state.board),
       };
     case 'blocks/reset':
       return INITIAL_STATE;
