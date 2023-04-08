@@ -19,8 +19,12 @@ export const asyncHandleMatches = async (
   }
 };
 
-export const handlePieceGoingDown = (ticks: number, dispatch: Dispatch<any>) => {
-  if (isTimeToMoveDown(ticks)) {
+export const handlePieceGoingDown = (
+  blocks: any,
+  ticks: number,
+  dispatch: Dispatch<any>,
+) => {
+  if (isTimeToMoveDown(ticks) && !isEmptyPiece(blocks.piece)) {
     dispatch({ type: 'piece/move-down' });
     // anim.start('follow');
   }

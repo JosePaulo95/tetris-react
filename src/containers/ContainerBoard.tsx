@@ -26,7 +26,7 @@ function ContainerBoard({ blocks, ticks, dispatch }: ContainerBoardProps) {
     asyncHandleMatches(blocks, ticks, dispatch)
       .then(() => {
         handleResetPiece(blocks, dispatch);
-        handlePieceGoingDown(ticks, dispatch);
+        handlePieceGoingDown(blocks, ticks, dispatch);
         handleUserInput(
           userController.current_input_x,
           userController.current_input_y,
