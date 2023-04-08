@@ -1,12 +1,25 @@
 import { Dispatch } from 'react';
 
-import { isEmptyPiece } from '../controller';
+import { hasAnyCombinations, isEmptyPiece } from '../controller';
 
 //TODO considerar o uso de UseCallbacks
+
+const isTimeToMoveDown = (ticks: number) => {
+  return ticks % 10 == 0;
+};
+
+export const asyncHandleMatches = async (
+  blocks: any,
+  ticks: number,
+  dispatch: Dispatch<any>,
+): Promise<void> => {
+  if (isTimeToMoveDown(ticks) && hasAnyCombinations(blocks.board)) {
+    dispatch('board/combinations');
+    // dispatch({ type: 'audio/play', payload: 'combination' });
+  }
+};
+
 export const handlePieceGoingDown = (ticks: number, dispatch: Dispatch<any>) => {
-  const isTimeToMoveDown = (ticks: number) => {
-    return ticks % 10 == 0;
-  };
   if (isTimeToMoveDown(ticks)) {
     dispatch({ type: 'piece/move-down' });
     // anim.start('follow');
