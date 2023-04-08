@@ -5,7 +5,7 @@ function ContainerTicker({ ticks, dispatch }) {
   useEffect(() => {
     const interval = setInterval(() => {
       try {
-        dispatch({ type: 'increment' });
+        dispatch({ type: 'ticker/increment' });
       } catch (error) {
         console.log(error);
       }
