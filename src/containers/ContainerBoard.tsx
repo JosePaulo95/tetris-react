@@ -30,8 +30,8 @@ function ContainerBoard({ blocks, ticks, dispatch }: ContainerBoardProps) {
         userController.current_input_y,
         dispatch,
       );
-    } catch (error) {
-      handleCollision(error as Error, dispatch);
+    } catch (collision) {
+      handleCollision(collision as Error, dispatch);
     }
   }, [ticks]);
 

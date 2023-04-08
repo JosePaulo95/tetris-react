@@ -47,8 +47,8 @@ export const handleResetPiece = (blocks: any, dispatch: Dispatch<any>) => {
   }
 };
 
-export const handleCollision = (error: Error, dispatch: Dispatch<any>) => {
-  switch (error.message) {
+export const handleCollision = (collision: Error, dispatch: Dispatch<any>) => {
+  switch (collision.message) {
     case 'piece-down-move-collision':
       try {
         dispatch({ type: 'piece/join' });
@@ -65,6 +65,6 @@ export const handleCollision = (error: Error, dispatch: Dispatch<any>) => {
     case 'piece-joinning-collides-or-undefined':
       break;
     default:
-      throw error;
+      throw collision;
   }
 };
