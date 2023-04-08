@@ -7,6 +7,7 @@ const audioMap = {
   rotation_move: 'drop_001.ogg',
   max_down_move: '',
   piece_join: 'click_003.ogg',
+  combination: 'maximize_006.ogg',
 };
 
 function AudioContainer({ audio, dispatch }) {
