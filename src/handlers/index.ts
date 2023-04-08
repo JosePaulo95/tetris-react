@@ -50,19 +50,18 @@ export const handleResetPiece = (blocks: any, dispatch: Dispatch<any>) => {
 export const handleCollision = (collision: Error, dispatch: Dispatch<any>) => {
   switch (collision.message) {
     case 'piece-down-move-collision':
-      try {
-        dispatch({ type: 'piece/join' });
-        dispatch({ type: 'audio/play', payload: 'piece_join' });
-        dispatch({ type: 'board/combinations' });
-      } catch (error) {
-        dispatch({ type: 'blocks/reset' });
-      }
+      dispatch({ type: 'piece/join' });
+      dispatch({ type: 'audio/play', payload: 'piece_join' });
+      dispatch({ type: 'board/combinations' });
       break;
     case 'piece-side-move-collision':
     case 'piece-rotation-move-collision':
       //add some feedback
       break;
     case 'piece-joinning-collides-or-undefined':
+      break;
+    case 'board-collides-with-limits':
+      dispatch({ type: 'blocks/reset' });
       break;
     default:
       throw collision;

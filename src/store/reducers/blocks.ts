@@ -68,13 +68,13 @@ export default function blocks(state: BlocksState = INITIAL_STATE, action): Bloc
         piece: { ...state.piece, rotations: state.piece.rotations + 1 },
       };
     case 'piece/join':
-      testJoinCollision(state.piece, state.limits);
       return {
         ...state,
         board: join(displayCurrentGrid(state.piece)!, state.board),
         piece: erasedPiece(),
       };
     case 'piece/reset':
+      testJoinCollision(state.board, state.limits);
       return {
         ...state,
         piece: {
