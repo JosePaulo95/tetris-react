@@ -58,8 +58,6 @@ export const handleCollision = (collision: Error, dispatch: Dispatch<any>) => {
     case 'piece-rotation-move-collision':
       //add some feedback
       break;
-    case 'piece-joinning-collides-or-undefined':
-      break;
     case 'board-collides-with-limits':
       dispatch({ type: 'blocks/reset' });
       break;
