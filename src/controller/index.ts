@@ -1,7 +1,7 @@
 import { createPiece, emptyPiece } from '../factories/PieceFactory';
 import { Block, Grid } from '../types';
 
-export const displayCurrentGrid = (block: Block): Grid | undefined => {
+export const getCurrentGrid = (block: Block): Grid | undefined => {
   const b = transform(
     block.initial_grid[block.rotations % block.initial_grid.length],
     block.x,
@@ -210,7 +210,7 @@ export const clear = (board: Grid): Grid => {
 };
 
 export const isEmptyPiece = (piece: Block) => {
-  const grid = displayCurrentGrid(piece);
+  const grid = getCurrentGrid(piece);
   if (grid) {
     return grid.every((row) => row.every((cell) => cell == 0));
   } else {

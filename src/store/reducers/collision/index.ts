@@ -1,4 +1,4 @@
-import { displayCurrentGrid, isColliding } from '../../../controller';
+import { getCurrentGrid, isColliding } from '../../../controller';
 import { Block, Grid } from '../../../types';
 
 export const testFloatingFallCollision = (
@@ -6,7 +6,7 @@ export const testFloatingFallCollision = (
   board: Grid,
   index: number,
 ): void | Error => {
-  const posFall = displayCurrentGrid({
+  const posFall = getCurrentGrid({
     ...piece,
     y: piece.y + 1,
   });
@@ -19,7 +19,7 @@ export const testFloatingFallCollision = (
 };
 
 export const testDownCollision = (piece: Block, board: Grid): void | Error => {
-  const posMove = displayCurrentGrid({
+  const posMove = getCurrentGrid({
     ...piece,
     y: piece.y + 1,
     anim_state: 'follow',
@@ -35,7 +35,7 @@ export const testSideCollision = (
   board: Grid,
   dir: number,
 ): void | Error => {
-  const posMove = displayCurrentGrid({
+  const posMove = getCurrentGrid({
     ...piece,
     x: piece.x + dir,
     anim_state: 'follow',
@@ -47,7 +47,7 @@ export const testSideCollision = (
 };
 
 export const testRotationCollision = (piece: Block, board: Grid): void | Error => {
-  const posMove = displayCurrentGrid({
+  const posMove = getCurrentGrid({
     ...piece,
     rotations: piece.rotations + 1,
   });

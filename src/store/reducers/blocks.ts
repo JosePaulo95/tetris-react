@@ -1,4 +1,4 @@
-import { BoardState, displayCurrentGrid, join, removeMatches } from '../../controller';
+import { BoardState, getCurrentGrid, join, removeMatches } from '../../controller';
 import {
   emptyPiece,
   erasedPiece,
@@ -69,7 +69,7 @@ export default function blocks(
         piece: { ...state.piece, rotations: state.piece.rotations + 1 },
       };
     case 'piece/join':
-      pieceCopy = displayCurrentGrid(state.piece);
+      pieceCopy = getCurrentGrid(state.piece);
       if (pieceCopy) {
         return {
           ...state,
@@ -81,7 +81,7 @@ export default function blocks(
     case 'floating/join':
       floatingCopy = state.floating.slice();
       floatingCopy.splice(action.payload, 1);
-      pieceCopy = displayCurrentGrid(state.floating[action.payload]);
+      pieceCopy = getCurrentGrid(state.floating[action.payload]);
       if (pieceCopy) {
         return {
           ...state,
