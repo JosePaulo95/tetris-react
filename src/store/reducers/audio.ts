@@ -1,3 +1,5 @@
+import { AudioAction } from '../actions/audio';
+
 type AudioState = {
   name: string;
   isPlaying: boolean;
@@ -7,8 +9,6 @@ const INITIAL_AUDIO_STATE: AudioState = {
   name: '',
   isPlaying: false,
 };
-
-type AudioAction = { type: 'audio/play'; payload: string } | { type: 'audio/pause' };
 
 export default function audioReducer(
   state: AudioState = INITIAL_AUDIO_STATE,
