@@ -1,7 +1,21 @@
 import { useEffect } from 'react';
-import { connect } from 'react-redux';
+import { connect, ConnectedProps } from 'react-redux';
 
-function ContainerTicker({ ticks, dispatch }) {
+type RootState = {
+  ticks: number;
+};
+
+const mapStateToProps = (state: RootState): RootState => ({
+  ticks: state.ticks,
+});
+
+const connector = connect(mapStateToProps);
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
+
+type ContainerAudioProps = PropsFromRedux;
+
+function ContainerTicker({ ticks, dispatch }: ContainerAudioProps) {
   useEffect(() => {
     const interval = setInterval(() => {
       try {
@@ -16,8 +30,4 @@ function ContainerTicker({ ticks, dispatch }) {
   return <></>;
 }
 
-const mapStateToProps = (state) => ({
-  ticks: state.ticks,
-});
-
-export default connect(mapStateToProps)(ContainerTicker);
+export default connector(ContainerTicker);
