@@ -63,7 +63,7 @@ export const handleUserInput = (
   if (inputy && inputy < 0) {
     dispatch({ type: 'piece/move-down-max' });
     dispatch({ type: 'audio/play', payload: 'max_down_move' });
-    dispatch({ type: 'piece/move-down' });
+    // dispatch({ type: 'piece/move-down' });
   }
 };
 
