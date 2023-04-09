@@ -27,7 +27,7 @@ export default function blocks(
   action: BlocksAction,
 ): BlocksState {
   let distance = 1;
-  let floatingCopy, boardCopy;
+  let floatingCopy, boardCopy, pieceCopy;
   switch (action.type) {
     case 'piece/move-down':
       testDownCollision(state.piece, state.board);
@@ -69,19 +69,27 @@ export default function blocks(
         piece: { ...state.piece, rotations: state.piece.rotations + 1 },
       };
     case 'piece/join':
-      return {
-        ...state,
-        board: join(displayCurrentGrid(state.piece)!, state.board),
-        piece: erasedPiece(),
-      };
+      pieceCopy = displayCurrentGrid(state.piece);
+      if (pieceCopy) {
+        return {
+          ...state,
+          board: join(pieceCopy, state.board),
+          piece: erasedPiece(),
+        };
+      }
+      return state;
     case 'floating/join':
       floatingCopy = state.floating.slice();
       floatingCopy.splice(action.payload, 1);
-      return {
-        ...state,
-        board: join(displayCurrentGrid(state.floating[action.payload])!, state.board),
-        floating: floatingCopy,
-      };
+      pieceCopy = displayCurrentGrid(state.floating[action.payload]);
+      if (pieceCopy) {
+        return {
+          ...state,
+          board: join(pieceCopy, state.board),
+          floating: floatingCopy,
+        };
+      }
+      return state;
     case 'piece/reset':
       testJoinCollision(state.board, state.limits);
       return {
