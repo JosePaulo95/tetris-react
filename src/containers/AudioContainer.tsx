@@ -1,20 +1,34 @@
 import { Howl } from 'howler';
 import { useEffect } from 'react';
-import { connect } from 'react-redux';
+import { connect, ConnectedProps } from 'react-redux';
 
-const audioMap = {
-  side_move: 'drop_002.ogg',
-  rotation_move: 'drop_001.ogg',
-  max_down_move: '',
-  piece_join: 'click_003.ogg',
-  combination: 'maximize_006.ogg',
+type RootState = {
+  audio: {
+    name: string;
+  };
 };
 
-function AudioContainer({ audio, dispatch }) {
-  useEffect(() => {
-    const fileName = audioMap[audio.name];
+const mapStateToProps = (state: RootState): RootState => ({
+  audio: state.audio,
+});
 
-    // Cria um novo objeto Howl com o arquivo de áudio especificado na propriedade `src`
+const connector = connect(mapStateToProps);
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
+
+type AudioContainerProps = PropsFromRedux;
+
+function AudioContainer({ audio }: AudioContainerProps) {
+  const audioMap = new Map<string, string>([
+    ['side_move', 'drop_002.ogg'],
+    ['rotation_move', 'drop_001.ogg'],
+    ['max_down_move', ''],
+    ['piece_join', 'click_003.ogg'],
+    ['combination', 'maximize_006.ogg'],
+  ]);
+  useEffect(() => {
+    const fileName = audioMap.get(audio.name);
+
     const sound = new Howl({
       src: `./resources/audio/${fileName}`,
       format: 'ogg',
@@ -23,16 +37,9 @@ function AudioContainer({ audio, dispatch }) {
 
     // Toca o áudio quando o componente é montado
     sound.play();
-
-    // Retorna uma função para parar o áudio quando o componente é desmontado
-    //return () => sound.stop();
   }, [audio]);
 
   return <></>;
 }
 
-const mapStateToProps = (state) => ({
-  audio: state.audio,
-});
-
-export default connect(mapStateToProps)(AudioContainer);
+export default connector(AudioContainer);
