@@ -14,7 +14,7 @@ export const asyncHandleMatches = async (
   dispatch: Dispatch<any>,
 ): Promise<void> => {
   if (hasAnyCombinations(blocks.board)) {
-    dispatch('board/combinations');
+    dispatch({ type: 'board/combinations' });
     // dispatch({ type: 'audio/play', payload: 'combination' });
   }
 };
@@ -80,12 +80,10 @@ export const handleCollision = (collision: Error, dispatch: Dispatch<any>) => {
     case 'piece-down-move-collision':
       dispatch({ type: 'piece/join' });
       dispatch({ type: 'audio/play', payload: 'piece_join' });
-      dispatch({ type: 'board/combinations' });
       break;
     case 'floating-fall-collision':
       dispatch({ type: 'floating/join', payload: collision.name });
       dispatch({ type: 'audio/play', payload: 'piece_join' });
-      dispatch({ type: 'board/combinations' });
       break;
     case 'piece-side-move-collision':
     case 'piece-rotation-move-collision':
