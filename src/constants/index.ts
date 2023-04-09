@@ -1,11 +1,15 @@
-import { createBlock } from '../factories/PieceFactory';
+import { Grid } from '../types';
 
-export const EMPTY_GRID = () => {
+export const EMPTY_GRID = (): Grid => {
   return [[0]];
 };
 
-export const LIMIT_GRID = (width, height, playable_height) => {
-  const grid = [];
+export const LIMIT_GRID = (
+  width: number,
+  height: number,
+  playable_height: number,
+): number[][] => {
+  const grid: number[][] = [];
   for (let i = 0; i < height; i++) {
     grid.push([]);
     for (let j = 0; j < width; j++) {
@@ -19,10 +23,10 @@ export const LIMIT_GRID = (width, height, playable_height) => {
   return grid;
 };
 
-export const PIECE_A_GRIDS = (type) => {
+export const PIECE_A_GRIDS = (type: number): Grid[] => {
   const o = type;
   const _ = 0;
-  const grids = [
+  const grids: Grid[] = [
     [
       [o, o, _],
       [_, o, o],
@@ -38,10 +42,10 @@ export const PIECE_A_GRIDS = (type) => {
   return grids;
 };
 
-export const PIECE_B_GRIDS = (type) => {
+export const PIECE_B_GRIDS = (type: number): Grid[] => {
   const o = type;
   const _ = 0;
-  const grids = [
+  const grids: Grid[] = [
     [
       [o, _, _],
       [o, _, _],
@@ -62,10 +66,10 @@ export const PIECE_B_GRIDS = (type) => {
   return grids;
 };
 
-export const PIECE_C_GRIDS = (type) => {
+export const PIECE_C_GRIDS = (type: number): Grid[] => {
   const o = type;
   const _ = 0;
-  const grids = [
+  const grids: Grid[] = [
     [
       [o, o],
       [o, o],
@@ -75,10 +79,10 @@ export const PIECE_C_GRIDS = (type) => {
   return grids;
 };
 
-export const PIECE_D_GRIDS = (type) => {
+export const PIECE_D_GRIDS = (type: number): Grid[] => {
   const o = type;
   const _ = 0;
-  const grids = [
+  const grids: Grid[] = [
     [
       [o, _, _, _],
       [o, _, _, _],
