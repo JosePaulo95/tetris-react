@@ -5,8 +5,8 @@ import {
   limitsPiece,
   randomPiece,
 } from '../../factories/PieceFactory';
-import { Block, Grid } from '../../types';
 import { BlocksState } from '../../types/block';
+import { BlocksAction } from '../actions/blocks';
 import {
   testDownCollision,
   testFloatingFallCollision,
@@ -22,7 +22,10 @@ const INITIAL_STATE: BlocksState = {
   floating: [],
 };
 
-export default function blocks(state: BlocksState = INITIAL_STATE, action): BlocksState {
+export default function blocks(
+  state: BlocksState = INITIAL_STATE,
+  action: BlocksAction,
+): BlocksState {
   let distance = 1;
   let floatingCopy, boardCopy;
   switch (action.type) {
@@ -118,7 +121,4 @@ export default function blocks(state: BlocksState = INITIAL_STATE, action): Bloc
     default:
       return state;
   }
-}
-function floatingFallCollision(arg0: Block, board: Grid, i: number) {
-  throw new Error('Function not implemented.');
 }
