@@ -68,7 +68,7 @@ export const handleUserInput = (
 };
 
 export const handleResetPiece = (blocks: any, dispatch: Dispatch<any>) => {
-  if (isEmptyPiece(blocks.piece)) {
+  if (isEmptyPiece(blocks.piece) && blocks.floating.length == 0) {
     dispatch({ type: 'piece/reset' });
     // anim.reset();
     // anim.start('show');

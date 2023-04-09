@@ -5,7 +5,9 @@ import {
   removeMatchesMoveDownBlocks,
 } from '../../controller';
 import {
+  auxPieces,
   emptyPiece,
+  emptyPiece1,
   erasedPiece,
   limitsPiece,
   randomPiece,
@@ -13,6 +15,7 @@ import {
 import { Block, Grid } from '../../types';
 import {
   testDownCollision,
+  testFloatingFallCollision,
   testJoinCollision,
   testRotationCollision,
   testSideCollision,
@@ -22,16 +25,19 @@ type BlocksState = {
   piece: Block;
   board: Grid;
   limits: Grid;
+  floating: Block[];
 };
 
-const INITIAL_STATE = {
+const INITIAL_STATE: BlocksState = {
   piece: randomPiece(),
   board: emptyPiece(),
   limits: limitsPiece(),
+  floating: [],
 };
 
 export default function blocks(state: BlocksState = INITIAL_STATE, action): BlocksState {
   let distance = 1;
+  let floatingCopy;
   switch (action.type) {
     case 'piece/move-down':
       testDownCollision(state.piece, state.board);
@@ -78,6 +84,14 @@ export default function blocks(state: BlocksState = INITIAL_STATE, action): Bloc
         board: join(displayCurrentGrid(state.piece)!, state.board),
         piece: erasedPiece(),
       };
+    case 'floating/join':
+      floatingCopy = state.floating.slice();
+      floatingCopy.splice(action.payload, 1);
+      return {
+        ...state,
+        board: join(displayCurrentGrid(state.floating[action.payload])!, state.board),
+        floating: floatingCopy,
+      };
     case 'piece/reset':
       testJoinCollision(state.board, state.limits);
       return {
@@ -95,7 +109,24 @@ export default function blocks(state: BlocksState = INITIAL_STATE, action): Bloc
       };
     case 'blocks/reset':
       return INITIAL_STATE;
+    case 'floating/fall':
+      for (let i = 0; i < state.floating.length; i++) {
+        testFloatingFallCollision(state.floating[i], state.board, i);
+      }
+
+      return {
+        ...state,
+        floating: state.floating.map((i) => {
+          return {
+            ...i,
+            y: i.y + 1,
+          };
+        }),
+      };
     default:
       return state;
   }
+}
+function floatingFallCollision(arg0: Block, board: Grid, i: number) {
+  throw new Error('Function not implemented.');
 }
