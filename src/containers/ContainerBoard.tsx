@@ -1,5 +1,5 @@
-import { Dispatch, useEffect } from 'react';
-import { connect } from 'react-redux';
+import { useEffect } from 'react';
+import { connect, ConnectedProps } from 'react-redux';
 
 import BoardContainer from '../components/BoardContainer';
 import GridView from '../components/GridView';
@@ -13,15 +13,24 @@ import {
   handleUserInput,
 } from '../handlers';
 import { userController } from '../input/keyboardInput';
-import { Block, Grid } from '../types';
+import { Block } from '../types';
+import { BlocksState } from '../types/block';
 
-type ContainerBoardProps = {
-  piece: Block;
-  board: Grid;
-  limits: Grid;
-  floating: Block[];
-  dispatch: Dispatch<any>;
+type RootState = {
+  blocks: BlocksState;
+  ticks: number;
 };
+
+const mapStateToProps = (state: RootState): RootState => ({
+  blocks: state.blocks,
+  ticks: state.ticks,
+});
+
+const connector = connect(mapStateToProps);
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
+
+export type ContainerBoardProps = PropsFromRedux;
 
 function ContainerBoard({ blocks, ticks, dispatch }: ContainerBoardProps) {
   useEffect(() => {
@@ -44,18 +53,18 @@ function ContainerBoard({ blocks, ticks, dispatch }: ContainerBoardProps) {
   return (
     <BoardContainer>
       <PieceView piece={blocks.piece}></PieceView>
-      {blocks.floating.map((piece: Block, index: number) => (
-        <PieceView key={index} piece={piece} />
-      ))}
+      <>
+        {blocks.floating.map(
+          (piece: Block, index: number): React.ReactElement => (
+            <PieceView key={index} piece={piece} />
+          ),
+        )}
+      </>
       {/* <GridView grid={displayCurrentGrid(blocks.piece)}></GridView> isso aqui mostra grid do dados ajuda a debugar*/}
       <GridView grid={blocks.board}></GridView>
       <GridView grid={blocks.limits}></GridView>
     </BoardContainer>
   );
 }
-const mapStateToProps = (state) => ({
-  blocks: state.blocks,
-  ticks: state.ticks,
-});
 
-export default connect(mapStateToProps)(ContainerBoard);
+export default connector(ContainerBoard);
