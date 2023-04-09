@@ -1,24 +1,24 @@
 import { GameInputs } from 'game-inputs';
 
 export const userController = {
-  _current_input_y: 0,
-  _current_input_x: 0,
-  get current_input_x() {
+  _current_input_y: 0 as number | undefined,
+  _current_input_x: 0 as number | undefined,
+  get current_input_x(): number | undefined {
     if (this._current_input_x) {
       const aux = Number(this._current_input_x);
       this._current_input_x = undefined;
       return aux;
     }
   },
-  set current_input_x(value) {
+  set current_input_x(value: number | undefined) {
     this._current_input_x = value;
   },
-  get current_input_y() {
+  get current_input_y(): number {
     const aux = Number(this._current_input_y);
     this._current_input_y = undefined;
     return aux;
   },
-  set current_input_y(value) {
+  set current_input_y(value: number) {
     this._current_input_y = value;
   },
 };
