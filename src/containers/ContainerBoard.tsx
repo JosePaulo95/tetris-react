@@ -5,9 +5,9 @@ import BoardContainer from '../components/BoardContainer';
 import GridView from '../components/GridView';
 import PieceView from '../components/PieceView';
 import {
-  asyncHandleMatches,
   handleCollision,
   handleFloatingsGoingDown,
+  handleMatches,
   handlePieceGoingDown,
   handleResetPiece,
   handleUserInput,
@@ -34,20 +34,19 @@ export type ContainerBoardProps = PropsFromRedux;
 
 function ContainerBoard({ blocks, ticks, dispatch }: ContainerBoardProps) {
   useEffect(() => {
-    asyncHandleMatches(blocks, ticks, dispatch)
-      .then(() => {
-        handleResetPiece(blocks, dispatch);
-        handleFloatingsGoingDown(blocks, ticks, dispatch);
-        handlePieceGoingDown(blocks, ticks, dispatch);
-        handleUserInput(
-          userController.current_input_x,
-          userController.current_input_y,
-          dispatch,
-        );
-      })
-      .catch((collision) => {
-        handleCollision(collision as Error, dispatch);
-      });
+    try {
+      handleMatches(blocks, ticks, dispatch);
+      handleResetPiece(blocks, dispatch);
+      handleFloatingsGoingDown(blocks, ticks, dispatch);
+      handlePieceGoingDown(blocks, ticks, dispatch);
+      handleUserInput(
+        userController.current_input_x,
+        userController.current_input_y,
+        dispatch,
+      );
+    } catch (collision) {
+      handleCollision(collision as Error, dispatch);
+    }
   }, [ticks]);
 
   return (

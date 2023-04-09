@@ -8,7 +8,7 @@ const isTimeToMoveDown = (ticks: number) => {
   return ticks % 10 == 0;
 };
 
-export const asyncHandleMatches = async (
+export const handleMatches = async (
   blocks: any,
   ticks: number,
   dispatch: Dispatch<any>,
