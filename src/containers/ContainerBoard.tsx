@@ -52,6 +52,7 @@ function ContainerBoard({ blocks, ticks, dispatch }: ContainerBoardProps) {
 
   return (
     <BoardContainer>
+      <GridView grid={blocks.limits}></GridView>
       <PieceView piece={blocks.piece}></PieceView>
       <>
         {blocks.floating.map(
@@ -62,7 +63,6 @@ function ContainerBoard({ blocks, ticks, dispatch }: ContainerBoardProps) {
       </>
       {/* <GridView grid={displayCurrentGrid(blocks.piece)}></GridView> isso aqui mostra grid do dados ajuda a debugar*/}
       <GridView grid={blocks.board}></GridView>
-      <GridView grid={blocks.limits}></GridView>
     </BoardContainer>
   );
 }
