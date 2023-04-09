@@ -166,22 +166,6 @@ export const removeMatchesMoveDownBlocks = (board: number[][]): number[][] => {
   return newBoard;
 };
 
-export const removeMatches1 = (board: number[][]) => {
-  const b = board;
-  for (let i = board.length - 1; i >= 0; i--) {
-    if (!b[i].includes(0)) {
-      b[i] = b[i].map((_) => 0);
-      for (let j = i; j > 0; j--) {
-        const aux = b[j];
-        b[j] = b[j - 1];
-        b[j - 1] = aux;
-      }
-    }
-  }
-
-  return b;
-};
-
 export const hasAnyCombinations = (board: Grid) => {
   return board.some((row) => row.every((i) => i > 0));
 };
