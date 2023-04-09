@@ -18,11 +18,7 @@ type ContainerAudioProps = PropsFromRedux;
 function ContainerTicker({ ticks, dispatch }: ContainerAudioProps) {
   useEffect(() => {
     const interval = setInterval(() => {
-      try {
-        dispatch({ type: 'ticker/increment' });
-      } catch (error) {
-        console.log(error);
-      }
+      dispatch({ type: 'ticker/increment' });
     }, 50);
     return () => clearInterval(interval);
   }, [ticks]);

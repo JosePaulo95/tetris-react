@@ -72,8 +72,6 @@ export const handleResetPiece = (blocks: any, dispatch: Dispatch<any>) => {
     dispatch({ type: 'piece/reset' });
     // anim.reset();
     // anim.start('show');
-  } else {
-    console.log(blocks.floating);
   }
 };
 
