@@ -1,7 +1,7 @@
 import { createPiece, emptyPiece } from '../factories/PieceFactory';
 import { Block, Grid } from '../types';
 
-export const displayCurrentGrid = (block: Block) => {
+export const displayCurrentGrid = (block: Block): Grid | undefined => {
   const b = transform(
     block.initial_grid[block.rotations % block.initial_grid.length],
     block.x,
@@ -20,7 +20,7 @@ export const wrapGrid = (
   }
 
   const padding = Math.floor((new_width - original_grid[0]?.length) / 2);
-  const grid = [];
+  const grid: number[][] = [];
   for (let i = 0; i < new_height; i++) {
     grid.push([]);
     for (let j = 0; j < new_width; j++) {
@@ -31,7 +31,7 @@ export const wrapGrid = (
   return grid;
 };
 
-const get = (board: Grid, x: number, y: number) => {
+const get = (board: Grid, x: number, y: number): number => {
   if (board[x] && board[x][y]) {
     return board[x][y];
   } else {
@@ -39,7 +39,7 @@ const get = (board: Grid, x: number, y: number) => {
   }
 };
 
-export const transform = (board: number[][], x: number, y: number) => {
+export const transform = (board: number[][], x: number, y: number): Grid | undefined => {
   const b: number[][] = [];
 
   for (let i = 0; i < board.length; i++) {
@@ -59,7 +59,7 @@ export const transform = (board: number[][], x: number, y: number) => {
   }
 };
 
-export const wrap = (board: number[][]) => {
+export const wrap = (board: number[][]): Grid => {
   const wrapped: number[][] = [];
   const width = board.length;
   const height = board[0] ? board[0].length : 0;
@@ -80,7 +80,7 @@ export const wrap = (board: number[][]) => {
   return wrapped;
 };
 
-export const isColliding = (boardA: number[][], boardB: number[][]) => {
+export const isColliding = (boardA: number[][], boardB: number[][]): boolean | Error => {
   if (!hasSameDimensions(boardA, boardB)) {
     throw new Error('Comparing boards with different sizes is not allowed.');
   }
@@ -96,7 +96,7 @@ export const isColliding = (boardA: number[][], boardB: number[][]) => {
   return false;
 };
 
-export const join = (boardA: number[][], boardB: number[][]) => {
+export const join = (boardA: number[][], boardB: number[][]): Grid => {
   if (!hasSameDimensions(boardA, boardB)) {
     throw new Error('Joining boards with different sizes is not allowed.');
   }
@@ -117,12 +117,12 @@ export const join = (boardA: number[][], boardB: number[][]) => {
   return join;
 };
 
-const hasSameDimensions = (boardA: number[][], boardB: number[][]) => {
+const hasSameDimensions = (boardA: number[][], boardB: number[][]): boolean => {
   return boardA.length == boardB.length && boardA[0]?.length == boardB[0]?.length;
 };
 
 export type BoardState = {
-  remaining: number[][];
+  remaining: Grid;
   floating: Block[];
 };
 
@@ -156,7 +156,7 @@ export const removeMatches = (board: number[][]): BoardState => {
   };
 };
 
-export const removeMatchesMoveDownBlocks = (board: number[][]): number[][] => {
+export const removeMatchesMoveDownBlocks = (board: number[][]): Grid => {
   const numRows = board.length;
   const numCols = board[0].length;
 
@@ -190,11 +190,11 @@ export const removeMatchesMoveDownBlocks = (board: number[][]): number[][] => {
   return newBoard;
 };
 
-export const hasAnyCombinations = (board: Grid) => {
+export const hasAnyCombinations = (board: Grid): boolean => {
   return board.some((row) => row.every((i) => i > 0));
 };
 
-export const clear = (board: number[][]) => {
+export const clear = (board: Grid): Grid => {
   const b = board;
   for (let i = 0; i < board.length; i++) {
     for (let j = 0; j < board[i].length; j++) {
@@ -204,7 +204,7 @@ export const clear = (board: number[][]) => {
   return b;
 };
 
-export const isEmptyPiece = (piece: Piece) => {
+export const isEmptyPiece = (piece: Block) => {
   const grid = displayCurrentGrid(piece);
   if (grid) {
     return grid.every((row) => row.every((cell) => cell == 0));

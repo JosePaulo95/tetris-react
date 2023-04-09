@@ -1,6 +1,11 @@
 import { displayCurrentGrid, isColliding } from '../../../controller';
+import { Block, Grid } from '../../../types';
 
-export const testFloatingFallCollision = (piece, board, index) => {
+export const testFloatingFallCollision = (
+  piece: Block,
+  board: Grid,
+  index: number,
+): void | Error => {
   const posFall = displayCurrentGrid({
     ...piece,
     y: piece.y + 1,
@@ -8,12 +13,12 @@ export const testFloatingFallCollision = (piece, board, index) => {
 
   if (!posFall || isColliding(posFall, board)) {
     const collision = new Error('floating-fall-collision');
-    collision.name = index;
+    collision.name = `${index}`;
     throw collision;
   }
 };
 
-export const testDownCollision = (piece, board) => {
+export const testDownCollision = (piece: Block, board: Grid): void | Error => {
   const posMove = displayCurrentGrid({
     ...piece,
     y: piece.y + 1,
@@ -25,7 +30,11 @@ export const testDownCollision = (piece, board) => {
   }
 };
 
-export const testSideCollision = (piece, board, dir) => {
+export const testSideCollision = (
+  piece: Block,
+  board: Grid,
+  dir: number,
+): void | Error => {
   const posMove = displayCurrentGrid({
     ...piece,
     x: piece.x + dir,
@@ -37,7 +46,7 @@ export const testSideCollision = (piece, board, dir) => {
   }
 };
 
-export const testRotationCollision = (piece, board) => {
+export const testRotationCollision = (piece: Block, board: Grid): void | Error => {
   const posMove = displayCurrentGrid({
     ...piece,
     rotations: piece.rotations + 1,
@@ -48,7 +57,7 @@ export const testRotationCollision = (piece, board) => {
   }
 };
 
-export const testJoinCollision = (board, limits) => {
+export const testJoinCollision = (board: Grid, limits: Grid): void | Error => {
   const limits_collider = limits.map((row) => row.map((c) => (c == 0 ? 1 : 0)));
   if (isColliding(board, limits_collider)) {
     throw new Error('board-collides-with-limits');
