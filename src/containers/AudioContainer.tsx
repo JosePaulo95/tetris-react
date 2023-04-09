@@ -30,7 +30,7 @@ function AudioContainer({ audio }: AudioContainerProps) {
     const fileName = audioMap.get(audio.name);
 
     const sound = new Howl({
-      src: `./resources/audio/${fileName}`,
+      src: `./audio/${fileName}`,
       format: 'ogg',
       volume: 0.3,
     });
