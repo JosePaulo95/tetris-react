@@ -1,4 +1,5 @@
 import {
+  BoardState,
   displayCurrentGrid,
   join,
   removeMatches,
@@ -37,7 +38,7 @@ const INITIAL_STATE: BlocksState = {
 
 export default function blocks(state: BlocksState = INITIAL_STATE, action): BlocksState {
   let distance = 1;
-  let floatingCopy;
+  let floatingCopy, boardCopy;
   switch (action.type) {
     case 'piece/move-down':
       testDownCollision(state.piece, state.board);
@@ -101,11 +102,16 @@ export default function blocks(state: BlocksState = INITIAL_STATE, action): Bloc
         },
       };
     case 'board/combinations':
+      // bug cascata buga
       // return state;
       //avisar cada bloco q ele sera eliminado para ativar a animação
+      ({ remaining: boardCopy, floating: floatingCopy } = removeMatches(
+        state.board,
+      ) as BoardState);
       return {
         ...state,
-        board: removeMatchesMoveDownBlocks(state.board),
+        board: boardCopy,
+        floating: floatingCopy,
       };
     case 'blocks/reset':
       return INITIAL_STATE;

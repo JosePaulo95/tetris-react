@@ -1,3 +1,4 @@
+import { createPiece, emptyPiece } from '../factories/PieceFactory';
 import { Block, Grid } from '../types';
 
 export const displayCurrentGrid = (block: Block) => {
@@ -120,16 +121,39 @@ const hasSameDimensions = (boardA: number[][], boardB: number[][]) => {
   return boardA.length == boardB.length && boardA[0]?.length == boardB[0]?.length;
 };
 
-export const removeMatches = (board: number[][]): number[][] => {
-  const b = board.map((row) => {
-    if (row.every((cell) => cell !== 0)) {
-      return row.map(() => 0);
-    } else {
-      return row;
-    }
-  });
+export type BoardState = {
+  remaining: number[][];
+  floating: Block[];
+};
 
-  return b;
+export const removeMatches = (board: number[][]): BoardState => {
+  const b: Grid = emptyPiece();
+  const f: Grid = emptyPiece();
+
+  let i = 0;
+
+  for (i = board.length - 1; i >= 0; i--) {
+    if (board[i].every((cell) => cell !== 0)) {
+      break;
+    }
+    b[i] = board[i];
+  }
+
+  if (i < 0) {
+    return {
+      remaining: b,
+      floating: [],
+    };
+  }
+
+  for (i = i - 1; i >= 0; i--) {
+    f[i] = board[i];
+  }
+
+  return {
+    remaining: b,
+    floating: [{ ...createPiece([f]), anim_state: 'follow' }],
+  };
 };
 
 export const removeMatchesMoveDownBlocks = (board: number[][]): number[][] => {
