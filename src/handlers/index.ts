@@ -13,7 +13,7 @@ export const asyncHandleMatches = async (
   ticks: number,
   dispatch: Dispatch<any>,
 ): Promise<void> => {
-  if (isTimeToMoveDown(ticks) && hasAnyCombinations(blocks.board)) {
+  if (hasAnyCombinations(blocks.board)) {
     dispatch('board/combinations');
     // dispatch({ type: 'audio/play', payload: 'combination' });
   }
@@ -24,7 +24,7 @@ export const handleFloatingsGoingDown = (
   ticks: number,
   dispatch: Dispatch<any>,
 ) => {
-  if (isTimeToMoveDown(ticks)) {
+  if (ticks % 2 == 0) {
     dispatch({ type: 'floating/fall' });
     // anim.start('follow');
   }
@@ -72,6 +72,8 @@ export const handleResetPiece = (blocks: any, dispatch: Dispatch<any>) => {
     dispatch({ type: 'piece/reset' });
     // anim.reset();
     // anim.start('show');
+  } else {
+    console.log(blocks.floating);
   }
 };
 
