@@ -1,19 +1,12 @@
+import { BoardState, displayCurrentGrid, join, removeMatches } from '../../controller';
 import {
-  BoardState,
-  displayCurrentGrid,
-  join,
-  removeMatches,
-  removeMatchesMoveDownBlocks,
-} from '../../controller';
-import {
-  auxPieces,
   emptyPiece,
-  emptyPiece1,
   erasedPiece,
   limitsPiece,
   randomPiece,
 } from '../../factories/PieceFactory';
 import { Block, Grid } from '../../types';
+import { BlocksState } from '../../types/block';
 import {
   testDownCollision,
   testFloatingFallCollision,
@@ -21,13 +14,6 @@ import {
   testRotationCollision,
   testSideCollision,
 } from './collision';
-
-type BlocksState = {
-  piece: Block;
-  board: Grid;
-  limits: Grid;
-  floating: Block[];
-};
 
 const INITIAL_STATE: BlocksState = {
   piece: randomPiece(),

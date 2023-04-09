@@ -7,3 +7,10 @@ export type Block = {
   rotations: number;
   anim_state: string;
 };
+
+export type BlocksState = {
+  piece: Block;
+  board: Grid;
+  limits: Grid;
+  floating: Block[];
+};
