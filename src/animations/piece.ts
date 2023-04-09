@@ -1,6 +1,8 @@
 import { useAnimationControls } from 'framer-motion';
 
-export const pieceAnimationController = (piece) => {
+import { Block } from '../types';
+
+export const pieceAnimationController = (piece: Block) => {
   const controller = useAnimationControls();
 
   return {
