@@ -138,6 +138,11 @@ export const removeMatches = (board: number[][]): BoardState => {
     }
     b[i] = board[i];
   }
+  for (i = i - 1; i >= 0; i--) {
+    if (board[i].some((cell) => cell !== 0)) {
+      break;
+    }
+  }
 
   if (i < 0) {
     return {
@@ -146,7 +151,7 @@ export const removeMatches = (board: number[][]): BoardState => {
     };
   }
 
-  for (i = i - 1; i >= 0; i--) {
+  for (; i >= 0; i--) {
     f[i] = board[i];
   }
 
