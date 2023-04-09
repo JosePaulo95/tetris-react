@@ -1,5 +1,18 @@
 import { displayCurrentGrid, isColliding } from '../../../controller';
 
+export const testFloatingFallCollision = (piece, board, index) => {
+  const posFall = displayCurrentGrid({
+    ...piece,
+    y: piece.y + 1,
+  });
+
+  if (!posFall || isColliding(posFall, board)) {
+    const collision = new Error('floating-fall-collision');
+    collision.name = index;
+    throw collision;
+  }
+};
+
 export const testDownCollision = (piece, board) => {
   const posMove = displayCurrentGrid({
     ...piece,
