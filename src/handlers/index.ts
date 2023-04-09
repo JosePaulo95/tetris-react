@@ -19,6 +19,17 @@ export const asyncHandleMatches = async (
   }
 };
 
+export const handleFloatingsGoingDown = (
+  blocks: any,
+  ticks: number,
+  dispatch: Dispatch<any>,
+) => {
+  if (isTimeToMoveDown(ticks)) {
+    dispatch({ type: 'floating/fall' });
+    // anim.start('follow');
+  }
+};
+
 export const handlePieceGoingDown = (
   blocks: any,
   ticks: number,
@@ -68,6 +79,11 @@ export const handleCollision = (collision: Error, dispatch: Dispatch<any>) => {
   switch (collision.message) {
     case 'piece-down-move-collision':
       dispatch({ type: 'piece/join' });
+      dispatch({ type: 'audio/play', payload: 'piece_join' });
+      dispatch({ type: 'board/combinations' });
+      break;
+    case 'floating-fall-collision':
+      dispatch({ type: 'floating/join', payload: collision.name });
       dispatch({ type: 'audio/play', payload: 'piece_join' });
       dispatch({ type: 'board/combinations' });
       break;
