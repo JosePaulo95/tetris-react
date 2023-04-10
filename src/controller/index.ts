@@ -104,7 +104,7 @@ export const join = (boardA: number[][], boardB: number[][]): Grid => {
     //throw new Error('Joining colliding boards is not allowed.');
   }
 
-  const join = boardA;
+  const join = boardA.map((row) => [...row]); // cria uma cópia de boardA
 
   for (let i = 0; i < boardB.length; i++) {
     for (let j = 0; j < boardB[i].length; j++) {
