@@ -1,5 +1,6 @@
 import { BoardState, getCurrentGrid, join, removeMatches } from '../../controller';
 import {
+  createPiece,
   emptyPiece,
   erasedPiece,
   limitsPiece,
@@ -20,6 +21,7 @@ const INITIAL_STATE: BlocksState = {
   board: emptyPiece(),
   limits: limitsPiece(),
   floating: [],
+  effects: [],
 };
 
 export default function blocks(
@@ -27,7 +29,7 @@ export default function blocks(
   action: BlocksAction,
 ): BlocksState {
   let distance = 1;
-  let floatingCopy, boardCopy, pieceCopy;
+  let floatingCopy, boardCopy, pieceCopy, effectsCopy;
   switch (action.type) {
     case 'piece/move-down':
       testDownCollision(state.piece, state.board);
@@ -71,9 +73,12 @@ export default function blocks(
     case 'piece/join':
       pieceCopy = getCurrentGrid(state.piece);
       if (pieceCopy) {
+        boardCopy = join(pieceCopy, state.board);
+        effectsCopy = createPiece([boardCopy]);
         return {
           ...state,
-          board: join(pieceCopy, state.board),
+          effects: [...state.effects, effectsCopy],
+          board: boardCopy,
           piece: erasedPiece(),
         };
       }
@@ -83,9 +88,12 @@ export default function blocks(
       floatingCopy.splice(action.payload, 1);
       pieceCopy = getCurrentGrid(state.floating[action.payload]);
       if (pieceCopy) {
+        boardCopy = join(pieceCopy, state.board);
+        effectsCopy = createPiece([boardCopy]);
         return {
           ...state,
-          board: join(pieceCopy, state.board),
+          effects: [...state.effects, effectsCopy],
+          board: boardCopy,
           floating: floatingCopy,
         };
       }
@@ -105,8 +113,10 @@ export default function blocks(
       ({ remaining: boardCopy, floating: floatingCopy } = removeMatches(
         state.board,
       ) as BoardState);
+      effectsCopy = createPiece([boardCopy]);
       return {
         ...state,
+        effects: [effectsCopy],
         board: boardCopy,
         floating: floatingCopy,
       };
