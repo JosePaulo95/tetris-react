@@ -60,8 +60,15 @@ function ContainerBoard({ blocks, ticks, dispatch }: ContainerBoardProps) {
           ),
         )}
       </>
+      <>
+        {blocks.effects.map(
+          (piece: Block, index: number): React.ReactElement => (
+            <PieceView key={index} piece={piece} />
+          ),
+        )}
+      </>
       {/* <GridView grid={displayCurrentGrid(blocks.piece)}></GridView> isso aqui mostra grid do dados ajuda a debugar*/}
-      <GridView grid={blocks.board}></GridView>
+      {/* <GridView grid={blocks.board}></GridView> */}
     </BoardContainer>
   );
 }
