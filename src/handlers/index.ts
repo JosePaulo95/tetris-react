@@ -15,7 +15,7 @@ export const handleMatches = async (
 ): Promise<void> => {
   if (hasAnyCombinations(blocks.board)) {
     dispatch({ type: 'board/combinations' });
-    // dispatch({ type: 'audio/play', payload: 'combination' });
+    dispatch({ type: 'audio/play', payload: 'combination' });
   }
 };
 
@@ -63,7 +63,7 @@ export const handleUserInput = (
   if (inputy && inputy < 0) {
     dispatch({ type: 'piece/move-down-max' });
     dispatch({ type: 'audio/play', payload: 'max_down_move' });
-    // dispatch({ type: 'piece/move-down' });
+    dispatch({ type: 'piece/move-down' });
   }
 };
 
@@ -78,8 +78,8 @@ export const handleResetPiece = (blocks: any, dispatch: Dispatch<any>) => {
 export const handleCollision = (collision: Error, dispatch: Dispatch<any>) => {
   switch (collision.message) {
     case 'piece-down-move-collision':
-      dispatch({ type: 'piece/join' });
       dispatch({ type: 'audio/play', payload: 'piece_join' });
+      dispatch({ type: 'piece/join' });
       break;
     case 'floating-fall-collision':
       dispatch({ type: 'floating/join', payload: collision.name });
