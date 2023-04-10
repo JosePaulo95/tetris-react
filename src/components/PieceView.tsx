@@ -18,6 +18,13 @@ const variants: Variants = {
     scaleX: [0, 1],
     scaleY: [0, 1],
   }),
+  biggerSplash: (piece) => ({
+    scaleX: [1.1, 1],
+  }),
+  smallerSplash: (piece) => ({
+    scaleX: [1.05, 1],
+  }),
+  static: (piece) => ({}),
 };
 const PieceView = ({ piece }: PieceViewProps) => {
   return (
