@@ -6,7 +6,6 @@ import {
   limitsPiece,
   randomPiece,
 } from '../../factories/PieceFactory';
-import { Block } from '../../types';
 import { BlocksState } from '../../types/block';
 import { BlocksAction } from '../actions/blocks';
 import {
@@ -30,7 +29,7 @@ export default function blocks(
   action: BlocksAction,
 ): BlocksState {
   let distance = 1;
-  let floatingCopy, boardCopy, pieceCopy, effectsCopy: Block[];
+  let floatingCopy, boardCopy, pieceCopy, effectsCopy;
   switch (action.type) {
     case 'piece/move-down':
       testDownCollision(state.piece, state.board);
@@ -75,13 +74,10 @@ export default function blocks(
       pieceCopy = getCurrentGrid(state.piece);
       if (pieceCopy) {
         boardCopy = join(pieceCopy, state.board);
-        effectsCopy = [
-          ...state.effects,
-          { ...createPiece([pieceCopy]), anim_state: 'biggerSplash' },
-        ];
+        effectsCopy = createPiece([boardCopy]);
         return {
           ...state,
-          effects: effectsCopy,
+          effects: [...state.effects, effectsCopy],
           board: boardCopy,
           piece: erasedPiece(),
         };
@@ -93,13 +89,10 @@ export default function blocks(
       pieceCopy = getCurrentGrid(state.floating[action.payload]);
       if (pieceCopy) {
         boardCopy = join(pieceCopy, state.board);
-        effectsCopy = [
-          ...state.effects,
-          { ...createPiece([pieceCopy]), anim_state: 'smallerSplash' },
-        ];
+        effectsCopy = createPiece([boardCopy]);
         return {
           ...state,
-          effects: effectsCopy,
+          effects: [...state.effects, effectsCopy],
           board: boardCopy,
           floating: floatingCopy,
         };
@@ -120,10 +113,10 @@ export default function blocks(
       ({ remaining: boardCopy, floating: floatingCopy } = removeMatches(
         state.board,
       ) as BoardState);
-      effectsCopy = [{ ...createPiece([boardCopy]), anim_state: 'static' }];
+      effectsCopy = createPiece([boardCopy]);
       return {
         ...state,
-        effects: effectsCopy,
+        effects: [effectsCopy],
         board: boardCopy,
         floating: floatingCopy,
       };
@@ -133,10 +126,9 @@ export default function blocks(
       for (let i = 0; i < state.floating.length; i++) {
         testFloatingFallCollision(state.floating[i], state.board, i);
       }
-      effectsCopy = [{ ...createPiece([state.board]), anim_state: 'static' }];
+
       return {
         ...state,
-        effects: effectsCopy,
         floating: state.floating.map((i) => {
           return {
             ...i,
