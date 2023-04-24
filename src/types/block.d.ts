@@ -13,5 +13,4 @@ export type BlocksState = {
   board: Grid;
   limits: Grid;
   floating: Block[];
-  effects: Block[];
 };
