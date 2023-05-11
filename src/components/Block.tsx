@@ -17,8 +17,13 @@ const mapClass = (type: number) => {
   }
 };
 
-const Block = ({ type }: { type: number }) => {
-  return <motion.td className={`${mapClass(type)} ${styles.block}`}></motion.td>;
+const Block = ({ type, section }: { type: number; section?: string }) => {
+  return (
+    <motion.td className={`${mapClass(type)} ${styles.block}`}>
+      {(section === 'front' || !section) && <div className={styles.front}></div>}
+      {(section === 'sides' || !section) && <div className={styles.side}></div>}
+    </motion.td>
+  );
 };
 
 export default Block;

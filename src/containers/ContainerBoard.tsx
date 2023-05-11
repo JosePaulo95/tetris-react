@@ -4,6 +4,7 @@ import { connect, ConnectedProps } from 'react-redux';
 import BoardContainer from '../components/BoardContainer';
 import GridView from '../components/GridView';
 import PieceView from '../components/PieceView';
+import PieceView3d from '../components/PieceView3d';
 import {
   handleCollision,
   handleFloatingsGoingDown,
@@ -52,16 +53,28 @@ function ContainerBoard({ blocks, ticks, dispatch }: ContainerBoardProps) {
   return (
     <BoardContainer>
       <GridView grid={blocks.limits}></GridView>
-      <PieceView piece={blocks.piece}></PieceView>
+
+      <PieceView piece={blocks.piece} section="sides"></PieceView>
       <>
         {blocks.floating.map(
           (piece: Block, index: number): React.ReactElement => (
-            <PieceView key={index} piece={piece} />
+            <PieceView key={index} piece={piece} section="sides" />
           ),
         )}
       </>
       {/* <GridView grid={displayCurrentGrid(blocks.piece)}></GridView> isso aqui mostra grid do dados ajuda a debugar*/}
-      <GridView grid={blocks.board}></GridView>
+      <GridView grid={blocks.board} section="sides"></GridView>
+
+      <PieceView piece={blocks.piece} section="front"></PieceView>
+      <>
+        {blocks.floating.map(
+          (piece: Block, index: number): React.ReactElement => (
+            <PieceView key={index} piece={piece} section="front" />
+          ),
+        )}
+      </>
+      {/* <GridView grid={displayCurrentGrid(blocks.piece)}></GridView> isso aqui mostra grid do dados ajuda a debugar*/}
+      <GridView grid={blocks.board} section="front"></GridView>
     </BoardContainer>
   );
 }

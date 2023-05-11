@@ -6,9 +6,10 @@ import { Block } from '../types';
 
 type GridViewProps = {
   grid: number[][] | undefined;
+  section?: string;
 };
 
-const GridView = ({ grid }: GridViewProps) => {
+const GridView = ({ grid, section }: GridViewProps) => {
   return (
     <>
       {grid && (
@@ -17,7 +18,7 @@ const GridView = ({ grid }: GridViewProps) => {
             {grid.map((row, i) => (
               <tr key={i}>
                 {row.map((block, j) => (
-                  <BlockFactory key={j} type={block}></BlockFactory>
+                  <BlockFactory key={j} type={block} section={section}></BlockFactory>
                 ))}
               </tr>
             ))}

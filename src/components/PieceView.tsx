@@ -6,6 +6,7 @@ import { Block } from '../types';
 
 type PieceViewProps = {
   piece: Block;
+  section?: string;
 };
 const variants: Variants = {
   follow: (piece) => ({
@@ -26,7 +27,7 @@ const variants: Variants = {
   }),
   static: (piece) => ({}),
 };
-const PieceView = ({ piece }: PieceViewProps) => {
+const PieceView = ({ piece, section }: PieceViewProps) => {
   return (
     <>
       {piece && (
@@ -41,7 +42,7 @@ const PieceView = ({ piece }: PieceViewProps) => {
               (row, i) => (
                 <tr key={i}>
                   {row.map((block, j) => (
-                    <BlockFactory key={j} type={block}></BlockFactory>
+                    <BlockFactory key={j} type={block} section={section}></BlockFactory>
                   ))}
                 </tr>
               ),
