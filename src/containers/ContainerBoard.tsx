@@ -4,7 +4,6 @@ import { connect, ConnectedProps } from 'react-redux';
 import BoardContainer from '../components/BoardContainer';
 import GridView from '../components/GridView';
 import PieceView from '../components/PieceView';
-import PieceView3d from '../components/PieceView3d';
 import {
   handleCollision,
   handleFloatingsGoingDown,
