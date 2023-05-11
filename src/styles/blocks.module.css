@@ -2,8 +2,27 @@
   display: block;
 }
 
-.block_a {
+.front, .side {
+  position: absolute;
+  width: inherit;
+  height: inherit;
+}
+
+.block_a > .front {
   background-color: rgba(255, 165, 0);
+}
+.block_b > .front {
+  background-color: rgb(248, 41, 14);
+}
+.block_c > .front {
+  background-color: rgb(233, 31, 149);
+}
+.block_d > .front {
+  background-color: rgb(36, 197, 122);
+}
+
+.block_a > .side {
+  /* background-color: rgba(255, 165, 0); */
   box-shadow:
     1px 1px rgb(255, 115, 0),
     2px 2px rgb(255, 115, 0),
@@ -17,8 +36,8 @@
     10px 10px rgb(255, 115, 0);
 }
 
-.block_b {
-  background-color: rgb(248, 41, 14);
+.block_b > .side {
+  /* background-color: rgb(248, 41, 14); */
   box-shadow:
     1px 1px rgb(146, 17, 13),
     2px 2px rgb(146, 17, 13),
@@ -32,8 +51,8 @@
     10px 10px rgb(146, 17, 13);
 }
 
-.block_c {
-  background-color: rgb(233, 31, 149);
+.block_c > .side {
+  /* background-color: rgb(233, 31, 149); */
   box-shadow:
     1px 1px rgb(192, 11, 116),
     2px 2px rgb(192, 11, 116),
@@ -47,8 +66,8 @@
     10px 10px rgb(192, 11, 116);
 }
 
-.block_d {
-  background-color: rgb(36, 197, 122);
+.block_d > .side {
+  /* background-color: rgb(36, 197, 122); */
   box-shadow:
     1px 1px rgb(20, 114, 48),
     2px 2px rgb(20, 114, 48),
@@ -83,6 +102,7 @@
   position: relative;
   width: min(100vw, 300px);
   height: 100vh;
+  z-index: 10;
 }
 
 .blockGroup {
