@@ -10,8 +10,8 @@ type PieceViewProps = {
 };
 const variants: Variants = {
   follow: (piece) => ({
-    x: piece.x * (100 / 3),
-    y: piece.y * (100 / 3),
+    x: piece.x * (95 / 3),
+    y: piece.y * (95 / 3),
     scaleX: 1,
     scaleY: 1,
   }),

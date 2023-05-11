@@ -85,12 +85,13 @@
   opacity: 0;
 }
 
-.empty_block {
+.empty_block > .front{
   background-color: white;
   opacity: 0.1;
 }
 
 .block {
+  padding: 0;
   width:  min(10vw, 30px);
   height: min(10vw, 30px);
 }
