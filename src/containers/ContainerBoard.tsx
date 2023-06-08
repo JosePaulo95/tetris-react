@@ -3,6 +3,7 @@ import { connect, ConnectedProps } from 'react-redux';
 
 import BoardContainer from '../components/BoardContainer';
 import GridView from '../components/GridView';
+import GroupPieceView from '../components/GroupPieceView';
 import PieceView from '../components/PieceView';
 import {
   handleCollision,
@@ -54,26 +55,14 @@ function ContainerBoard({ blocks, ticks, dispatch }: ContainerBoardProps) {
       <GridView grid={blocks.limits}></GridView>
 
       <PieceView piece={blocks.piece} section="sides"></PieceView>
-      <>
-        {blocks.floating.map(
-          (piece: Block, index: number): React.ReactElement => (
-            <PieceView key={index} piece={piece} section="sides" />
-          ),
-        )}
-      </>
-      {/* <GridView grid={displayCurrentGrid(blocks.piece)}></GridView> isso aqui mostra grid do dados ajuda a debugar*/}
+      <GroupPieceView pieces={blocks.floating} section="sides"></GroupPieceView>
       <GridView grid={blocks.board} section="sides"></GridView>
 
       <PieceView piece={blocks.piece} section="front"></PieceView>
-      <>
-        {blocks.floating.map(
-          (piece: Block, index: number): React.ReactElement => (
-            <PieceView key={index} piece={piece} section="front" />
-          ),
-        )}
-      </>
-      {/* <GridView grid={displayCurrentGrid(blocks.piece)}></GridView> isso aqui mostra grid do dados ajuda a debugar*/}
+      <GroupPieceView pieces={blocks.floating} section="front"></GroupPieceView>
       <GridView grid={blocks.board} section="front"></GridView>
+
+      {/* <GridView grid={displayCurrentGrid(blocks.piece)}></GridView> isso aqui mostra grid do dados ajuda a debugar*/}
     </BoardContainer>
   );
 }
