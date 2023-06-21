@@ -1,4 +1,5 @@
 import { GameInputs } from 'game-inputs';
+import Hammer from 'hammerjs';
 
 export const userController = {
   _current_input_y: 0 as number | undefined,
@@ -50,3 +51,14 @@ inputs.down.on('rotate', () => {
 inputs.down.on('move-down', () => {
   userController.current_input_y = -1;
 });
+
+const hammer = new Hammer(dom);
+hammer.on('swipeleft', function (event) {
+  userController.current_input_x = -1;
+});
+
+hammer.on('swiperight', function (event) {
+  userController.current_input_x = 1;
+});
+
+// Add more event listeners for other gestures as needed
