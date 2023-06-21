@@ -1,5 +1,6 @@
 import { createPiece, emptyPiece } from '../factories/PieceFactory';
 import { Block, Grid } from '../types';
+import { splitDisconnectedGraphs } from './graph';
 
 export const getCurrentGrid = (block: Block): Grid | undefined => {
   const b = transform(
@@ -126,6 +127,14 @@ export type BoardState = {
   floating: Block[];
 };
 
+export const splitDisconnected = (grid: Grid): Block[] => {
+  const splitted = splitDisconnectedGraphs(grid);
+  const blocks: Block[] = splitted.map((i) => {
+    return { ...createPiece([i]), anim_state: 'follow' };
+  });
+  return blocks;
+};
+
 export const removeMatches = (board: number[][]): BoardState => {
   const b: Grid = emptyPiece();
   const f: Grid = emptyPiece();
@@ -157,7 +166,7 @@ export const removeMatches = (board: number[][]): BoardState => {
 
   return {
     remaining: b,
-    floating: [{ ...createPiece([f]), anim_state: 'follow' }],
+    floating: splitDisconnected(f),
   };
 };
 
