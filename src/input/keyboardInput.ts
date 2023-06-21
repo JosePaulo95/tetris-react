@@ -54,7 +54,7 @@ inputs.down.on('move-down', () => {
 
 const hammer = new Hammer(dom);
 hammer.get('swipe').set({ direction: Hammer.DIRECTION_ALL });
-
+hammer.get('swipe').set({ threshold: 5 });
 hammer.on('swipeleft', function (event: HammerInput) {
   userController.current_input_x = -1;
 });
@@ -63,7 +63,7 @@ hammer.on('swiperight', function (event: HammerInput) {
   userController.current_input_x = 1;
 });
 
-hammer.on('swipeup', function (event: HammerInput) {
+hammer.on('swipeup tap', function (event: HammerInput) {
   userController.current_input_y = 1;
 });
 
