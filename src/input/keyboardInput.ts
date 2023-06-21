@@ -53,12 +53,20 @@ inputs.down.on('move-down', () => {
 });
 
 const hammer = new Hammer(dom);
-hammer.on('swipeleft', function (event) {
+hammer.on('swipeleft', function (event: HammerInput) {
   userController.current_input_x = -1;
 });
 
-hammer.on('swiperight', function (event) {
+hammer.on('swiperight', function (event: HammerInput) {
   userController.current_input_x = 1;
+});
+
+hammer.on('swipeup', function (event: HammerInput) {
+  userController.current_input_y = 1;
+});
+
+hammer.on('swipedown', function (event: HammerInput) {
+  userController.current_input_y = -1;
 });
 
 // Add more event listeners for other gestures as needed
