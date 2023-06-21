@@ -67,16 +67,27 @@ function handleTouchStart(event: TouchEvent): void {
 
   // Determine touch direction based on touch coordinates
   // and update userController accordingly
-  if (touchX < window.innerWidth / 2) {
-    userController.current_input_x = -1; // Move left
+  // Determine touch direction based on touch coordinates and update userController accordingly
+  const touchThreshold = 20; // Adjust this value to control the sensitivity
+
+  if (Math.abs(touchX - window.innerWidth / 2) > touchThreshold) {
+    if (touchX < window.innerWidth / 2) {
+      userController.current_input_x = 1; // Move left
+    } else {
+      userController.current_input_x = -1; // Move right
+    }
   } else {
-    userController.current_input_x = 1; // Move right
+    userController.current_input_x = 0; // No horizontal movement
   }
 
-  if (touchY < window.innerHeight / 2) {
-    userController.current_input_y = -1; // Move up
+  if (Math.abs(touchY - window.innerHeight / 2) > touchThreshold) {
+    if (touchY < window.innerHeight / 2) {
+      userController.current_input_y = -1; // Move up
+    } else {
+      userController.current_input_y = 1; // Move down
+    }
   } else {
-    userController.current_input_y = 1; // Move down
+    userController.current_input_y = 0; // No vertical movement
   }
 }
 
