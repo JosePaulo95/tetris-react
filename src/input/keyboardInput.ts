@@ -51,21 +51,19 @@ inputs.down.on('move-down', () => {
   userController.current_input_y = -1;
 });
 
-// ...
-
 // Add touch-related event listeners
 dom.addEventListener('touchstart', handleTouchStart, false);
 dom.addEventListener('touchmove', handleTouchMove, false);
 dom.addEventListener('touchend', handleTouchEnd, false);
 
 // Handle touch start event
-function handleTouchStart(event) {
+function handleTouchStart(event: TouchEvent): void {
   // Prevent default touch behavior
   event.preventDefault();
 
   // Get touch coordinates
-  const touchX = event.touches[0].clientX;
-  const touchY = event.touches[0].clientY;
+  const touchX: number = event.touches[0].clientX;
+  const touchY: number = event.touches[0].clientY;
 
   // Determine touch direction based on touch coordinates
   // and update userController accordingly
@@ -83,13 +81,13 @@ function handleTouchStart(event) {
 }
 
 // Handle touch move event
-function handleTouchMove(event) {
+function handleTouchMove(event: TouchEvent): void {
   event.preventDefault();
   // You can handle touch move events if needed
 }
 
 // Handle touch end event
-function handleTouchEnd(event) {
+function handleTouchEnd(event: TouchEvent): void {
   event.preventDefault();
   // Reset userController values to neutral state
   userController.current_input_x = 0;
