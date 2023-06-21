@@ -12,9 +12,11 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.1",
+    "@types/hammerjs": "^2.0.41",
     "audio-loader": "^1.0.3",
     "framer-motion": "^8.5.4",
     "game-inputs": "^0.7.0",
+    "hammerjs": "^2.0.8",
     "howler": "^2.2.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
