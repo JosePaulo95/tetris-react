@@ -14,7 +14,6 @@ import {
   handleUserInput,
 } from '../handlers';
 import { userController } from '../input/keyboardInput';
-import { Block } from '../types';
 import { BlocksState } from '../types/block';
 
 type RootState = {

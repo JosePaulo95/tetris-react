@@ -1,6 +1,5 @@
 import './index.css';
 
-import { GameInputs } from 'game-inputs';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
