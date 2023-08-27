@@ -208,6 +208,16 @@ export const hasAnyCombinations = (board: Grid): boolean => {
   return board.some((row) => row.every((i) => i > 0));
 };
 
+export const countCombinations = (board: Grid, piece: Block) => {
+  const piece_grid = getCurrentGrid(piece);
+  if (!piece_grid) {
+    return 0;
+  }
+  const joinned = join(board, piece_grid);
+  const combinations = joinned.filter((row) => row.every((i) => i > 0)).length;
+  return combinations;
+};
+
 export const clear = (board: Grid): Grid => {
   const b = board;
   for (let i = 0; i < board.length; i++) {

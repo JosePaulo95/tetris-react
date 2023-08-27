@@ -1,5 +1,5 @@
 import { EMPTY_GRID, PIECE_A_GRIDS, PIECE_B_GRIDS, PIECE_D_GRIDS } from '../constants';
-import { wrap, wrapGrid } from '../controller';
+import { countCombinations, wrap, wrapGrid } from '../controller';
 import { getMaxY, getPossiveisX } from '../factories/NextPieceCalculator';
 import { createPiece } from '../factories/PieceFactory';
 
@@ -48,4 +48,25 @@ test('calcula max y para peça z num tabuleiro exato', () => {
   piece.rotations = 1;
   const max_y = getMaxY(piece, board);
   expect(max_y).toEqual(2);
+});
+
+test('conta corretamente a qtde de matches', () => {
+  const width = 4;
+  const height = 6;
+
+  const piece_grids = PIECE_A_GRIDS(1);
+  const piece = createPiece(piece_grids.map((g) => wrapGrid(g, width, height)));
+  const b = [
+    [0, 0, 0, 0],
+    [0, 0, 0, 0],
+    [0, 0, 0, 0],
+    [1, 0, 0, 1],
+    [1, 0, 1, 1],
+    [1, 1, 1, 1],
+  ];
+  const board = wrapGrid(b, width, height);
+
+  piece.rotations = 1;
+  piece.y = 2;
+  expect(countCombinations(board, piece)).toEqual(3);
 });

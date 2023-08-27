@@ -1,5 +1,5 @@
 import { PIECE_A_GRIDS } from '../constants';
-import { getCurrentGrid, isColliding, join } from '../controller';
+import { countCombinations, getCurrentGrid, isColliding, join } from '../controller';
 import { Block, Grid } from '../types';
 
 export type fitnesses = {
@@ -12,22 +12,20 @@ export const calcPiecesFitness = (board: Grid, pieces: Block[]): fitnesses[] => 
   for (let i = 0; i < pieces.length; i++) {
     // para cada rotação
     for (let j = 0; j < pieces[i].initial_grid.length; j++) {
-      // para cada x possível
-      const x_possiveis = getPossiveisX({ ...pieces[i], rotations: j });
-      for (let k = 0; k < x_possiveis.length; k++) {
-        const max_y = getMaxY({ ...pieces[i], rotations: j, x: x_possiveis[k] }, board);
-        
-        const pos_join = join(board, getCurrentGrid({ ...pieces[i], rotations: j, x: x_possiveis[k], y: max_y }))
-        const qtde_matches = 
-        // for (let l = board.length - 1; l < array.length; l++) {
-        //   const element = array[l];
-        // }
+      const rotatedPiece = { ...pieces[i], rotations: j };
+      const possibleXPositions = getPossiveisX(rotatedPiece);
+      for (let k = 0; k < possibleXPositions.length; k++) {
+        const pieceAtX = { ...rotatedPiece, x: possibleXPositions[k] };
+        const maxYPosition = getMaxY(pieceAtX, board);
+        if (maxYPosition) {
+          const pieceAtMaxY = { ...pieceAtX, y: maxYPosition };
+          const matchCount = countCombinations(board, pieceAtMaxY);
+        }
       }
     }
   }
 
-  // se (x, max_y) válido
-  // se posição.y-1 colide
+  // plano:
   // calcular a qtde de matches (score de fitness)
   // assinalar o melhor score para a peça atual
 
@@ -36,7 +34,7 @@ export const calcPiecesFitness = (board: Grid, pieces: Block[]): fitnesses[] => 
   return [];
 };
 
-export function getMaxY(piece: Block, board: Grid): number|undefined {
+export function getMaxY(piece: Block, board: Grid): number | undefined {
   let p_grid, colide;
   do {
     piece = { ...piece, y: piece.y + 1 };
@@ -45,11 +43,11 @@ export function getMaxY(piece: Block, board: Grid): number|undefined {
   } while (p_grid && !colide);
 
   const result = piece.y - 1;
-  
+
   if (result === -1) {
     return undefined;
   }
-  
+
   return result;
 }
 
