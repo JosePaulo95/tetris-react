@@ -214,8 +214,11 @@ export const countCombinations = (board: Grid, piece: Block) => {
     return 0;
   }
   const joinned = join(board, piece_grid);
-  const combinations = joinned.filter((row) => row.every((i) => i > 0)).length;
-  return combinations;
+  const full_combinations = joinned.filter((row) => row.every((i) => i > 0)).length;
+  const partial_combinations = joinned.filter(
+    (row) => row.filter((j) => j === 0).length === 1,
+  ).length;
+  return full_combinations + 0.7 * partial_combinations;
 };
 
 export const calcAvgHeight = (board: Grid): number => {

@@ -1,7 +1,7 @@
 import { EMPTY_GRID, PIECE_A_GRIDS, PIECE_B_GRIDS, PIECE_D_GRIDS } from '../constants';
 import { calcAvgHeight, countCombinations, wrap, wrapGrid } from '../controller';
 import { calcMaxMatches, getMaxY, getPossiveisX } from '../factories/NextPieceCalculator';
-import { createPiece } from '../factories/PieceFactory';
+import { createPiece, emptyPiece } from '../factories/PieceFactory';
 import { Grid } from '../types';
 
 test('calcula x possíveis adequadamente da peça z', () => {
@@ -70,6 +70,25 @@ test('conta corretamente a qtde de matches', () => {
   piece.rotations = 1;
   piece.y = 2;
   expect(countCombinations(board, piece)).toEqual(3);
+});
+
+test('conta matches parciais', () => {
+  const width = 4;
+  const height = 6;
+
+  const piece_grids = [EMPTY_GRID()];
+  const piece = createPiece(piece_grids.map((g) => wrapGrid(g, width, height)));
+  const b = [
+    [0, 0, 0, 0],
+    [0, 0, 0, 0],
+    [1, 0, 3, 0],
+    [1, 2, 3, 0],
+    [1, 1, 3, 2],
+    [1, 0, 1, 1],
+  ];
+  const board = wrapGrid(b, width, height);
+
+  expect(countCombinations(board, piece)).toEqual(2.4);
 });
 
 test('conta corretamente a qtde de matches para peça L', () => {
