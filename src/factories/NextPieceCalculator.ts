@@ -21,29 +21,37 @@ export const calcPiecesFitness = (
   const avgHeight = calcAvgHeight(board); // Supondo que calcAvgHeight retorna a altura média atual do tabuleiro
   const fitnessScores: fitnesses[] = Array.from({ length: pieces.length }, (_, i) => ({
     id: i,
-    score: Infinity,
+    score: 10,
   }));
   // para cada peça
   for (let i = 0; i < pieces.length; i++) {
-    // para cada rotação
-    for (let j = 0; j < pieces[i].initial_grid.length; j++) {
-      const rotatedPiece = { ...pieces[i], rotations: j };
-      const possibleXPositions = getPossiveisX(rotatedPiece);
-      for (let k = 0; k < possibleXPositions.length; k++) {
-        const pieceAtX = { ...rotatedPiece, x: possibleXPositions[k] };
-        const maxYPosition = getMaxY(pieceAtX, board);
-        if (maxYPosition) {
-          const pieceAtMaxY = { ...pieceAtX, y: maxYPosition };
-          const matchCount = countCombinations(board, pieceAtMaxY);
-          const resultingHeight = avgHeight - matchCount;
-          const score = Math.abs(targetHeight - resultingHeight);
-          fitnessScores[i].score = Math.min(fitnessScores[i].score, score);
-        }
+    const maxMatches = calcMaxMatches(board, pieces[i]);
+    const resultingHeight = avgHeight - maxMatches;
+    const score = Math.abs(targetHeight - resultingHeight);
+    fitnessScores[i].score = Math.min(fitnessScores[i].score, score);
+  }
+
+  return fitnessScores;
+};
+
+export const calcMaxMatches = (board: Grid, piece: Block): number => {
+  let max = 0;
+  // para cada rotação
+  for (let j = 0; j < piece.initial_grid.length; j++) {
+    const rotatedPiece = { ...piece, rotations: j };
+    const possibleXPositions = getPossiveisX(rotatedPiece);
+    for (let k = 0; k < possibleXPositions.length; k++) {
+      const pieceAtX = { ...rotatedPiece, x: possibleXPositions[k] };
+      const maxYPosition = getMaxY(pieceAtX, board);
+      if (maxYPosition) {
+        const pieceAtMaxY = { ...pieceAtX, y: maxYPosition };
+        const matchCount = countCombinations(board, pieceAtMaxY);
+        max = Math.max(max, matchCount);
       }
     }
   }
 
-  return fitnessScores;
+  return max;
 };
 
 export function getMaxY(piece: Block, board: Grid): number | undefined {

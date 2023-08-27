@@ -1,6 +1,6 @@
 import { EMPTY_GRID, PIECE_A_GRIDS, PIECE_B_GRIDS, PIECE_D_GRIDS } from '../constants';
 import { calcAvgHeight, countCombinations, wrap, wrapGrid } from '../controller';
-import { getMaxY, getPossiveisX } from '../factories/NextPieceCalculator';
+import { calcMaxMatches, getMaxY, getPossiveisX } from '../factories/NextPieceCalculator';
 import { createPiece } from '../factories/PieceFactory';
 import { Grid } from '../types';
 
@@ -70,6 +70,25 @@ test('conta corretamente a qtde de matches', () => {
   piece.rotations = 1;
   piece.y = 2;
   expect(countCombinations(board, piece)).toEqual(3);
+});
+
+test('conta corretamente a qtde de matches para peça L', () => {
+  const width = 6;
+  const height = 6;
+
+  const piece_grids = PIECE_B_GRIDS(1);
+  const piece = createPiece(piece_grids.map((g) => wrapGrid(g, width, height)));
+  const b = [
+    [0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0],
+    [2, 0, 0, 0, 0, 0],
+    [2, 0, 0, 0, 0, 3],
+    [2, 2, 0, 0, 0, 3],
+  ];
+  const board = wrapGrid(b, width, height);
+
+  expect(calcMaxMatches(board, piece)).toEqual(1);
 });
 
 it('avgHeight should return the average height of the board', () => {
