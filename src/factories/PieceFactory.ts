@@ -9,8 +9,10 @@ import {
   PIECE_C_GRIDS,
   PIECE_D_GRIDS,
 } from '../constants';
-import { transform, wrap, wrapGrid } from '../controller';
+import { getCurrentGrid, join, transform, wrap, wrapGrid } from '../controller';
 import { Block as Piece, Grid } from '../types';
+import { BlocksState } from '../types/block';
+import { calcPiecesFitness } from './NextPieceCalculator';
 
 export const randomPiece = () => {
   const options = [
@@ -21,6 +23,29 @@ export const randomPiece = () => {
   ];
   const grids: Grid[] = options[Math.floor(Math.random() * options.length)];
   return createPiece(grids.map((g) => wrapGrid(g, configs.width, configs.height)));
+};
+
+export const nextPiece = (boardState: BlocksState) => {
+  const options = [
+    PIECE_A_GRIDS(1),
+    PIECE_B_GRIDS(2),
+    PIECE_C_GRIDS(3),
+    PIECE_D_GRIDS(4),
+  ];
+  const pieces = options.map((grids) =>
+    createPiece(grids.map((g) => wrapGrid(g, configs.width, configs.height))),
+  );
+  const floatingGrids = boardState.floating.map((i) =>
+    getCurrentGrid({ ...i, y: i.y + 1 }),
+  );
+  floatingGrids.push(boardState.board);
+  const floatingJoinned = floatingGrids
+    .filter(Boolean)
+    .reduce((acc, curr) => join(acc!, curr!), floatingGrids[0]);
+
+  const withScores = calcPiecesFitness(floatingJoinned!, pieces, 2);
+  const index = withScores.sort((a, b) => a.score - b.score)[0].id;
+  return pieces[index];
 };
 
 export const erasedPiece = () => {
