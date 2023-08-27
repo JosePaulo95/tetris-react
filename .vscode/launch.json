@@ -10,6 +10,16 @@
       "name": "Launch Chrome against localhost",
       "url": "http://127.0.0.1:5173",
       "webRoot": "${workspaceFolder}"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Debug yarn test",
+      "runtimeExecutable": "yarn",
+      "args": ["test"],
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen",
+      "disableOptimisticBPs": true
     }
   ]
 }
