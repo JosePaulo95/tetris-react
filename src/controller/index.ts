@@ -218,6 +218,24 @@ export const countCombinations = (board: Grid, piece: Block) => {
   return combinations;
 };
 
+export const calcAvgHeight = (board: Grid): number => {
+  let totalHeight = 0;
+  const numCols = board[0].length;
+
+  for (let col = 0; col < numCols; col++) {
+    let colHeight = 0;
+    for (let row = 0; row < board.length; row++) {
+      if (board[row][col] > 0) {
+        colHeight = board.length - row;
+        break;
+      }
+    }
+    totalHeight += colHeight;
+  }
+
+  return totalHeight / numCols;
+};
+
 export const clear = (board: Grid): Grid => {
   const b = board;
   for (let i = 0; i < board.length; i++) {
