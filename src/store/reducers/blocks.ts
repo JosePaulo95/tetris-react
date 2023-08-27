@@ -3,6 +3,7 @@ import {
   emptyPiece,
   erasedPiece,
   limitsPiece,
+  nextPiece,
   randomPiece,
 } from '../../factories/PieceFactory';
 import { BlocksState } from '../../types/block';
@@ -95,7 +96,7 @@ export default function blocks(
       return {
         ...state,
         piece: {
-          ...randomPiece(),
+          ...nextPiece(state),
         },
       };
     case 'board/combinations':
