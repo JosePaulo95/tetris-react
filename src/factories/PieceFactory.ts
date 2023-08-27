@@ -43,7 +43,7 @@ export const nextPiece = (boardState: BlocksState) => {
     .filter(Boolean)
     .reduce((acc, curr) => join(acc!, curr!), floatingGrids[0]);
 
-  const withScores = calcPiecesFitness(floatingJoinned!, pieces, 2);
+  const withScores = calcPiecesFitness(floatingJoinned!, pieces, 0);
   const index = withScores.sort((a, b) => a.score - b.score)[0].id;
   return pieces[index];
 };
