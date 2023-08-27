@@ -1,5 +1,5 @@
 import { PIECE_A_GRIDS } from '../constants';
-import { getCurrentGrid } from '../controller';
+import { getCurrentGrid, isColliding } from '../controller';
 import { Block, Grid } from '../types';
 
 export type fitnesses = {
@@ -13,9 +13,13 @@ export const calcPiecesFitness = (board: Grid, pieces: Block[]): fitnesses[] => 
     // para cada rotação
     for (let j = 0; j < pieces[i].initial_grid.length; j++) {
       // para cada x possível
-      // const xs = getPossiveisX({ ...pieces[i], rotations: j });
-      // for (let k = 0; k < xs.length; k++) {
-      // }
+      const x_possiveis = getPossiveisX({ ...pieces[i], rotations: j });
+      for (let k = 0; k < x_possiveis.length; k++) {
+        // const y = getMaxY({ ...pieces[i], x: x_possiveis[k], rotations: j }, board);
+        // for (let l = board.length - 1; l < array.length; l++) {
+        //   const element = array[l];
+        // }
+      }
     }
   }
 
@@ -29,7 +33,18 @@ export const calcPiecesFitness = (board: Grid, pieces: Block[]): fitnesses[] => 
   return [];
 };
 
-export function getPossiveisX(piece: Block) {
+export function getMaxY(piece: Block, board: Grid): number {
+  let p_grid, colide;
+  do {
+    piece = { ...piece, y: piece.y + 1 };
+    p_grid = getCurrentGrid(piece);
+    colide = p_grid ? isColliding(p_grid, board) : undefined;
+  } while (p_grid && !colide);
+
+  return piece.y - 1;
+}
+
+export function getPossiveisX(piece: Block): number[] {
   const xs = [];
   const grid = getCurrentGrid(piece);
   if (!grid) {
