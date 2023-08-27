@@ -1,13 +1,28 @@
 import { PIECE_A_GRIDS } from '../constants';
-import { countCombinations, getCurrentGrid, isColliding, join } from '../controller';
+import {
+  calcAvgHeight,
+  countCombinations,
+  getCurrentGrid,
+  isColliding,
+  join,
+} from '../controller';
 import { Block, Grid } from '../types';
 
 export type fitnesses = {
   id: number;
-  fitness: number;
+  score: number;
 };
 
-export const calcPiecesFitness = (board: Grid, pieces: Block[]): fitnesses[] => {
+export const calcPiecesFitness = (
+  board: Grid,
+  pieces: Block[],
+  targetHeight: number,
+): fitnesses[] => {
+  const avgHeight = calcAvgHeight(board); // Supondo que calcAvgHeight retorna a altura média atual do tabuleiro
+  const fitnessScores: fitnesses[] = Array.from({ length: pieces.length }, (_, i) => ({
+    id: i,
+    score: Infinity,
+  }));
   // para cada peça
   for (let i = 0; i < pieces.length; i++) {
     // para cada rotação
@@ -20,18 +35,15 @@ export const calcPiecesFitness = (board: Grid, pieces: Block[]): fitnesses[] => 
         if (maxYPosition) {
           const pieceAtMaxY = { ...pieceAtX, y: maxYPosition };
           const matchCount = countCombinations(board, pieceAtMaxY);
+          const resultingHeight = avgHeight - matchCount;
+          const score = Math.abs(targetHeight - resultingHeight);
+          fitnessScores[i].score = Math.min(fitnessScores[i].score, score);
         }
       }
     }
   }
 
-  // plano:
-  // calcular a qtde de matches (score de fitness)
-  // assinalar o melhor score para a peça atual
-
-  //retornar os scores
-
-  return [];
+  return fitnessScores;
 };
 
 export function getMaxY(piece: Block, board: Grid): number | undefined {
