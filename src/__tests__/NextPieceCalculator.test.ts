@@ -1,4 +1,4 @@
-import { EMPTY_GRID, PIECE_Z_GRIDS, PIECE_L_GRIDS, PIECE_I_GRIDS } from '../constants';
+import { EMPTY_GRID, PIECE_I_GRIDS, PIECE_L_GRIDS, PIECE_Z_GRIDS } from '../constants';
 import { calcAvgHeight, countCombinations, wrap, wrapGrid } from '../controller';
 import { calcMaxMatches, getMaxY, getPossiveisX } from '../factories/NextPieceCalculator';
 import { createPiece, emptyPiece } from '../factories/PieceFactory';

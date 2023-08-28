@@ -4,10 +4,10 @@ import { configs } from '../configs';
 import {
   EMPTY_GRID,
   LIMIT_GRID,
-  PIECE_Z_GRIDS,
+  PIECE_I_GRIDS,
   PIECE_L_GRIDS,
   PIECE_O_GRIDS,
-  PIECE_I_GRIDS,
+  PIECE_Z_GRIDS,
 } from '../constants';
 import { getCurrentGrid, join, transform, wrap, wrapGrid } from '../controller';
 import { Block as Piece, Grid } from '../types';
