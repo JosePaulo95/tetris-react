@@ -25,6 +25,8 @@ export const randomPiece = () => {
   return createPiece(grids.map((g) => wrapGrid(g, configs.width, configs.height)));
 };
 
+const ocorencies: number[] = [0, 0, 0, 0];
+
 export const nextPiece = (boardState: BlocksState) => {
   const options = [
     PIECE_A_GRIDS(1),
@@ -43,8 +45,17 @@ export const nextPiece = (boardState: BlocksState) => {
     .filter(Boolean)
     .reduce((acc, curr) => join(acc!, curr!), floatingGrids[0]);
 
-  const withScores = calcPiecesFitness(floatingJoinned!, pieces, 0);
-  const index = withScores.sort((a, b) => a.score - b.score)[0].id;
+  let index;
+  const ocorenciesTotal = ocorencies.reduce((acc, val) => acc + val, 0);
+  const ocorenciesNormalized = ocorencies.map((x) => x / ocorenciesTotal);
+  if (ocorenciesNormalized.some((i) => i < 0.8 / ocorencies.length)) {
+    index = ocorenciesNormalized.findIndex((i) => i < 0.8 / ocorencies.length);
+  } else {
+    const withScores = calcPiecesFitness(floatingJoinned!, pieces, 0);
+    index = withScores.sort((a, b) => a.score - b.score)[0].id;
+  }
+
+  ocorencies[index]++;
   return pieces[index];
 };
 
