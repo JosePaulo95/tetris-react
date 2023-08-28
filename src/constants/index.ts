@@ -23,7 +23,7 @@ export const LIMIT_GRID = (
   return grid;
 };
 
-export const PIECE_A_GRIDS = (type: number): Grid[] => {
+export const PIECE_Z_GRIDS = (type: number): Grid[] => {
   const o = type;
   const _ = 0;
   const grids: Grid[] = [
@@ -42,7 +42,7 @@ export const PIECE_A_GRIDS = (type: number): Grid[] => {
   return grids;
 };
 
-export const PIECE_B_GRIDS = (type: number): Grid[] => {
+export const PIECE_L_GRIDS = (type: number): Grid[] => {
   const o = type;
   const _ = 0;
   const grids: Grid[] = [
@@ -66,7 +66,7 @@ export const PIECE_B_GRIDS = (type: number): Grid[] => {
   return grids;
 };
 
-export const PIECE_C_GRIDS = (type: number): Grid[] => {
+export const PIECE_O_GRIDS = (type: number): Grid[] => {
   const o = type;
   const _ = 0;
   const grids: Grid[] = [
@@ -79,7 +79,7 @@ export const PIECE_C_GRIDS = (type: number): Grid[] => {
   return grids;
 };
 
-export const PIECE_D_GRIDS = (type: number): Grid[] => {
+export const PIECE_I_GRIDS = (type: number): Grid[] => {
   const o = type;
   const _ = 0;
   const grids: Grid[] = [

@@ -4,10 +4,10 @@ import { configs } from '../configs';
 import {
   EMPTY_GRID,
   LIMIT_GRID,
-  PIECE_A_GRIDS,
-  PIECE_B_GRIDS,
-  PIECE_C_GRIDS,
-  PIECE_D_GRIDS,
+  PIECE_Z_GRIDS,
+  PIECE_L_GRIDS,
+  PIECE_O_GRIDS,
+  PIECE_I_GRIDS,
 } from '../constants';
 import { getCurrentGrid, join, transform, wrap, wrapGrid } from '../controller';
 import { Block as Piece, Grid } from '../types';
@@ -16,10 +16,10 @@ import { calcPiecesFitness } from './NextPieceCalculator';
 
 export const randomPiece = () => {
   const options = [
-    PIECE_A_GRIDS(1),
-    PIECE_B_GRIDS(2),
-    PIECE_C_GRIDS(3),
-    PIECE_D_GRIDS(4),
+    PIECE_Z_GRIDS(1),
+    PIECE_L_GRIDS(2),
+    PIECE_O_GRIDS(3),
+    PIECE_I_GRIDS(4),
   ];
   const grids: Grid[] = options[Math.floor(Math.random() * options.length)];
   return createPiece(grids.map((g) => wrapGrid(g, configs.width, configs.height)));
@@ -29,10 +29,10 @@ const ocorencies: number[] = [0, 0, 0, 0];
 let nextIndex: number;
 export const nextPiece = (boardState: BlocksState) => {
   const options = [
-    PIECE_A_GRIDS(1),
-    PIECE_B_GRIDS(2),
-    PIECE_C_GRIDS(3),
-    PIECE_D_GRIDS(4),
+    PIECE_Z_GRIDS(1),
+    PIECE_L_GRIDS(2),
+    PIECE_O_GRIDS(3),
+    PIECE_I_GRIDS(4),
   ];
   const pieces = options.map((grids) =>
     createPiece(grids.map((g) => wrapGrid(g, configs.width, configs.height))),

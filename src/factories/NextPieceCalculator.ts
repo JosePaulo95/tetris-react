@@ -1,4 +1,4 @@
-import { PIECE_A_GRIDS } from '../constants';
+import { PIECE_Z_GRIDS } from '../constants';
 import {
   calcAvgHeight,
   countCombinations,
