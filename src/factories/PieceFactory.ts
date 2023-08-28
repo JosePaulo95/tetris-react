@@ -26,7 +26,7 @@ export const randomPiece = () => {
 };
 
 const ocorencies: number[] = [0, 0, 0, 0];
-
+let nextIndex: number;
 export const nextPiece = (boardState: BlocksState) => {
   const options = [
     PIECE_A_GRIDS(1),
@@ -45,18 +45,21 @@ export const nextPiece = (boardState: BlocksState) => {
     .filter(Boolean)
     .reduce((acc, curr) => join(acc!, curr!), floatingGrids[0]);
 
-  let index;
   const ocorenciesTotal = ocorencies.reduce((acc, val) => acc + val, 0);
   const ocorenciesNormalized = ocorencies.map((x) => x / ocorenciesTotal);
   if (ocorenciesNormalized.some((i) => i < 0.8 / ocorencies.length)) {
-    index = ocorenciesNormalized.findIndex((i) => i < 0.8 / ocorencies.length);
+    nextIndex = ocorenciesNormalized.findIndex((i) => i < 0.8 / ocorencies.length);
   } else {
     const withScores = calcPiecesFitness(floatingJoinned!, pieces, 0);
-    index = withScores.sort((a, b) => a.score - b.score)[0].id;
+    let index = withScores.sort((a, b) => a.score - b.score)[0].id;
+    if (index == nextIndex) {
+      index = withScores.sort((a, b) => a.score - b.score)[1].id;
+    }
+    nextIndex = index;
   }
 
-  ocorencies[index]++;
-  return pieces[index];
+  ocorencies[nextIndex]++;
+  return pieces[nextIndex];
 };
 
 export const erasedPiece = () => {
