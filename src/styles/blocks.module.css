@@ -20,6 +20,9 @@
 .block_d > .front {
   background-color: rgb(36, 197, 122);
 }
+.block_T > .front {
+  background-color: rgb(0, 191, 255);
+}
 
 .block_a > .side {
   /* background-color: rgba(255, 165, 0); */
@@ -79,6 +82,21 @@
     8px 8px rgb(20, 114, 48),
     9px 9px rgb(20, 114, 48),
     10px 10px rgb(20, 114, 48);
+}
+
+.block_T > .side {
+  /* background-color: rgb(36, 197, 122); */
+  box-shadow:
+    1px 1px rgb(0, 128, 255),
+    2px 2px rgb(0, 128, 255),
+    3px 3px rgb(0, 128, 255),
+    4px 4px rgb(0, 128, 255),
+    5px 5px rgb(0, 128, 255),
+    6px 6px rgb(0, 128, 255),
+    7px 7px rgb(0, 128, 255),
+    8px 8px rgb(0, 128, 255),
+    9px 9px rgb(0, 128, 255),
+    10px 10px rgb(0, 128, 255);
 }
 
 .void_block {

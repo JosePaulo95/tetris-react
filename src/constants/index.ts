@@ -99,3 +99,32 @@ export const PIECE_I_GRIDS = (type: number): Grid[] => {
 
   return grids;
 };
+
+export const PIECE_T_GRIDS = (type: number): Grid[] => {
+  const o = type;
+  const _ = 0;
+  const grids: Grid[] = [
+    [
+      [_, _, _],
+      [o, o, o],
+      [_, o, _],
+    ],
+    [
+      [_, o, _],
+      [_, o, o],
+      [_, o, _],
+    ],
+    [
+      [_, o, _],
+      [o, o, o],
+      [_, _, _],
+    ],
+    [
+      [_, o, _],
+      [o, o, _],
+      [_, o, _],
+    ],
+  ];
+
+  return grids;
+};

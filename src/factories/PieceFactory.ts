@@ -7,6 +7,7 @@ import {
   PIECE_I_GRIDS,
   PIECE_L_GRIDS,
   PIECE_O_GRIDS,
+  PIECE_T_GRIDS,
   PIECE_Z_GRIDS,
 } from '../constants';
 import { getCurrentGrid, join, transform, wrap, wrapGrid } from '../controller';
@@ -20,12 +21,13 @@ export const randomPiece = () => {
     PIECE_L_GRIDS(2),
     PIECE_O_GRIDS(3),
     PIECE_I_GRIDS(4),
+    PIECE_T_GRIDS(5),
   ];
   const grids: Grid[] = options[Math.floor(Math.random() * options.length)];
   return createPiece(grids.map((g) => wrapGrid(g, configs.width, configs.height)));
 };
 
-const ocorencies: number[] = [0, 0, 0, 0];
+const ocorencies: number[] = [0, 0, 0, 0, 0];
 let nextIndex: number;
 export const nextPiece = (boardState: BlocksState) => {
   const options = [
@@ -33,6 +35,7 @@ export const nextPiece = (boardState: BlocksState) => {
     PIECE_L_GRIDS(2),
     PIECE_O_GRIDS(3),
     PIECE_I_GRIDS(4),
+    PIECE_T_GRIDS(5),
   ];
   const pieces = options.map((grids) =>
     createPiece(grids.map((g) => wrapGrid(g, configs.width, configs.height))),

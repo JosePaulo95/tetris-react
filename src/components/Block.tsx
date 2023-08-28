@@ -12,6 +12,8 @@ const mapClass = (type: number) => {
       return styles.block_c;
     case 4:
       return styles.block_d;
+    case 5:
+      return styles.block_T;
     default:
       return styles.block_d;
   }
