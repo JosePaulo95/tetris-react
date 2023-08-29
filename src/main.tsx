@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 import App from './App';
+import Menu from './screens/Menu';
 import store from './store';
 
 ReactDOM.render(
@@ -13,6 +14,7 @@ ReactDOM.render(
       <Router>
         <Routes>
           <Route path="/" Component={App} />
+          <Route path="/menu" Component={Menu} />
         </Routes>
       </Router>
     </Provider>
