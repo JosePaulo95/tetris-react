@@ -14,6 +14,9 @@ function Menu() {
           />
         </h2>
       </div>
+      <button className="rounded-button">
+        <img src="icons/play-icon.svg" alt="Ícone de play" />
+      </button>
     </>
   );
 }

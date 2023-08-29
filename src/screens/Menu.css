@@ -52,3 +52,21 @@
     transform: rotate(360deg); /* Rotação completa */
   }
 }
+
+.rounded-button {
+  background-color: #74A0EF;
+  border: none;
+  border-radius: 15px;
+  width: 250px;
+  height: 250px;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+
+.rounded-button:hover {
+  opacity: 0.9;
+}
+
+.rounded-button img {
+  width: 60%;
+}
