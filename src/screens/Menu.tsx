@@ -17,6 +17,7 @@ function Menu() {
       <button className="rounded-button">
         <img src="icons/play-icon.svg" alt="Ícone de play" />
       </button>
+      <footer className="footer">Desenvolvido por @JosePaulo95</footer>
     </>
   );
 }

@@ -6,7 +6,12 @@
 @font-face {
     font-family: 'Lato Italic';
     src: url('./fonts/Lato-Italic.woff2') format('woff2');
-  }
+}
+
+@font-face {
+  font-family: 'Lato Regular';
+  src: url('./fonts/Lato-Regular.woff2') format('woff2');
+}
 
 .titulo-container {
     text-align: center; /* Centraliza o conteúdo horizontalmente */
@@ -69,4 +74,15 @@
 
 .rounded-button img {
   width: 60%;
+}
+
+.footer {
+  font-family: 'Lato Regular', Arial, Helvetica, sans-serif;
+  text-align: center;
+  padding: 20px;
+  color: white;
+}
+
+.nome {
+  font-weight: bold;
 }
