@@ -61,6 +61,11 @@ export const PIECE_L_GRIDS = (type: number): Grid[] => {
       [_, o, _],
       [_, o, _],
     ],
+    [
+      [o, o, o],
+      [o, _, _],
+      [_, _, _],
+    ],
   ];
 
   return grids;
