@@ -1,5 +1,7 @@
 import './Menu.css';
 
+import { Link } from 'react-router-dom'; // Importe o hook useHistory
+
 function Menu() {
   return (
     <>
@@ -15,7 +17,9 @@ function Menu() {
         </h2>
       </div>
       <button className="rounded-button">
-        <img src="icons/play-icon.svg" alt="Ícone de play" />
+        <Link to="/" className="rounded-button">
+          <img src="icons/play-icon.svg" alt="Ícone de play" />
+        </Link>
       </button>
       <a
         href="https://github.com/JosePaulo95/tetris-react"
