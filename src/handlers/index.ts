@@ -15,6 +15,7 @@ export const handleMatches = async (
 ): Promise<void> => {
   if (hasAnyCombinations(blocks.board)) {
     dispatch({ type: 'board/combinations' });
+    dispatch({ type: 'score/increment' });
     dispatch({ type: 'audio/play', payload: 'combination' });
   }
 };
