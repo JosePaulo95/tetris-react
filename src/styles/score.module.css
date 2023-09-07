@@ -1,3 +1,8 @@
+@font-face {
+    font-family: 'Monomaniac One';
+    src: url('./fonts/MonomaniacOne-Regular.woff2') format('woff2');
+}
+
 .scoreContainer {
     position: absolute;
     width: 100%;
@@ -10,6 +15,7 @@
 }
 
 .scoreValue {
+    font-family: 'Monomaniac One', monospace, Arial, sans-serif;
     font-size: 5vh;
     color: white;
 }
