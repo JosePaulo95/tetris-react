@@ -1,0 +1,15 @@
+.scoreContainer {
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+}
+.scoreContainer > :first-child {
+    position: absolute;
+    bottom: 10vh;
+    left: 50vw;
+}
+
+.scoreValue {
+    font-size: 5vh;
+    color: white;
+}
