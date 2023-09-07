@@ -83,6 +83,7 @@ export const limitsPiece = () => {
 
 export const createPiece = (initial_grid: Grid[]): Piece => {
   const piece = {
+    key: 0,
     initial_grid: initial_grid,
     x: 0,
     y: 0,

@@ -1,6 +1,7 @@
 import { Grid } from '.';
 
 export type Block = {
+  key: number;
   initial_grid: Grid[];
   x: number;
   y: number;

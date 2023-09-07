@@ -6,7 +6,7 @@ import {
   nextPiece,
   randomPiece,
 } from '../../factories/PieceFactory';
-import { BlocksState } from '../../types/block';
+import { Block, BlocksState } from '../../types/block';
 import { BlocksAction } from '../actions/blocks';
 import {
   testDownCollision,
@@ -23,13 +23,15 @@ const INITIAL_STATE: BlocksState = {
   floating: [],
   matching: [],
 };
+const keys = { matching: 0 };
 
 export default function blocks(
   state: BlocksState = INITIAL_STATE,
   action: BlocksAction,
 ): BlocksState {
   let distance = 1;
-  let floatingCopy, boardCopy, pieceCopy, matchingCopy;
+  let floatingCopy, boardCopy, pieceCopy, matchingCopy: Block[];
+  let matchingRows;
   switch (action.type) {
     case 'piece/move-down':
       testDownCollision(state.piece, state.board);
@@ -109,11 +111,16 @@ export default function blocks(
         floating: floatingCopy,
         matching: matchingCopy,
       } = removeMatches(state.board) as BoardState);
+      matchingRows = matchingCopy.map((i) => ({
+        ...i,
+        anim_state: 'match',
+        key: keys.matching++,
+      }));
       return {
         ...state,
         board: boardCopy,
         floating: floatingCopy,
-        matching: matchingCopy.map((i) => ({ ...i, anim_state: 'match' })),
+        matching: matchingRows,
       };
     case 'blocks/reset':
       return INITIAL_STATE;

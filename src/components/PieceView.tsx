@@ -40,6 +40,7 @@ const PieceView = ({ piece, section }: PieceViewProps) => {
           custom={piece}
           variants={variants}
           className={styles.blockGroup}
+          key={piece.key}
         >
           <tbody>
             {piece.initial_grid[piece.rotations % piece.initial_grid.length].map(
