@@ -156,14 +156,6 @@ export const removeMatches = (board: number[][]): BoardState => {
     }
   }
 
-  if (i < 0) {
-    return {
-      remaining: b,
-      floating: [],
-      matching: [],
-    };
-  }
-
   for (; i >= 0; i--) {
     f[i] = board[i];
   }
