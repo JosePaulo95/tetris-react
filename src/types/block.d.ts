@@ -13,4 +13,5 @@ export type BlocksState = {
   board: Grid;
   limits: Grid;
   floating: Block[];
+  matching: Block[];
 };

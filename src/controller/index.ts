@@ -125,6 +125,7 @@ const hasSameDimensions = (boardA: number[][], boardB: number[][]): boolean => {
 export type BoardState = {
   remaining: Grid;
   floating: Block[];
+  matching: Block[];
 };
 
 export const splitDisconnected = (grid: Grid): Block[] => {
@@ -138,11 +139,13 @@ export const splitDisconnected = (grid: Grid): Block[] => {
 export const removeMatches = (board: number[][]): BoardState => {
   const b: Grid = emptyPiece();
   const f: Grid = emptyPiece();
+  const m: Grid = emptyPiece();
 
   let i = 0;
 
   for (i = board.length - 1; i >= 0; i--) {
     if (board[i].every((cell) => cell !== 0)) {
+      m[i] = board[i].map((i) => 10);
       break;
     }
     b[i] = board[i];
@@ -157,6 +160,7 @@ export const removeMatches = (board: number[][]): BoardState => {
     return {
       remaining: b,
       floating: [],
+      matching: [],
     };
   }
 
@@ -167,6 +171,7 @@ export const removeMatches = (board: number[][]): BoardState => {
   return {
     remaining: b,
     floating: splitDisconnected(f),
+    matching: splitDisconnected(m),
   };
 };
 

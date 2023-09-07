@@ -56,10 +56,12 @@ function ContainerBoard({ blocks, ticks, dispatch }: ContainerBoardProps) {
       <PieceView piece={blocks.piece} section="sides"></PieceView>
       <GroupPieceView pieces={blocks.floating} section="sides"></GroupPieceView>
       <GridView grid={blocks.board} section="sides"></GridView>
+      <GroupPieceView pieces={blocks.matching} section="sides"></GroupPieceView>
 
       <PieceView piece={blocks.piece} section="front"></PieceView>
       <GroupPieceView pieces={blocks.floating} section="front"></GroupPieceView>
       <GridView grid={blocks.board} section="front"></GridView>
+      <GroupPieceView pieces={blocks.matching} section="front"></GroupPieceView>
 
       {/* <GridView grid={displayCurrentGrid(blocks.piece)}></GridView> isso aqui mostra grid do dados ajuda a debugar*/}
     </BoardContainer>

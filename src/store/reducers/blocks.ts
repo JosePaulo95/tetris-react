@@ -21,6 +21,7 @@ const INITIAL_STATE: BlocksState = {
   board: emptyPiece(),
   limits: limitsPiece(),
   floating: [],
+  matching: [],
 };
 
 export default function blocks(
@@ -28,7 +29,7 @@ export default function blocks(
   action: BlocksAction,
 ): BlocksState {
   let distance = 1;
-  let floatingCopy, boardCopy, pieceCopy;
+  let floatingCopy, boardCopy, pieceCopy, matchingCopy;
   switch (action.type) {
     case 'piece/move-down':
       testDownCollision(state.piece, state.board);
@@ -103,13 +104,16 @@ export default function blocks(
       // bug cascata buga
       // return state;
       //avisar cada bloco q ele sera eliminado para ativar a animação
-      ({ remaining: boardCopy, floating: floatingCopy } = removeMatches(
-        state.board,
-      ) as BoardState);
+      ({
+        remaining: boardCopy,
+        floating: floatingCopy,
+        matching: matchingCopy,
+      } = removeMatches(state.board) as BoardState);
       return {
         ...state,
         board: boardCopy,
         floating: floatingCopy,
+        matching: matchingCopy.map((i) => ({ ...i, anim_state: 'match' })),
       };
     case 'blocks/reset':
       return INITIAL_STATE;

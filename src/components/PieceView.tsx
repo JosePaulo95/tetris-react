@@ -25,6 +25,10 @@ const variants: Variants = {
   smallerSplash: (piece) => ({
     scaleX: [1.05, 1],
   }),
+  match: (piece) => ({
+    scaleX: [1, 1.2],
+    opacity: [1, 0],
+  }),
   static: (piece) => ({}),
 };
 const PieceView = ({ piece, section }: PieceViewProps) => {
