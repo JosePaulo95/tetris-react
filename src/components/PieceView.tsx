@@ -26,7 +26,7 @@ const variants: Variants = {
     scaleX: [1.05, 1],
   }),
   match: (piece) => ({
-    scaleX: [1, 1.2],
+    scaleX: [1, 1.1],
     opacity: [1, 0],
   }),
   static: (piece) => ({}),

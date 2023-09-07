@@ -15,7 +15,7 @@ const mapClass = (type: number) => {
     case 5:
       return styles.block_T;
     default:
-      return styles.block_d;
+      return styles.block_white;
   }
 };
 

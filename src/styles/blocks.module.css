@@ -99,6 +99,10 @@
     10px 10px rgb(0, 128, 255);
 }
 
+.block_white > .front {
+  background-color: white;
+}
+
 .void_block {
   opacity: 0;
 }
