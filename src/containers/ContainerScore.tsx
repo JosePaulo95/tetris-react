@@ -1,6 +1,9 @@
 import { useEffect } from 'react';
 import { connect, ConnectedProps } from 'react-redux';
 
+import Score from '../components/Score';
+import ScoreContainer from '../components/ScoreContainer';
+
 type RootState = {
   score: number;
 };
@@ -16,7 +19,12 @@ type PropsFromRedux = ConnectedProps<typeof connector>;
 type ContainerAudioProps = PropsFromRedux;
 
 function ContainerScore({ score, dispatch }: ContainerAudioProps) {
-  return <>{score}</>;
+  return (
+    <ScoreContainer>
+      <Score current={score}></Score>
+      <></>
+    </ScoreContainer>
+  );
 }
 
 export default connector(ContainerScore);
