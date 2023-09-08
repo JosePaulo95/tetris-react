@@ -79,7 +79,8 @@ export default function blocks(
       if (pieceCopy) {
         return {
           ...state,
-          board: join(pieceCopy, state.board),
+          joinning: [...state.joinning, state.piece],
+          // board: join(pieceCopy, state.board),
           piece: erasedPiece(),
         };
       }
@@ -95,6 +96,7 @@ export default function blocks(
       }, emptyPiece());
       return {
         ...state,
+        joinning: [],
         board: join(joinningCopy, state.board),
       };
     case 'floating/join':
