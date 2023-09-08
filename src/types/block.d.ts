@@ -13,6 +13,7 @@ export type BlocksState = {
   piece: Block;
   board: Grid;
   limits: Grid;
+  joinning: Block[];
   floating: Block[];
   matching: Block[];
 };

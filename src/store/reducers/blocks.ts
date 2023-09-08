@@ -6,6 +6,7 @@ import {
   nextPiece,
   randomPiece,
 } from '../../factories/PieceFactory';
+import { Grid } from '../../types';
 import { Block, BlocksState } from '../../types/block';
 import { BlocksAction } from '../actions/blocks';
 import {
@@ -20,6 +21,7 @@ const INITIAL_STATE: BlocksState = {
   piece: randomPiece(),
   board: emptyPiece(),
   limits: limitsPiece(),
+  joinning: [],
   floating: [],
   matching: [],
 };
@@ -30,7 +32,7 @@ export default function blocks(
   action: BlocksAction,
 ): BlocksState {
   let distance = 1;
-  let floatingCopy, boardCopy, pieceCopy, matchingCopy: Block[];
+  let floatingCopy, boardCopy, pieceCopy, matchingCopy: Block[], joinningCopy: Grid;
   let matchingRows;
   switch (action.type) {
     case 'piece/move-down':
@@ -82,6 +84,19 @@ export default function blocks(
         };
       }
       return state;
+    case 'piece/definitive-join':
+      joinningCopy = state.joinning.reduce((acc, cur) => {
+        const grid = getCurrentGrid(cur);
+        if (grid) {
+          return join(acc, grid);
+        } else {
+          return acc;
+        }
+      }, emptyPiece());
+      return {
+        ...state,
+        board: join(joinningCopy, state.board),
+      };
     case 'floating/join':
       floatingCopy = state.floating.slice();
       floatingCopy.splice(action.payload, 1);
