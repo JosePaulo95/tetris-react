@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { motion, Variants } from 'framer-motion';
 
 import styles from '../styles/blocks.module.css';
 
@@ -19,9 +19,39 @@ const mapClass = (type: number) => {
   }
 };
 
-const Block = ({ type, section }: { type: number; section?: string }) => {
+const variants: Variants = {
+  match: (piece) => ({
+    y: [0, 10],
+    scale: [1, 0],
+    // scaleX: [1.1, 3],
+  }),
+};
+
+const Block = ({
+  type,
+  section,
+  anim,
+  anim_delay,
+}: {
+  type: number;
+  section?: string;
+  anim?: string;
+  anim_delay?: number;
+}) => {
   return (
-    <motion.td className={`${mapClass(type)} ${styles.block}`}>
+    <motion.td
+      className={`${mapClass(type)} ${styles.block}`}
+      animate={anim}
+      variants={variants}
+      transition={{
+        duration: 0.15, // Defina a duração da animação em segundos
+        ease: 'easeOut', // Escolha o tipo de curva de animação desejada
+        delay: anim_delay,
+      }}
+      style={{
+        transformOrigin: 'bottom', // Define o pivô para o canto superior esquerdo
+      }}
+    >
       {(section === 'front' || !section) && <div className={styles.front}></div>}
       {(section === 'sides' || !section) && <div className={styles.side}></div>}
     </motion.td>

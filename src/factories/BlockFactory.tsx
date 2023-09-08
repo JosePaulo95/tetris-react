@@ -5,6 +5,8 @@ import styles from '../styles/blocks.module.css';
 interface BlockFactoryInterface {
   type: number;
   section?: string;
+  anim: string;
+  anim_delay: number;
 }
 
 const BlockFactory = (props: BlockFactoryInterface) => {
@@ -14,7 +16,14 @@ const BlockFactory = (props: BlockFactoryInterface) => {
     case 0:
       return <td className={`${styles.void_block} ${styles.block}`}></td>;
     default:
-      return <Block type={props.type} section={props.section} />;
+      return (
+        <Block
+          type={props.type}
+          section={props.section}
+          anim={props.anim}
+          anim_delay={props.anim_delay}
+        />
+      );
   }
 };
 

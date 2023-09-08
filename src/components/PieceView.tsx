@@ -26,8 +26,8 @@ const variants: Variants = {
     scaleX: [1.05, 1],
   }),
   match: (piece) => ({
-    scaleX: [1, 1.1],
-    opacity: [1, 0],
+    // scaleY: [1, 0],
+    // opacity: [0.3, 0.3],
   }),
   static: (piece) => ({}),
 };
@@ -47,7 +47,13 @@ const PieceView = ({ piece, section }: PieceViewProps) => {
               (row, i) => (
                 <tr key={i}>
                   {row.map((block, j) => (
-                    <BlockFactory key={j} type={block} section={section}></BlockFactory>
+                    <BlockFactory
+                      key={j}
+                      type={block}
+                      section={section}
+                      anim={piece.anim_state}
+                      anim_delay={0.05 * j}
+                    ></BlockFactory>
                   ))}
                 </tr>
               ),
