@@ -1,5 +1,6 @@
 import { BoardState, getCurrentGrid, join, removeMatches } from '../../controller';
 import {
+  createPiece,
   emptyPiece,
   erasedPiece,
   limitsPiece,
@@ -32,8 +33,13 @@ export default function blocks(
   action: BlocksAction,
 ): BlocksState {
   let distance = 1;
-  let floatingCopy, boardCopy, pieceCopy, matchingCopy: Block[], joinningCopy: Grid;
+  let floatingCopy: Block[],
+    boardCopy,
+    pieceCopy,
+    matchingCopy: Block[],
+    joinningCopy: Grid;
   let matchingRows;
+  let grid_aux: Grid | undefined;
   switch (action.type) {
     case 'piece/move-down':
       testDownCollision(state.piece, state.board);
@@ -75,11 +81,12 @@ export default function blocks(
         piece: { ...state.piece, rotations: state.piece.rotations + 1 },
       };
     case 'piece/join':
-      pieceCopy = getCurrentGrid(state.piece);
-      if (pieceCopy) {
+      grid_aux = getCurrentGrid(state.piece);
+      if (grid_aux) {
+        pieceCopy = { ...createPiece([grid_aux]), anim_state: 'biggerSplash' } as Block;
         return {
           ...state,
-          joinning: [...state.joinning, state.piece],
+          joinning: [...state.joinning, pieceCopy],
           // board: join(pieceCopy, state.board),
           piece: erasedPiece(),
         };
@@ -102,11 +109,13 @@ export default function blocks(
     case 'floating/join':
       floatingCopy = state.floating.slice();
       floatingCopy.splice(action.payload, 1);
-      pieceCopy = getCurrentGrid(state.floating[action.payload]);
-      if (pieceCopy) {
+      grid_aux = getCurrentGrid(state.floating[action.payload]);
+      if (grid_aux) {
+        pieceCopy = { ...createPiece([grid_aux]), anim_state: 'biggerSplash' } as Block;
         return {
           ...state,
-          board: join(pieceCopy, state.board),
+          // joinning: [...state.joinning, pieceCopy],
+          board: join(grid_aux, state.board),
           floating: floatingCopy,
         };
       }
