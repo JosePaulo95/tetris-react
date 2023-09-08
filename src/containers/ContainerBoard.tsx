@@ -8,6 +8,7 @@ import PieceView from '../components/PieceView';
 import {
   handleCollision,
   handleFloatingsGoingDown,
+  handleJoin,
   handleMatches,
   handlePieceGoingDown,
   handleResetPiece,
@@ -35,6 +36,7 @@ export type ContainerBoardProps = PropsFromRedux;
 function ContainerBoard({ blocks, ticks, dispatch }: ContainerBoardProps) {
   useEffect(() => {
     try {
+      handleJoin(blocks, ticks, dispatch);
       handleMatches(blocks, ticks, dispatch);
       handleResetPiece(blocks, dispatch);
       handleFloatingsGoingDown(blocks, ticks, dispatch);
@@ -55,11 +57,13 @@ function ContainerBoard({ blocks, ticks, dispatch }: ContainerBoardProps) {
 
       <PieceView piece={blocks.piece} section="sides"></PieceView>
       <GroupPieceView pieces={blocks.floating} section="sides"></GroupPieceView>
+      <GroupPieceView pieces={blocks.joinning} section="sides"></GroupPieceView>
       <GridView grid={blocks.board} section="sides"></GridView>
       <GroupPieceView pieces={blocks.matching} section="sides"></GroupPieceView>
 
       <PieceView piece={blocks.piece} section="front"></PieceView>
       <GroupPieceView pieces={blocks.floating} section="front"></GroupPieceView>
+      <GroupPieceView pieces={blocks.joinning} section="front"></GroupPieceView>
       <GridView grid={blocks.board} section="front"></GridView>
       <GroupPieceView pieces={blocks.matching} section="front"></GroupPieceView>
 
