@@ -24,6 +24,12 @@ const variants: Variants = {
     y: piece.y * (95 / 3),
     scaleX: 1,
     scaleY: 1,
+    transition: {
+      type: 'easeInOut',
+      duration: 0.3,
+      // type: 'cubic-bezier(1, 0, 1, 1)',
+      // stiffness: 70,
+    },
   }),
   show: (piece) => ({
     scaleX: [0, 1],
