@@ -2,11 +2,28 @@
   display: block;
 }
 
+.front::before {
+  content: "";
+  position: absolute;
+  width: 20%; /* Ajuste para controlar o tamanho do destaque interno */
+  height: 60%; /* Ajuste para controlar o tamanho do destaque interno */
+  background: rgba(255, 255, 255, 0.1); /* Cor do destaque (branco com transparência) */
+  top: 10px; /* Ajuste para controlar a posição do destaque interno */
+  left: 2px; /* Ajuste para controlar a posição do destaque interno */
+  z-index: 1; /* Certifique-se de que o destaque interno fique sobre o conteúdo principal */
+}
+
 .front, .side {
+  border-radius: 4px;
   position: absolute;
   width: inherit;
   height: inherit;
 }
+
+/* .front {
+  background-image: radial-gradient(circle, rgba(0, 0, 0, 0.1) 1px, transparent 1px);
+  background-size: 3px 3px;
+} */
 
 .block_a > .front {
   background-color: rgba(255, 165, 0);
