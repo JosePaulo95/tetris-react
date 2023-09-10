@@ -7,7 +7,6 @@
   position: absolute;
   width: 20%; /* Ajuste para controlar o tamanho do destaque interno */
   height: 60%; /* Ajuste para controlar o tamanho do destaque interno */
-  background: rgba(255, 255, 255, 0.1); /* Cor do destaque (branco com transparência) */
   top: 10px; /* Ajuste para controlar a posição do destaque interno */
   left: 2px; /* Ajuste para controlar a posição do destaque interno */
   z-index: 1; /* Certifique-se de que o destaque interno fique sobre o conteúdo principal */
@@ -26,19 +25,42 @@
 } */
 
 .block_a > .front {
-  background-color: rgba(255, 165, 0);
+  background-color: hsl(39, 100%, 50%);
 }
+.block_a > .front::before {
+  background-color: hsl(39, 100%, 60%);
+}
+
 .block_b > .front {
-  background-color: rgb(248, 41, 14);
+  background-color: hsl(7, 94%, 50%);
 }
+
+.block_b > .front::before {
+  background-color: hsl(7, 94%, 60%); /* Cor mais clara para block_b */
+}
+
 .block_c > .front {
-  background-color: rgb(233, 31, 149);
+  background-color: hsl(325, 82%, 50%);
 }
+
+.block_c > .front::before {
+  background-color: hsl(325, 82%, 60%); /* Cor mais clara para block_c */
+}
+
 .block_d > .front {
-  background-color: rgb(36, 197, 122);
+  background-color: hsl(152, 69%, 48%);
 }
+
+.block_d > .front::before {
+  background-color: hsl(152, 69%, 60%);/* Cor mais clara para block_d */
+}
+
 .block_T > .front {
-  background-color: rgb(0, 191, 255);
+  background-color: hsl(195, 100%, 50%);
+}
+
+.block_T > .front::before {
+  background-color: hsl(195, 100%, 60%); /* Cor mais clara para block_T */
 }
 
 .block_a > .side {
