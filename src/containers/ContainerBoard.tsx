@@ -57,13 +57,13 @@ function ContainerBoard({ blocks, ticks, dispatch }: ContainerBoardProps) {
 
       <PieceView piece={blocks.piece} section="sides"></PieceView>
       <GroupPieceView pieces={blocks.floating} section="sides"></GroupPieceView>
-      <GroupPieceView pieces={blocks.joinning} section="sides"></GroupPieceView>
+      <PieceView piece={blocks.joinning} section="sides"></PieceView>
       <GridView grid={blocks.board} section="sides"></GridView>
       <GroupPieceView pieces={blocks.matching} section="sides"></GroupPieceView>
 
       <PieceView piece={blocks.piece} section="front"></PieceView>
       <GroupPieceView pieces={blocks.floating} section="front"></GroupPieceView>
-      <GroupPieceView pieces={blocks.joinning} section="front"></GroupPieceView>
+      <PieceView piece={blocks.joinning} section="front"></PieceView>
       <GridView grid={blocks.board} section="front"></GridView>
       <GroupPieceView pieces={blocks.matching} section="front"></GroupPieceView>
 

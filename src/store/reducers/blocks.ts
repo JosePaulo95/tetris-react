@@ -22,7 +22,7 @@ const INITIAL_STATE: BlocksState = {
   piece: randomPiece(),
   board: emptyPiece(),
   limits: limitsPiece(),
-  joinning: [],
+  joinning: erasedPiece(),
   floating: [],
   matching: [],
 };
@@ -42,6 +42,7 @@ export default function blocks(
   let grid_aux: Grid | undefined;
   switch (action.type) {
     case 'piece/move-down':
+      // grid_aux = getCurrentGrid(state.joinning);
       testDownCollision(state.piece, state.board);
       return {
         ...state,
@@ -86,26 +87,23 @@ export default function blocks(
         pieceCopy = { ...createPiece([grid_aux]), anim_state: 'biggerSplash' } as Block;
         return {
           ...state,
-          joinning: [...state.joinning, pieceCopy],
+          joinning: pieceCopy,
           // board: join(pieceCopy, state.board),
           piece: erasedPiece(),
         };
       }
       return state;
     case 'piece/definitive-join':
-      joinningCopy = state.joinning.reduce((acc, cur) => {
-        const grid = getCurrentGrid(cur);
-        if (grid) {
-          return join(acc, grid);
-        } else {
-          return acc;
-        }
-      }, emptyPiece());
-      return {
-        ...state,
-        joinning: [],
-        board: join(joinningCopy, state.board),
-      };
+      grid_aux = getCurrentGrid(state.joinning);
+      if (grid_aux) {
+        return {
+          ...state,
+          joinning: erasedPiece(),
+          board: join(grid_aux, state.board),
+        };
+      } else {
+        return state;
+      }
     case 'floating/join':
       floatingCopy = state.floating.slice();
       floatingCopy.splice(action.payload, 1);
