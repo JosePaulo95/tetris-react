@@ -21,8 +21,10 @@ const mapClass = (type: number) => {
 
 const variants: Variants = {
   match: (piece) => ({
-    y: [0, 10],
-    scale: [1, 0],
+    y: [0, 30],
+    scale: [1.2, 0],
+    rotateZ: [0, -45],
+    borderRadius: [0, 100],
     // scaleX: [1.1, 3],
   }),
 };
@@ -44,7 +46,7 @@ const Block = ({
       animate={anim}
       variants={variants}
       transition={{
-        duration: 0.15, // Defina a duração da animação em segundos
+        duration: 0.2, // Defina a duração da animação em segundos
         ease: 'easeOut', // Escolha o tipo de curva de animação desejada
         delay: anim_delay,
       }}

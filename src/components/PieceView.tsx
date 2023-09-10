@@ -72,7 +72,7 @@ const PieceView = ({ piece, section }: PieceViewProps) => {
                       type={block}
                       section={section}
                       anim={piece.anim_state}
-                      anim_delay={0.05 * j}
+                      anim_delay={0.06 * j}
                     ></BlockFactory>
                   ))}
                 </tr>
