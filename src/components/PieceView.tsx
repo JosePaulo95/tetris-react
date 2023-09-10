@@ -12,7 +12,7 @@ type PieceViewProps = {
 const initialFrom = (anim_state: string) => {
   if (anim_state == 'biggerSplash') {
     return {
-      scaleX: 1.06,
+      scaleX: 1.05,
     };
   }
   return {};
@@ -31,7 +31,7 @@ const variants: Variants = {
   }),
   biggerSplash: (piece) => ({
     // scaleY: [0.5, 1],
-    scaleX: [0.94, 1.06],
+    scaleX: [0.95, 1.05, 0.95, 1],
     // ease: 'easeIn',
   }),
   smallerSplash: (piece) => ({
@@ -49,7 +49,7 @@ const PieceView = ({ piece, section }: PieceViewProps) => {
       {piece && (
         <motion.table
           initial={initialFrom(piece.anim_state)}
-          // transition={{ duration: piece.anim_state == 'biggerSplash' ? 1 : 0.2 }}
+          transition={{ duration: piece.anim_state == 'biggerSplash' ? 0.4 : 0.2 }}
           animate={piece.anim_state}
           custom={piece}
           variants={variants}
