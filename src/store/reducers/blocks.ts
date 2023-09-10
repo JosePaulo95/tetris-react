@@ -26,7 +26,7 @@ const INITIAL_STATE: BlocksState = {
   floating: [],
   matching: [],
 };
-const keys = { matching: 0 };
+const keys = { matching: 0, joinning: 0 };
 
 export default function blocks(
   state: BlocksState = INITIAL_STATE,
@@ -84,11 +84,15 @@ export default function blocks(
     case 'piece/join':
       grid_aux = getCurrentGrid(state.piece);
       if (grid_aux) {
-        pieceCopy = { ...createPiece([grid_aux]), anim_state: 'biggerSplash' } as Block;
+        pieceCopy = {
+          ...createPiece([grid_aux]),
+          anim_state: 'biggerSplash',
+          key: keys.joinning++,
+        } as Block;
         return {
           ...state,
           joinning: pieceCopy,
-          // board: join(pieceCopy, state.board),
+          board: join(grid_aux, state.board),
           piece: erasedPiece(),
         };
       }
@@ -109,10 +113,14 @@ export default function blocks(
       floatingCopy.splice(action.payload, 1);
       grid_aux = getCurrentGrid(state.floating[action.payload]);
       if (grid_aux) {
-        pieceCopy = { ...createPiece([grid_aux]), anim_state: 'biggerSplash' } as Block;
+        pieceCopy = {
+          ...createPiece([grid_aux]),
+          anim_state: 'biggerSplash',
+          key: keys.joinning++,
+        } as Block;
         return {
           ...state,
-          // joinning: [...state.joinning, pieceCopy],
+          joinning: pieceCopy,
           board: join(grid_aux, state.board),
           floating: floatingCopy,
         };
@@ -143,6 +151,7 @@ export default function blocks(
       return {
         ...state,
         board: boardCopy,
+        joinning: erasedPiece(),
         floating: floatingCopy,
         matching: matchingRows,
       };

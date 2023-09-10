@@ -36,7 +36,6 @@ export type ContainerBoardProps = PropsFromRedux;
 function ContainerBoard({ blocks, ticks, dispatch }: ContainerBoardProps) {
   useEffect(() => {
     try {
-      handleJoin(blocks, ticks, dispatch);
       handleMatches(blocks, ticks, dispatch);
       handleResetPiece(blocks, dispatch);
       handleFloatingsGoingDown(blocks, ticks, dispatch);
@@ -46,6 +45,7 @@ function ContainerBoard({ blocks, ticks, dispatch }: ContainerBoardProps) {
         userController.current_input_y,
         dispatch,
       );
+      // handleJoin(blocks, ticks, dispatch);
     } catch (collision) {
       handleCollision(collision as Error, dispatch);
     }
