@@ -76,10 +76,10 @@ export default function blocks(
         piece: { ...state.piece, x: state.piece.x - 1 },
       };
     case 'piece/rotate':
-      testRotationCollision(state.piece, state.board);
+      pieceCopy = testRotationCollision(state.piece, state.board);
       return {
         ...state,
-        piece: { ...state.piece, rotations: state.piece.rotations + 1 },
+        piece: pieceCopy,
       };
     case 'piece/join':
       grid_aux = getCurrentGrid(state.piece);
