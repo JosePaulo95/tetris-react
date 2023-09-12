@@ -42,6 +42,9 @@ export default function blocks(
   let grid_aux: Grid | undefined;
   switch (action.type) {
     case 'piece/move-down':
+      if (state.floating.length > 0) {
+        return state;
+      }
       // grid_aux = getCurrentGrid(state.joinning);
       testDownCollision(state.piece, state.board);
       return {
@@ -49,6 +52,9 @@ export default function blocks(
         piece: { ...state.piece, y: state.piece.y + 1, anim_state: 'follow' },
       };
     case 'piece/move-down-max':
+      if (state.floating.length > 0) {
+        return state;
+      }
       distance = 0;
       // eslint-disable-next-line no-constant-condition
       for (let i = 0; i < 20; i++) {
