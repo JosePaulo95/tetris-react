@@ -8,7 +8,6 @@ import PieceView from '../components/PieceView';
 import {
   handleCollision,
   handleFloatingsGoingDown,
-  handleJoin,
   handleMatches,
   handlePieceGoingDown,
   handleResetPiece,
@@ -45,7 +44,6 @@ function ContainerBoard({ blocks, ticks, dispatch }: ContainerBoardProps) {
         userController.current_input_y,
         dispatch,
       );
-      // handleJoin(blocks, ticks, dispatch);
     } catch (collision) {
       handleCollision(collision as Error, dispatch);
     }
