@@ -141,30 +141,39 @@ export const removeMatches = (board: number[][]): BoardState => {
   const f: Grid = emptyPiece();
   const m: Grid = emptyPiece();
 
-  let i = 0;
-
-  for (i = board.length - 1; i >= 0; i--) {
+  for (let i = board.length - 1; i >= 0; i--) {
     if (board[i].every((cell) => cell !== 0)) {
       m[i] = board[i].map((i) => 10);
-      break;
-    }
-    b[i] = board[i];
-  }
-  for (i = i - 1; i >= 0; i--) {
-    if (board[i].some((cell) => cell !== 0)) {
-      break;
+    } else {
+      b[i] = board[i];
     }
   }
 
-  for (; i >= 0; i--) {
-    f[i] = board[i];
-  }
+  const splitted = splitDisconnected(b);
+  const grounded = splitted
+    .filter((i) => !getCurrentGrid({ ...i, y: i.y + 1 }))
+    .reduce((cur, acc) => join(cur, getCurrentGrid(acc) || emptyPiece()), emptyPiece());
+  const floating = splitted.filter((i) => getCurrentGrid({ ...i, y: i.y + 1 }));
 
-  return {
-    remaining: b,
-    floating: splitDisconnected(f),
+  // const disc = splitDisconnected(b);
+
+  // for (i = i - 1; i >= 0; i--) {
+  //   if (board[i].some((cell) => cell !== 0)) {
+  //     break;
+  //   }
+  // }
+
+  // for (; i >= 0; i--) {
+  //   f[i] = board[i];
+  // }
+
+  const aux = {
+    remaining: grounded,
+    floating: floating,
     matching: splitDisconnected(m),
   };
+
+  return aux;
 };
 
 export const removeMatchesMoveDownBlocks = (board: number[][]): Grid => {
