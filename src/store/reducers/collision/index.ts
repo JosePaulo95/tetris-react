@@ -46,15 +46,26 @@ export const testSideCollision = (
   }
 };
 
-export const testRotationCollision = (piece: Block, board: Grid): void | Error => {
-  const posMove = getCurrentGrid({
+export const testRotationCollision = (piece: Block, board: Grid): Block => {
+  const closestValidX =
+    [0, -1, 1, -2, 2, -3, 3, 4, -4].find((index) =>
+      getCurrentGrid({
+        ...piece,
+        rotations: piece.rotations + 1,
+        x: piece.x + index,
+      }),
+    ) || 0;
+  const posMove = {
     ...piece,
     rotations: piece.rotations + 1,
-  });
-
-  if (!posMove || isColliding(posMove, board)) {
+    x: piece.x + closestValidX,
+  };
+  const posMoveGrid = getCurrentGrid(posMove);
+  if (!posMoveGrid || isColliding(posMoveGrid, board)) {
     throw new Error('piece-rotation-move-collision');
   }
+
+  return posMove;
 };
 
 export const testJoinCollision = (board: Grid, limits: Grid): void | Error => {
