@@ -22,10 +22,6 @@ type PieceJoinAction = {
   type: 'piece/join';
 };
 
-type PieceDefinitiveJoinAction = {
-  type: 'piece/definitive-join';
-};
-
 type FloatingJoinAction = {
   type: 'floating/join';
   payload: number; //index

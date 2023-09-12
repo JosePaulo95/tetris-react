@@ -97,17 +97,6 @@ export default function blocks(
         };
       }
       return state;
-    case 'piece/definitive-join':
-      grid_aux = getCurrentGrid(state.joinning);
-      if (grid_aux) {
-        return {
-          ...state,
-          joinning: erasedPiece(),
-          board: join(grid_aux, state.board),
-        };
-      } else {
-        return state;
-      }
     case 'floating/join':
       floatingCopy = state.floating.slice();
       floatingCopy.splice(action.payload, 1);

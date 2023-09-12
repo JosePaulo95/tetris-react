@@ -42,12 +42,6 @@ export const handlePieceGoingDown = (
   }
 };
 
-export const handleJoin = (blocks: any, ticks: number, dispatch: Dispatch<any>) => {
-  if (isTimeToMoveDown(ticks)) {
-    dispatch({ type: 'piece/definitive-join' });
-  }
-};
-
 export const handleUserInput = (
   inputx: number | undefined,
   inputy: number | undefined,
