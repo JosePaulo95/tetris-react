@@ -19,10 +19,10 @@
   height: inherit;
 }
 
-/* .front {
-  background-image: radial-gradient(circle, rgba(0, 0, 0, 0.1) 1px, transparent 1px);
-  background-size: 3px 3px;
-} */
+.front {
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+  background-size: 6px 6px;
+}
 
 .block_a > .front {
   background-color: hsl(39, 100%, 50%);
