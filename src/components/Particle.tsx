@@ -5,9 +5,9 @@ import particleStyles from '../styles/particles.module.css';
 
 const variants: Variants = {
   match: () => ({
-    scale: [0, 2],
-    // scaleX: [1, 1.8, 2],
-    opacity: [1, 0],
+    y: [0, -10],
+    scale: [0, 1.5],
+    opacity: [0.7, 0],
   }),
 };
 
