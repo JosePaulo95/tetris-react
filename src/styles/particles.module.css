@@ -1,0 +1,27 @@
+.particle_block {
+    content: ' ';
+    position: relative; /* Adicionado */
+}
+
+.bolinha {
+    position: absolute; /* Adicionado */
+    color: white;
+}
+
+.bolinha_top {
+    font-size: 7px;
+    top: 80%;
+    left: 30%;
+  }
+  
+  .bolinha_bottom_left {
+    font-size: 5px;
+    top: 10%;
+    left: 50%;
+  }
+  
+  .bolinha_bottom_right {
+    font-size: 6px;
+    bottom: 20%;
+    right: 20%;
+  }

@@ -1,7 +1,7 @@
 import Block from '../components/Block';
 import EmptyBlock from '../components/EmptyBlock';
+import Particle from '../components/Particle';
 import styles from '../styles/blocks.module.css';
-
 interface BlockFactoryInterface {
   type: number;
   section?: string;
@@ -15,6 +15,8 @@ const BlockFactory = (props: BlockFactoryInterface) => {
       return <EmptyBlock></EmptyBlock>;
     case 0:
       return <td className={`${styles.void_block} ${styles.block}`}></td>;
+    case 100:
+      return <Particle anim={props.anim} />;
     default:
       return (
         <Block

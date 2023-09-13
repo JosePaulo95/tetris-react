@@ -1,4 +1,5 @@
 import { BoardState, getCurrentGrid, join, removeMatches } from '../../controller';
+import { createParticles } from '../../factories/ParticlesData';
 import {
   createPiece,
   emptyPiece,
@@ -25,8 +26,9 @@ const INITIAL_STATE: BlocksState = {
   joinning: erasedPiece(),
   floating: [],
   matching: [],
+  particles: createParticles(),
 };
-const keys = { matching: 0, joinning: 0 };
+const keys = { matching: 0, joinning: 0, particles: 0 };
 
 export default function blocks(
   state: BlocksState = INITIAL_STATE,
@@ -143,12 +145,22 @@ export default function blocks(
         anim_state: 'match',
         key: keys.matching++,
       }));
+
       return {
         ...state,
         board: boardCopy,
         joinning: erasedPiece(),
         floating: floatingCopy,
         matching: matchingRows,
+        particles: {
+          ...state.particles,
+          key: keys.particles++,
+          initial_grid: matchingCopy[0].initial_grid.map((grid) =>
+            grid.map((row, row_index) =>
+              row.map((cell, cell_index) => (cell > 0 ? 100 : 0)),
+            ),
+          ),
+        },
       };
     case 'blocks/reset':
       return INITIAL_STATE;

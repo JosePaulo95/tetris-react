@@ -16,4 +16,5 @@ export type BlocksState = {
   joinning: Block;
   floating: Block[];
   matching: Block[];
+  particles: Block;
 };

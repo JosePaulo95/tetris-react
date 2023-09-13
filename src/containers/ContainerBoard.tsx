@@ -53,6 +53,8 @@ function ContainerBoard({ blocks, ticks, dispatch }: ContainerBoardProps) {
     <BoardContainer>
       <GridView grid={blocks.limits}></GridView>
 
+      <PieceView piece={blocks.particles}></PieceView>
+
       <PieceView piece={blocks.piece} section="sides"></PieceView>
       <GroupPieceView pieces={blocks.floating} section="sides"></GroupPieceView>
       <PieceView piece={blocks.joinning} section="sides"></PieceView>
