@@ -163,7 +163,7 @@ export default function blocks(
         },
       };
     case 'blocks/reset':
-      return INITIAL_STATE;
+      return { ...INITIAL_STATE, piece: randomPiece() };
     case 'floating/fall':
       for (let i = 0; i < state.floating.length; i++) {
         testFloatingFallCollision(state.floating[i], state.board, state.limits, i);
