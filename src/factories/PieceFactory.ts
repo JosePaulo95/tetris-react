@@ -10,26 +10,19 @@ import {
   PIECE_T_GRIDS,
   PIECE_Z_GRIDS,
 } from '../constants';
-import { getCurrentGrid, join, transform, wrap, wrapGrid } from '../controller';
+import {
+  BoardState,
+  getCurrentGrid,
+  join,
+  transform,
+  wrap,
+  wrapGrid,
+} from '../controller';
 import { Block as Piece, Grid } from '../types';
-import { BlocksState } from '../types/block';
+import { Block, BlocksState } from '../types/block';
 import { calcPiecesFitness } from './NextPieceCalculator';
 
-export const randomPiece = () => {
-  const options = [
-    PIECE_Z_GRIDS(1),
-    PIECE_L_GRIDS(2),
-    PIECE_O_GRIDS(3),
-    PIECE_I_GRIDS(4),
-    PIECE_T_GRIDS(5),
-  ];
-  const grids: Grid[] = options[Math.floor(Math.random() * options.length)];
-  return createPiece(grids.map((g) => wrapGrid(g, configs.width, configs.height)));
-};
-
-const ocorencies: number[] = [0, 0, 0, 0, 0];
-let nextIndex: number;
-export const nextPiece = (boardState: BlocksState) => {
+const allPieces = (): Block[] => {
   const options = [
     PIECE_Z_GRIDS(1),
     PIECE_L_GRIDS(2),
@@ -40,17 +33,37 @@ export const nextPiece = (boardState: BlocksState) => {
   const pieces = options.map((grids) =>
     createPiece(grids.map((g) => wrapGrid(g, configs.width, configs.height))),
   );
+  return pieces;
+};
+
+const calcGridPosFloatingJoin = (boardState: BlocksState): Grid => {
   const floatingGrids = boardState.floating.map((i) =>
     getCurrentGrid({ ...i, y: i.y + 1 }),
   );
-  floatingGrids.push(boardState.board);
   const floatingJoinned = floatingGrids
     .filter(Boolean)
-    .reduce((acc, curr) => join(acc!, curr!), floatingGrids[0]);
+    .reduce((acc, curr) => join(acc!, curr!), boardState.board);
 
-  const ocorenciesTotal = ocorencies.reduce((acc, val) => acc + val, 0);
-  const ocorenciesNormalized = ocorencies.map((x) => x / ocorenciesTotal);
-  if (ocorenciesNormalized.some((i) => i < 0.8 / ocorencies.length)) {
+  return floatingJoinned || boardState.board;
+};
+
+export const randomPiece = () => {
+  const pieces = allPieces();
+  const index = Math.floor(Math.random() * pieces.length);
+  return pieces[index];
+};
+
+const ocorencies: number[] = [0, 0, 0, 0, 0];
+let nextIndex: number;
+export const nextPiece = (boardState: BlocksState) => {
+  const pieces = allPieces();
+  const floatingJoinned = calcGridPosFloatingJoin(boardState);
+  const ocorenciesNormalized = normalizeOcorencies(ocorencies);
+  const avgHeight = calcAverageHeight(floatingJoinned);
+
+  if (avgHeight == 0) {
+    nextIndex = ocorenciesNormalized.sort()[0];
+  } else if (ocorenciesNormalized.some((i) => i < 0.8 / ocorencies.length)) {
     nextIndex = ocorenciesNormalized.findIndex((i) => i < 0.8 / ocorencies.length);
   } else {
     const withScores = calcPiecesFitness(floatingJoinned!, pieces, 0);
@@ -91,4 +104,29 @@ export const createPiece = (initial_grid: Grid[]): Piece => {
     anim_state: '-',
   };
   return piece;
+};
+const calcAverageHeight = (grid: Grid): number => {
+  let totalHeight = 0;
+  const numberOfColumns = grid.length;
+
+  if (numberOfColumns === 0) {
+    return 0;
+  }
+
+  for (let col = 0; col < numberOfColumns; col++) {
+    let height = 0;
+    for (let row = 0; row < grid[col].length; row++) {
+      if (grid[col][row] !== 0) {
+        height++;
+      }
+    }
+    totalHeight += height;
+  }
+
+  return totalHeight / numberOfColumns;
+};
+const normalizeOcorencies = (ocorencies: number[]): number[] => {
+  const ocorenciesTotal = ocorencies.reduce((acc, val) => acc + val, 0);
+  const ocorenciesNormalized = ocorencies.map((x) => x / ocorenciesTotal);
+  return ocorenciesNormalized;
 };
