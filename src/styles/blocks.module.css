@@ -33,7 +33,7 @@
 }
 
 .block_b > .front {
-  background-color: hsl(7, 94%, 50%);
+  background-color: hsl(7, 92%, 50%);
 }
 
 .block_b > .front::before {
@@ -41,11 +41,11 @@
 }
 
 .block_c > .front {
-  background-color: hsl(325, 82%, 50%);
+  background-color: hsl(325, 100%, 50%);
 }
 
 .block_c > .front::before {
-  background-color: hsl(325, 82%, 60%); /* Cor mais clara para block_c */
+  background-color: hsl(330, 100%, 60%);
 }
 
 .block_d > .front {
@@ -97,16 +97,16 @@
 .block_c > .side {
   /* background-color: rgb(233, 31, 149); */
   box-shadow:
-    1px 1px rgb(192, 11, 116),
-    2px 2px rgb(192, 11, 116),
-    3px 3px rgb(192, 11, 116),
-    4px 4px rgb(192, 11, 116),
-    5px 5px rgb(192, 11, 116),
-    6px 6px rgb(192, 11, 116),
-    7px 7px rgb(192, 11, 116),
-    8px 8px rgb(192, 11, 116),
-    9px 9px rgb(192, 11, 116),
-    10px 10px rgb(192, 11, 116);
+    1px 1px hsl(330, 100%, 40%),
+    2px 2px hsl(330, 100%, 40%),
+    3px 3px hsl(330, 100%, 40%),
+    4px 4px hsl(330, 100%, 40%),
+    5px 5px hsl(330, 100%, 40%),
+    6px 6px hsl(330, 100%, 40%),
+    7px 7px hsl(330, 100%, 40%),
+    8px 8px hsl(330, 100%, 40%),
+    9px 9px hsl(330, 100%, 40%),
+    10px 10px hsl(330, 100%, 40%)
 }
 
 .block_d > .side {
