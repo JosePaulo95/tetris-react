@@ -5,8 +5,8 @@ import styles from '../styles/blocks.module.css';
 interface BlockFactoryInterface {
   type: number;
   section?: string;
-  anim: string;
-  anim_delay: number;
+  anim?: string;
+  anim_delay?: number;
 }
 
 const BlockFactory = (props: BlockFactoryInterface) => {
