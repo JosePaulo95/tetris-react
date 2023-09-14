@@ -50,7 +50,6 @@ export type BlocksAction =
   | PieceMoveLeftAction
   | PieceRotateAction
   | PieceJoinAction
-  | PieceDefinitiveJoinAction
   | FloatingJoinAction
   | PieceResetAction
   | BoardCombinationsAction
