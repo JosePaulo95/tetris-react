@@ -1,20 +1,28 @@
-import { getCurrentGrid, isColliding } from '../../../controller';
+import { getCurrentGrid, isColliding, join } from '../../../controller';
 import { Block, Grid } from '../../../types';
 
 export const testFloatingFallCollision = (
   piece: Block,
   board: Grid,
+  limits: Grid,
   index: number,
 ): void | Error => {
   const posFall = getCurrentGrid({
     ...piece,
     y: piece.y + 1,
   });
+  const curGrid = getCurrentGrid(piece);
 
   if (!posFall || isColliding(posFall, board)) {
-    const collision = new Error('floating-fall-collision');
-    collision.name = `${index}`;
-    throw collision;
+    const current = getCurrentGrid(piece);
+    const limits_collider = limits.map((row) => row.map((c) => (c == 0 ? 1 : 0)));
+    if (current && isColliding(current, limits_collider)) {
+      throw new Error('board-collides-with-limits');
+    }
+
+    const joinCollision = new Error('floating-fall-collision');
+    joinCollision.name = `${index}`;
+    throw joinCollision;
   }
 };
 

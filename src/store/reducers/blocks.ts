@@ -166,9 +166,8 @@ export default function blocks(
       return INITIAL_STATE;
     case 'floating/fall':
       for (let i = 0; i < state.floating.length; i++) {
-        testFloatingFallCollision(state.floating[i], state.board, i);
+        testFloatingFallCollision(state.floating[i], state.board, state.limits, i);
       }
-
       return {
         ...state,
         floating: state.floating.map((i) => {
