@@ -5,6 +5,7 @@
 .front::before {
   content: "";
   position: absolute;
+  border-radius: 20%;
   width: 20%; /* Ajuste para controlar o tamanho do destaque interno */
   height: 60%; /* Ajuste para controlar o tamanho do destaque interno */
   top: 10px; /* Ajuste para controlar a posição do destaque interno */
