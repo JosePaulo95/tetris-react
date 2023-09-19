@@ -9,8 +9,8 @@ function App() {
   return (
     <>
       <ContainerTicker></ContainerTicker>
-      <ContainerScore></ContainerScore>
       <ContainerBoard></ContainerBoard>
+      <ContainerScore></ContainerScore>
       <AudioContainer></AudioContainer>
     </>
   );
