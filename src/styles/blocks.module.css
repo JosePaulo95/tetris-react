@@ -49,7 +49,7 @@
 }
 
 .block_d > .front {
-  background-color: hsl(152, 69%, 48%);
+  background-color: hsl(150, 68%, 48%);
 }
 
 .block_d > .front::before {
