@@ -1,6 +1,6 @@
 @font-face {
     font-family: 'Monomaniac One';
-    src: url('./fonts/MonomaniacOne-Regular.woff2') format('woff2');
+    src: url('/fonts/MonomaniacOne-Regular.woff2') format('woff2');
 }
 
 .scoreContainer {
