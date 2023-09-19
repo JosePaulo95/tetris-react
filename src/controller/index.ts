@@ -214,6 +214,10 @@ export const hasAnyCombinations = (board: Grid): boolean => {
   return board.some((row) => row.every((i) => i > 0));
 };
 
+export const countExactCombinations = (board: Grid): number => {
+  return board.filter((row) => row.every((i) => i > 0)).length;
+};
+
 export const countCombinations = (board: Grid, piece: Block) => {
   const piece_grid = getCurrentGrid(piece);
   if (!piece_grid) {

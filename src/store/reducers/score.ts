@@ -7,9 +7,11 @@ export default function ticks(
   state: ScoreState = INITIAL_SCORE_STATE,
   action: ScoreAction,
 ) {
+  let count;
   switch (action.type) {
     case 'score/increment':
-      return state + 100;
+      count = action.payload;
+      return state + count * 100;
     default:
       return state;
   }

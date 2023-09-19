@@ -1,6 +1,11 @@
 import { Dispatch } from 'react';
 
-import { hasAnyCombinations, isEmptyPiece } from '../controller';
+import {
+  countCombinations,
+  countExactCombinations,
+  hasAnyCombinations,
+  isEmptyPiece,
+} from '../controller';
 
 //TODO considerar o uso de UseCallbacks
 
@@ -13,9 +18,10 @@ export const handleMatches = async (
   ticks: number,
   dispatch: Dispatch<any>,
 ): Promise<void> => {
-  if (hasAnyCombinations(blocks.board)) {
+  const matches_count = countExactCombinations(blocks.board);
+  if (matches_count > 0) {
     dispatch({ type: 'board/combinations' });
-    dispatch({ type: 'score/increment' });
+    dispatch({ type: 'score/increment', payload: matches_count });
     dispatch({ type: 'audio/play', payload: 'combination' });
   }
 };
