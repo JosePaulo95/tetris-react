@@ -35,6 +35,10 @@ inputs.bind('move-left', 'ArrowLeft');
 inputs.bind('move-right', 'ArrowRight');
 inputs.bind('rotate', 'ArrowUp');
 inputs.bind('move-down', 'ArrowDown');
+inputs.bind('move-left', 'KeyA');
+inputs.bind('move-right', 'KeyD');
+inputs.bind('rotate', 'KeyW');
+inputs.bind('move-down', 'KeyS');
 
 inputs.down.on('move-left', () => {
   userController.current_input_x = -1;
