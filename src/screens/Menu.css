@@ -1,16 +1,16 @@
 @font-face {
-    font-family: 'Monomaniac One';
-    src: url('./fonts/MonomaniacOne-Regular.woff2') format('woff2');
+   font-family: 'Monomaniac One';
+  src: url('/fonts/MonomaniacOne-Regular.woff2') format('woff2');
 }
 
 @font-face {
-    font-family: 'Lato Italic';
-    src: url('./fonts/Lato-Italic.woff2') format('woff2');
+  font-family: 'Lato Italic';
+  src: url('/fonts/Lato-Italic.woff2') format('woff2');
 }
 
 @font-face {
   font-family: 'Lato Regular';
-  src: url('./fonts/Lato-Regular.woff2') format('woff2');
+  src: url('/fonts/Lato-Regular.woff2') format('woff2');
 }
 
 .titulo-container {
