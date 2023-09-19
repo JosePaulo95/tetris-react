@@ -12,6 +12,8 @@ export default function ticks(
     case 'score/increment':
       count = action.payload;
       return state + count * 100;
+    case 'score/reset':
+      return 0;
     default:
       return state;
   }

@@ -3,4 +3,8 @@ type ScoreIncrement = {
   payload: number;
 };
 
-export type ScoreAction = ScoreIncrement;
+type ScoreReset = {
+  type: 'score/reset';
+};
+
+export type ScoreAction = ScoreIncrement | ScoreReset;

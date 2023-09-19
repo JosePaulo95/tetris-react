@@ -98,6 +98,7 @@ export const handleCollision = (collision: Error, dispatch: Dispatch<any>) => {
       break;
     case 'board-collides-with-limits':
       dispatch({ type: 'blocks/reset' });
+      dispatch({ type: 'score/reset' });
       break;
     default:
       throw collision;
