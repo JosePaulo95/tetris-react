@@ -22,8 +22,8 @@ function ContainerScore({ score, dispatch }: ContainerAudioProps) {
   return (
     <ScoreContainer>
       <div className={styles.highScore}>
-        <img src="./icons/crown-icon.svg" alt="" />
         <span className={styles.scoreValue}>{7500}</span>
+        <img src="./icons/crown-icon.svg" alt="" />
       </div>
       <span className={styles.scoreValue}>{score}</span>
       <></>

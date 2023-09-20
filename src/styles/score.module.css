@@ -16,20 +16,9 @@
     width: 10vw;
 }
 .highScore img {
-    margin: 0 5px 0 0;
+    margin: 0 0 0 10px;
 }
-.scoreContainer span:first-child {
-    /* flex-grow: 1; */
-    /* text-align: left; */
-    /* width: 5vh; */
-  }
-  
-  .scoreContainer span:nth-child(2) {
-    /* flex-grow: 1; */
-    /* text-align: right; */
-    /* width: 5vh; */
-  }
-
+ 
 .scoreContainer img {
     width: 5vh;
     flex-shrink: 0;
