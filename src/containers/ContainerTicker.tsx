@@ -19,7 +19,8 @@ function ContainerTicker({ ticks, dispatch }: ContainerAudioProps) {
   useEffect(() => {
     window.addEventListener('blur', () => dispatch({ type: 'ticker/pause' }));
     window.addEventListener('focus', () => dispatch({ type: 'ticker/resume' }));
-
+  }, []);
+  useEffect(() => {
     const interval = setInterval(() => {
       dispatch({ type: 'ticker/increment' });
     }, 50);
