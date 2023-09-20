@@ -1,8 +1,8 @@
-import { useEffect } from 'react';
 import { connect, ConnectedProps } from 'react-redux';
 
 import Score from '../components/Score';
 import ScoreContainer from '../components/ScoreContainer';
+import styles from '../styles/score.module.css';
 
 type RootState = {
   score: number;
@@ -21,7 +21,11 @@ type ContainerAudioProps = PropsFromRedux;
 function ContainerScore({ score, dispatch }: ContainerAudioProps) {
   return (
     <ScoreContainer>
-      <Score current={score}></Score>
+      <div className={styles.highScore}>
+        <img src="./icons/crown-icon.svg" alt="" />
+        <span className={styles.scoreValue}>{7500}</span>
+      </div>
+      <span className={styles.scoreValue}>{score}</span>
       <></>
     </ScoreContainer>
   );

@@ -4,15 +4,37 @@
 }
 
 .scoreContainer {
-    position: absolute;
-    width: 100%;
-    height: 100vh;   
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: min(50vw, 200px);
+    margin: auto;
 }
-.scoreContainer > :first-child {
-    position: absolute;
-    bottom: 5vh;
-    left: 50vw;
+.highScore {
+    display: flex;
+    /* justify-content: space-between; */
+    width: 10vw;
 }
+.highScore img {
+    margin: 0 5px 0 0;
+}
+.scoreContainer span:first-child {
+    /* flex-grow: 1; */
+    /* text-align: left; */
+    /* width: 5vh; */
+  }
+  
+  .scoreContainer span:nth-child(2) {
+    /* flex-grow: 1; */
+    /* text-align: right; */
+    /* width: 5vh; */
+  }
+
+.scoreContainer img {
+    width: 5vh;
+    flex-shrink: 0;
+}
+
 
 .scoreValue {
     font-family: 'Monomaniac One', monospace, Arial, sans-serif;

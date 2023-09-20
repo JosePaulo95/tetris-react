@@ -164,7 +164,7 @@
   justify-content: center;
   position: relative;
   width: min(100vw, 300px);
-  height: 100vh;
+  height: 80vh;
   z-index: 10;
 }
 
