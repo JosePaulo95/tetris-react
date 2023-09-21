@@ -10,7 +10,7 @@ function App() {
     <>
       <ContainerTicker></ContainerTicker>
       <ContainerBoard></ContainerBoard>
-      {/* <ContainerScore></ContainerScore> */}
+      <ContainerScore></ContainerScore>
       <AudioContainer></AudioContainer>
     </>
   );
