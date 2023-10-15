@@ -7,9 +7,10 @@
   "description": "This project is a tetris game made in React with Typescript and Redux Toolkit.",
   "repository": "https://github.com/JosePaulo95/tetris-react",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "serve": "vite preview",
+    "dev": "vite --mode dev",
+    "build:dev": "vite build --mode dev",
+    "build:prod": "vite build --mode prod",
+    "serve": "vite preview --mode dev --port 3001",
     "lint:fix": "eslint ./src --ext .jsx,.js,.ts,.tsx --quiet --fix --ignore-path ./.gitignore",
     "lint:format": "prettier  --loglevel warn --write \"./**/*.{js,jsx,ts,tsx,css,md,json}\" ",
     "lint": "yarn lint:format && yarn lint:fix ",
