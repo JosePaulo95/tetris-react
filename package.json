@@ -8,13 +8,16 @@
   "repository": "https://github.com/JosePaulo95/tetris-react",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "vite build",
     "serve": "vite preview",
-    "test": "jest",
     "lint:fix": "eslint ./src --ext .jsx,.js,.ts,.tsx --quiet --fix --ignore-path ./.gitignore",
     "lint:format": "prettier  --loglevel warn --write \"./**/*.{js,jsx,ts,tsx,css,md,json}\" ",
     "lint": "yarn lint:format && yarn lint:fix ",
-    "type-check": "tsc"
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:c": "vitest run --coverage",
+    "test:w": "vitest",
+    "test:ci": "vitest run"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.1",
@@ -29,16 +32,21 @@
     "react-router-dom": "^6.13.0"
   },
   "devDependencies": {
-    "@types/hammerjs": "^2.0.41",
     "@babel/preset-env": "^7.22.10",
+    "@testing-library/dom": "^9.3.3",
+    "@testing-library/jest-dom": "^6.1.4",
+    "@testing-library/react": "^14.0.0",
+    "@testing-library/user-event": "^14.5.1",
+    "@types/hammerjs": "^2.0.41",
     "@types/howler": "^2.2.7",
-    "@types/jest": "^29.5.4",
+    "@types/jsdom-global": "^3.0.5",
+    "@types/node": "^20.8.6",
     "@types/react": "^18.0.26",
     "@types/react-dom": "^18.0.10",
     "@typescript-eslint/eslint-plugin": "^5.10.2",
     "@typescript-eslint/parser": "^5.10.2",
-    "@vitejs/plugin-react": "^3.0.0",
-    "babel-jest": "^29.6.4",
+    "@vitejs/plugin-react-swc": "^3.4.0",
+    "@vitest/coverage-v8": "^0.34.6",
     "eslint": "^8.8.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-import": "^2.25.4",
@@ -46,11 +54,14 @@
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-react": "^7.28.0",
     "eslint-plugin-simple-import-sort": "^8.0.0",
-    "jest": "^29.6.4",
+    "happy-dom": "^12.9.1",
+    "jsdom": "^22.1.0",
+    "jsdom-global": "^3.0.2",
     "pre-commit": "^1.2.2",
     "prettier": "^2.5.1",
-    "ts-jest": "^29.1.1",
     "typescript": "^4.5.5",
-    "vite": "^4.0.3"
+    "vite": "^4.4.11",
+    "vite-tsconfig-paths": "^4.2.1",
+    "vitest": "^0.34.6"
   }
 }
