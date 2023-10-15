@@ -1,6 +1,41 @@
-node_modules
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+
+# testing
+/coverage
+
+# production
+/dist
+/build
+
+# misc
 .DS_Store
-dist
-dist-ssr
-*.local
-node_modules/*
+*.pem
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# vercel
+.vercel
+
+# jetbrains and vscode
+.idea/
+.vscode/
+
+# PWA
+**/public/workbox-*.js
+**/public/sw.js
+**/public/fallback-*.js
+
+# storybook
+/storybook-static
+/src/stories
+
+# linters
+.eslintcache
+.stylelintcache
+.husky
