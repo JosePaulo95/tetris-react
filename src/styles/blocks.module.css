@@ -3,7 +3,7 @@
 }
 
 .front::before {
-  content: "";
+  content: '';
   position: absolute;
   border-radius: 20%;
   width: 20%; /* Ajuste para controlar o tamanho do destaque interno */
@@ -13,7 +13,8 @@
   z-index: 1; /* Certifique-se de que o destaque interno fique sobre o conteúdo principal */
 }
 
-.front, .side {
+.front,
+.side {
   border-radius: 4px;
   position: absolute;
   width: inherit;
@@ -21,7 +22,11 @@
 }
 
 .front {
-  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+  background-image: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.08) 1px,
+    transparent 1px
+  );
   background-size: 6px 6px;
 }
 
@@ -53,7 +58,7 @@
 }
 
 .block_d > .front::before {
-  background-color: hsl(152, 69%, 60%);/* Cor mais clara para block_d */
+  background-color: hsl(152, 69%, 60%); /* Cor mais clara para block_d */
 }
 
 .block_T > .front {
@@ -106,7 +111,7 @@
     7px 7px hsl(330, 100%, 40%),
     8px 8px hsl(330, 100%, 40%),
     9px 9px hsl(330, 100%, 40%),
-    10px 10px hsl(330, 100%, 40%)
+    10px 10px hsl(330, 100%, 40%);
 }
 
 .block_d > .side {
@@ -147,14 +152,14 @@
   opacity: 0;
 }
 
-.empty_block > .front{
+.empty_block > .front {
   background-color: white;
   opacity: 0.1;
 }
 
 .block {
   padding: 0;
-  width:  min(10vw, 30px);
+  width: min(10vw, 30px);
   height: min(10vw, 30px);
 }
 

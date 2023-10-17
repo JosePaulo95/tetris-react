@@ -1,6 +1,6 @@
-import './Menu.css';
+import './Menu.css'
 
-import { Link } from 'react-router-dom'; // Importe o hook useHistory
+import { Link } from 'react-router-dom' // Importe o hook useHistory
 
 function Menu() {
   return (
@@ -11,37 +11,37 @@ function Menu() {
           <h2 className="subtitle">
             Feito com React{' '}
             <img
-              src="icons/react-icon.svg"
               alt="Ícone do React"
               className="tool-icon rotate"
+              src="icons/react-icon.svg"
             />
           </h2>
         </div>
         {/* <button className="rounded-button"> */}
-        <Link to="/">
-          <img src="icons/play-icon.svg" alt="Ícone de play" />
+        <Link to="/play">
+          <img alt="Ícone de play" src="icons/play-icon.svg" />
         </Link>
         {/* </button> */}
       </div>
       <footer className="footer-container">
         <a
-          href="https://github.com/JosePaulo95/tetris-react"
-          target="_blank"
-          rel="noopener noreferrer"
           className="footer-link"
+          href="https://github.com/JosePaulo95/tetris-react"
+          rel="noopener noreferrer"
+          target="_blank"
         >
-          <img src="icons/github-icon.svg" alt="Ícone do GitHub" />
+          <img alt="Ícone do GitHub" src="icons/github-icon.svg" />
         </a>
         <a
-          href="https://twitter.com/paulinhogamedev"
-          target="_blank"
-          rel="noopener noreferrer"
           className="footer-link"
+          href="https://twitter.com/paulinhogamedev"
+          rel="noopener noreferrer"
+          target="_blank"
         >
-          <img src="icons/twitter-icon.svg" alt="Ícone do Twitter" />
+          <img alt="Ícone do Twitter" src="icons/twitter-icon.svg" />
         </a>
       </footer>
     </>
-  );
+  )
 }
-export default Menu;
+export default Menu

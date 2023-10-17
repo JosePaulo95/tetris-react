@@ -1,11 +1,11 @@
-import styles from '../styles/score.module.css';
+import styles from '../styles/score.module.css'
 
 type ScoreProps = {
-  current: number;
-};
+  current: number
+}
 
 const Score = ({ current }: ScoreProps) => {
-  return <span className={styles.scoreValue}>{current}</span>;
-};
+  return <span className={styles.scoreValue}>{current}</span>
+}
 
-export default Score;
+export default Score

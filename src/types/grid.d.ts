@@ -1,1 +1,1 @@
-export type Grid = number[][];
+export type Grid = number[][]

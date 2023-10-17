@@ -1,12 +1,12 @@
-import { motion } from 'framer-motion';
+import { motion } from 'framer-motion'
 
-import BlockFactory from '../factories/BlockFactory';
-import styles from '../styles/blocks.module.css';
+import BlockFactory from '../factories/BlockFactory'
+import styles from '../styles/blocks.module.css'
 
 type GridViewProps = {
-  grid: number[][] | undefined;
-  section?: string;
-};
+  grid: number[][] | undefined
+  section?: string
+}
 
 const GridView = ({ grid, section }: GridViewProps) => {
   return (
@@ -17,7 +17,11 @@ const GridView = ({ grid, section }: GridViewProps) => {
             {grid.map((row, i) => (
               <tr key={i}>
                 {row.map((block, j) => (
-                  <BlockFactory key={j} type={block} section={section}></BlockFactory>
+                  <BlockFactory
+                    key={j}
+                    section={section}
+                    type={block}
+                  ></BlockFactory>
                 ))}
               </tr>
             ))}
@@ -25,7 +29,7 @@ const GridView = ({ grid, section }: GridViewProps) => {
         </motion.table>
       )}
     </>
-  );
-};
+  )
+}
 
-export default GridView;
+export default GridView

@@ -1,23 +1,23 @@
-import { type BoardState, getCurrentGrid, join, removeMatches } from '../../controller';
-import { createParticles } from '../../factories/ParticlesData';
+import { getCurrentGrid, join, removeMatches } from '../../controller'
+import { createParticles } from '../../factories/ParticlesData'
 import {
   createPiece,
   emptyPiece,
   erasedPiece,
   limitsPiece,
   nextPiece,
-  randomPiece,
-} from '../../factories/PieceFactory';
-import type { Grid } from '../../types';
-import type { Block, BlocksState } from '../../types/block';
-import type { BlocksAction } from '../actions/blocks';
+  randomPiece
+} from '../../factories/PieceFactory'
+import type { Grid } from '../../types'
+import type { Block, BlocksState } from '../../types/block'
+import type { BlocksAction } from '../actions/blocks'
 import {
   testDownCollision,
   testFloatingFallCollision,
   testJoinCollision,
   testRotationCollision,
-  testSideCollision,
-} from './collision';
+  testSideCollision
+} from './collision'
 
 const INITIAL_STATE: BlocksState = {
   piece: randomPiece(),
@@ -26,121 +26,129 @@ const INITIAL_STATE: BlocksState = {
   joinning: erasedPiece(),
   floating: [],
   matching: [],
-  particles: createParticles(),
-};
-const keys = { matching: 0, joinning: 0, particles: 0 };
+  particles: createParticles()
+}
+const keys = { matching: 0, joinning: 0, particles: 0 }
 
 export default function blocks(
   state: BlocksState = INITIAL_STATE,
-  action: BlocksAction,
+  action: BlocksAction
 ): BlocksState {
-  let distance = 1;
-  let floatingCopy: Block[], boardCopy, pieceCopy, matchingCopy: Block[];
-  let matchingRows;
-  let grid_aux: Grid | undefined;
+  let distance = 1
+  let floatingCopy: Block[], boardCopy, pieceCopy, matchingCopy: Block[]
+  let matchingRows
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  let grid_aux: Grid | undefined
   switch (action.type) {
     case 'piece/move-down':
       if (state.floating.length > 0) {
-        return state;
+        return state
       }
       // grid_aux = getCurrentGrid(state.joinning);
-      testDownCollision(state.piece, state.board);
+      testDownCollision(state.piece, state.board)
       return {
         ...state,
-        piece: { ...state.piece, y: state.piece.y + 1, anim_state: 'follow' },
-      };
+        piece: { ...state.piece, y: state.piece.y + 1, anim_state: 'follow' }
+      }
     case 'piece/move-down-max':
       if (state.floating.length > 0) {
-        return state;
+        return state
       }
-      distance = 0;
+      distance = 0
       // eslint-disable-next-line no-constant-condition
       for (let i = 0; i < 20; i++) {
         try {
-          testDownCollision({ ...state.piece, y: state.piece.y + distance }, state.board);
-          distance++;
+          testDownCollision(
+            { ...state.piece, y: state.piece.y + distance },
+            state.board
+          )
+          distance++
         } catch (error) {
-          break;
+          break
         }
       }
       return {
         ...state,
-        piece: { ...state.piece, y: state.piece.y + distance, anim_state: 'follow' },
-      };
+        piece: {
+          ...state.piece,
+          y: state.piece.y + distance,
+          anim_state: 'follow'
+        }
+      }
     case 'piece/move-right':
-      testSideCollision(state.piece, state.board, 1);
+      testSideCollision(state.piece, state.board, 1)
       return {
         ...state,
-        piece: { ...state.piece, x: state.piece.x + 1, anim_state: 'follow' },
-      };
+        piece: { ...state.piece, x: state.piece.x + 1, anim_state: 'follow' }
+      }
     case 'piece/move-left':
-      testSideCollision(state.piece, state.board, -1);
+      testSideCollision(state.piece, state.board, -1)
       return {
         ...state,
-        piece: { ...state.piece, x: state.piece.x - 1 },
-      };
+        piece: { ...state.piece, x: state.piece.x - 1 }
+      }
     case 'piece/rotate':
-      pieceCopy = testRotationCollision(state.piece, state.board);
+      pieceCopy = testRotationCollision(state.piece, state.board)
       return {
         ...state,
-        piece: pieceCopy,
-      };
+        piece: pieceCopy
+      }
     case 'piece/join':
-      grid_aux = getCurrentGrid(state.piece);
+      grid_aux = getCurrentGrid(state.piece)
       if (grid_aux) {
         pieceCopy = {
           ...createPiece([grid_aux]),
           anim_state: 'biggerSplash',
-          key: keys.joinning++,
-        } as Block;
+          key: keys.joinning++
+        } satisfies Block
         return {
           ...state,
           joinning: pieceCopy,
           board: join(grid_aux, state.board),
-          piece: erasedPiece(),
-        };
+          piece: erasedPiece()
+        }
       }
-      return state;
+      return state
     case 'floating/join':
-      floatingCopy = state.floating.slice();
-      floatingCopy.splice(action.payload, 1);
-      grid_aux = getCurrentGrid(state.floating[action.payload]);
+      floatingCopy = state.floating.slice()
+      floatingCopy.splice(action.payload, 1)
+      grid_aux = getCurrentGrid(state.floating[action.payload])
       if (grid_aux) {
         pieceCopy = {
           ...createPiece([grid_aux]),
           anim_state: 'biggerSplash',
-          key: keys.joinning++,
-        } as Block;
+          key: keys.joinning++
+        } satisfies Block
         return {
           ...state,
           joinning: pieceCopy,
           board: join(grid_aux, state.board),
-          floating: floatingCopy,
-        };
+          floating: floatingCopy
+        }
       }
-      return state;
+      return state
     case 'piece/reset':
-      testJoinCollision(state.board, state.limits);
+      testJoinCollision(state.board, state.limits)
       return {
         ...state,
         piece: {
-          ...nextPiece(state),
-        },
-      };
+          ...nextPiece(state)
+        }
+      }
     case 'board/combinations':
       // TODO: bug cascata buga
       // return state;
-      //avisar cada bloco q ele sera eliminado para ativar a animação
-      ({
+      // avisar cada bloco q ele sera eliminado para ativar a animação
+      ;({
         remaining: boardCopy,
         floating: floatingCopy,
-        matching: matchingCopy,
-      } = removeMatches(state.board) as BoardState);
-      matchingRows = matchingCopy.map((i) => ({
+        matching: matchingCopy
+      } = removeMatches(state.board))
+      matchingRows = matchingCopy.map(i => ({
         ...i,
         anim_state: 'match',
-        key: keys.matching++,
-      }));
+        key: keys.matching++
+      }))
 
       return {
         ...state,
@@ -151,27 +159,32 @@ export default function blocks(
         particles: {
           ...state.particles,
           key: keys.particles++,
-          initial_grid: matchingCopy[0]?.initial_grid.map((grid) =>
-            grid.map((row) => row.map((cell) => (cell > 0 ? 100 : 0))),
-          ),
-        },
-      };
+          initial_grid: matchingCopy[0]?.initial_grid.map(grid =>
+            grid.map(row => row.map(cell => (cell > 0 ? 100 : 0)))
+          )
+        }
+      }
     case 'blocks/reset':
-      return { ...INITIAL_STATE, piece: randomPiece() };
+      return { ...INITIAL_STATE, piece: randomPiece() }
     case 'floating/fall':
       for (let i = 0; i < state.floating.length; i++) {
-        testFloatingFallCollision(state.floating[i], state.board, state.limits, i);
+        testFloatingFallCollision(
+          state.floating[i],
+          state.board,
+          state.limits,
+          i
+        )
       }
       return {
         ...state,
-        floating: state.floating.map((i) => {
+        floating: state.floating.map(i => {
           return {
             ...i,
-            y: i.y + 1,
-          };
-        }),
-      };
+            y: i.y + 1
+          }
+        })
+      }
     default:
-      return state;
+      return state
   }
 }

@@ -1,32 +1,31 @@
 @font-face {
-    font-family: 'Monomaniac One';
-    src: url('/fonts/MonomaniacOne-Regular.woff2') format('woff2');
+  font-family: 'Monomaniac One';
+  src: url('/fonts/MonomaniacOne-Regular.woff2') format('woff2');
 }
 
 .scoreContainer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: min(50vw, 200px);
-    margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: min(50vw, 200px);
+  margin: auto;
 }
 .highScore {
-    display: flex;
-    /* justify-content: space-between; */
-    width: 10vw;
+  display: flex;
+  /* justify-content: space-between; */
+  width: 10vw;
 }
 .highScore img {
-    margin: 0 0 0 10px;
-}
- 
-.scoreContainer img {
-    width: 5vh;
-    flex-shrink: 0;
+  margin: 0 0 0 10px;
 }
 
+.scoreContainer img {
+  width: 5vh;
+  flex-shrink: 0;
+}
 
 .scoreValue {
-    font-family: 'Monomaniac One', monospace, Arial, sans-serif;
-    font-size: 5vh;
-    color: white;
+  font-family: 'Monomaniac One', monospace, Arial, sans-serif;
+  font-size: 5vh;
+  color: white;
 }

@@ -1,5 +1,5 @@
 @font-face {
-   font-family: 'Monomaniac One';
+  font-family: 'Monomaniac One';
   src: url('/fonts/MonomaniacOne-Regular.woff2') format('woff2');
 }
 
@@ -18,7 +18,7 @@
   align-items: center;
   flex-direction: column;
 }
-.vertical-container *{
+.vertical-container * {
   margin: 10%;
 }
 
@@ -31,27 +31,27 @@
 }
 
 .main-title {
-    color: #FFF;
-    font-family: 'Monomaniac One', monospace, Arial, sans-serif;
-    font-size: 96px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
+  color: #fff;
+  font-family: 'Monomaniac One', monospace, Arial, sans-serif;
+  font-size: 96px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
 }
 
-.subtitle{
-    color: #FFF;
-    font-family: 'Lato Italic', monospace;
-    font-size: 28px;
-    font-style: italic;
-    font-weight: 400;
-    line-height: normal;
+.subtitle {
+  color: #fff;
+  font-family: 'Lato Italic', monospace;
+  font-size: 28px;
+  font-style: italic;
+  font-weight: 400;
+  line-height: normal;
 }
 
 .tool-icon {
-    width: inherit; /* Ajuste o tamanho do ícone conforme necessário */
-    vertical-align: middle; /* Alinha verticalmente o ícone com o texto */
-    transition: transform 0.5s ease; /* Adiciona uma transição suave à transformação */
+  width: inherit; /* Ajuste o tamanho do ícone conforme necessário */
+  vertical-align: middle; /* Alinha verticalmente o ícone com o texto */
+  transition: transform 0.5s ease; /* Adiciona uma transição suave à transformação */
 }
 
 .rotate {
