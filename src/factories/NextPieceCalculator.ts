@@ -1,12 +1,10 @@
-import { PIECE_Z_GRIDS } from '../constants';
 import {
   calcAvgHeight,
   countCombinations,
   getCurrentGrid,
   isColliding,
-  join,
 } from '../controller';
-import { Block, Grid } from '../types';
+import type { Block, Grid } from '../types';
 
 export type fitnesses = {
   id: number;

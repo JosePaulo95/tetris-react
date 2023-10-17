@@ -1,5 +1,5 @@
 import { createPiece, emptyPiece } from '../factories/PieceFactory';
-import { Block, Grid } from '../types';
+import type { Block, Grid } from '../types';
 import { splitDisconnectedGraphs } from './graph';
 
 export const getCurrentGrid = (block: Block): Grid | undefined => {
@@ -25,7 +25,7 @@ export const wrapGrid = (
   for (let i = 0; i < new_height; i++) {
     grid.push([]);
     for (let j = 0; j < new_width; j++) {
-      grid[i].push(get(original_grid, i, j - padding));
+      grid[i]?.push(get(original_grid, i, j - padding));
     }
   }
 
@@ -138,12 +138,11 @@ export const splitDisconnected = (grid: Grid): Block[] => {
 
 export const removeMatches = (board: number[][]): BoardState => {
   const b: Grid = emptyPiece();
-  const f: Grid = emptyPiece();
   const m: Grid = emptyPiece();
 
   for (let i = board.length - 1; i >= 0; i--) {
     if (board[i].every((cell) => cell !== 0)) {
-      m[i] = board[i].map((i) => 10);
+      m[i] = board[i].map(() => 10);
     } else {
       b[i] = board[i];
     }

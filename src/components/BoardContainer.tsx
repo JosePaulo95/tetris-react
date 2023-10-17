@@ -1,4 +1,4 @@
-import { Children, ReactElement } from 'react';
+import type { ReactElement } from 'react';
 
 import styles from '../styles/blocks.module.css';
 

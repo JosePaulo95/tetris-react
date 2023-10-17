@@ -1,4 +1,4 @@
-import { Block } from '../types';
+import type { Block } from '../types';
 import PieceView from './PieceView';
 
 type GroupPieceViewProps = {

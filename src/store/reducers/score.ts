@@ -1,4 +1,4 @@
-import { ScoreAction } from '../actions/score';
+import type { ScoreAction } from '../actions/score';
 
 type ScoreState = number;
 const INITIAL_SCORE_STATE = 0;

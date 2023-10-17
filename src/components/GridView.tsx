@@ -2,7 +2,6 @@ import { motion } from 'framer-motion';
 
 import BlockFactory from '../factories/BlockFactory';
 import styles from '../styles/blocks.module.css';
-import { Block } from '../types';
 
 type GridViewProps = {
   grid: number[][] | undefined;

@@ -1,6 +1,5 @@
-import { TicksAction } from '../actions/ticks';
+import type { TicksAction } from '../actions/ticks';
 
-type TicksState = number;
 const INITIAL_TICKS_STATE = 0;
 
 let isGamePaused = false; // Variável global para controle de pausa, o certo seria alterar o estado

@@ -1,4 +1,4 @@
-import { motion, Variants } from 'framer-motion';
+import { type Variants, motion } from 'framer-motion';
 
 import blockStyles from '../styles/blocks.module.css';
 import particleStyles from '../styles/particles.module.css';
@@ -11,7 +11,7 @@ const variants: Variants = {
   }),
 };
 
-const Particle = ({ anim }: { anim?: string }) => {
+const Particle = () => {
   return (
     <motion.td
       animate={'match'}

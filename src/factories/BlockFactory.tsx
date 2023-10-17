@@ -16,6 +16,8 @@ const BlockFactory = (props: BlockFactoryInterface) => {
     case 0:
       return <td className={`${styles.void_block} ${styles.block}`}></td>;
     case 100:
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
       return <Particle anim={props.anim} />;
     default:
       return (

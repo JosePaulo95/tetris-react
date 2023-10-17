@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { connect, ConnectedProps } from 'react-redux';
+import { type ConnectedProps, connect } from 'react-redux';
 
 type RootState = {
   ticks: number;

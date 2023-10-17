@@ -1,4 +1,4 @@
-import { Grid } from '../types';
+import type { Grid } from '../types';
 
 export const EMPTY_GRID = (): Grid => {
   return [[0]];
@@ -73,7 +73,6 @@ export const PIECE_L_GRIDS = (type: number): Grid[] => {
 
 export const PIECE_O_GRIDS = (type: number): Grid[] => {
   const o = type;
-  const _ = 0;
   const grids: Grid[] = [
     [
       [o, o],

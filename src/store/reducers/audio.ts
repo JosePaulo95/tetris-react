@@ -1,4 +1,4 @@
-import { AudioAction } from '../actions/audio';
+import type { AudioAction } from '../actions/audio';
 
 type AudioState = {
   name: string;

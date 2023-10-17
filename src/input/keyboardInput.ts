@@ -59,19 +59,19 @@ inputs.down.on('move-down', () => {
 const hammer = new Hammer(dom);
 hammer.get('swipe').set({ direction: Hammer.DIRECTION_ALL });
 hammer.get('swipe').set({ threshold: 0.3 });
-hammer.on('swipeleft', function (event: HammerInput) {
+hammer.on('swipeleft', function () {
   userController.current_input_x = -1;
 });
 
-hammer.on('swiperight', function (event: HammerInput) {
+hammer.on('swiperight', function () {
   userController.current_input_x = 1;
 });
 
-hammer.on('swipeup tap', function (event: HammerInput) {
+hammer.on('swipeup tap', function () {
   userController.current_input_y = 1;
 });
 
-hammer.on('swipedown', function (event: HammerInput) {
+hammer.on('swipedown', function () {
   userController.current_input_y = -1;
 });
 

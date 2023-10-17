@@ -1,6 +1,5 @@
-import { connect, ConnectedProps } from 'react-redux';
+import { type ConnectedProps, connect } from 'react-redux';
 
-import Score from '../components/Score';
 import ScoreContainer from '../components/ScoreContainer';
 import styles from '../styles/score.module.css';
 
@@ -18,7 +17,7 @@ type PropsFromRedux = ConnectedProps<typeof connector>;
 
 type ContainerAudioProps = PropsFromRedux;
 
-function ContainerScore({ score, dispatch }: ContainerAudioProps) {
+function ContainerScore({ score }: ContainerAudioProps) {
   return (
     <ScoreContainer>
       <div className={styles.highScore}>
@@ -31,4 +30,6 @@ function ContainerScore({ score, dispatch }: ContainerAudioProps) {
   );
 }
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
 export default connector(ContainerScore);

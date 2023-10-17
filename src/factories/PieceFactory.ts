@@ -1,5 +1,3 @@
-import { useAnimationControls } from 'framer-motion';
-
 import { configs } from '../configs';
 import {
   EMPTY_GRID,
@@ -10,16 +8,9 @@ import {
   PIECE_T_GRIDS,
   PIECE_Z_GRIDS,
 } from '../constants';
-import {
-  BoardState,
-  getCurrentGrid,
-  join,
-  transform,
-  wrap,
-  wrapGrid,
-} from '../controller';
-import { Block as Piece, Grid } from '../types';
-import { Block, BlocksState } from '../types/block';
+import { getCurrentGrid, join, wrapGrid } from '../controller';
+import type { Block as Piece, Grid } from '../types';
+import type { Block, BlocksState } from '../types/block';
 import { calcPiecesFitness } from './NextPieceCalculator';
 
 const allPieces = (): Block[] => {

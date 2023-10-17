@@ -1,5 +1,5 @@
-import { getCurrentGrid, isColliding, join } from '../../../controller';
-import { Block, Grid } from '../../../types';
+import { getCurrentGrid, isColliding } from '../../../controller';
+import type { Block, Grid } from '../../../types';
 
 export const testFloatingFallCollision = (
   piece: Block,
@@ -11,7 +11,6 @@ export const testFloatingFallCollision = (
     ...piece,
     y: piece.y + 1,
   });
-  const curGrid = getCurrentGrid(piece);
 
   if (!posFall || isColliding(posFall, board)) {
     const current = getCurrentGrid(piece);

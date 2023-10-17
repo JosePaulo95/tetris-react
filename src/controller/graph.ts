@@ -1,4 +1,4 @@
-import { Grid } from '../types';
+import type { Grid } from '../types';
 
 export function splitDisconnectedGraphs(grid: number[][]): Grid[] {
   const coordinatesGroups: number[][][] = findDisconnectedGraphs(grid);

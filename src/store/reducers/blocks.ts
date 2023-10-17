@@ -1,4 +1,4 @@
-import { BoardState, getCurrentGrid, join, removeMatches } from '../../controller';
+import { type BoardState, getCurrentGrid, join, removeMatches } from '../../controller';
 import { createParticles } from '../../factories/ParticlesData';
 import {
   createPiece,
@@ -8,9 +8,9 @@ import {
   nextPiece,
   randomPiece,
 } from '../../factories/PieceFactory';
-import { Grid } from '../../types';
-import { Block, BlocksState } from '../../types/block';
-import { BlocksAction } from '../actions/blocks';
+import type { Grid } from '../../types';
+import type { Block, BlocksState } from '../../types/block';
+import type { BlocksAction } from '../actions/blocks';
 import {
   testDownCollision,
   testFloatingFallCollision,
@@ -35,11 +35,7 @@ export default function blocks(
   action: BlocksAction,
 ): BlocksState {
   let distance = 1;
-  let floatingCopy: Block[],
-    boardCopy,
-    pieceCopy,
-    matchingCopy: Block[],
-    joinningCopy: Grid;
+  let floatingCopy: Block[], boardCopy, pieceCopy, matchingCopy: Block[];
   let matchingRows;
   let grid_aux: Grid | undefined;
   switch (action.type) {
@@ -132,7 +128,7 @@ export default function blocks(
         },
       };
     case 'board/combinations':
-      // bug cascata buga
+      // TODO: bug cascata buga
       // return state;
       //avisar cada bloco q ele sera eliminado para ativar a animação
       ({
@@ -155,10 +151,8 @@ export default function blocks(
         particles: {
           ...state.particles,
           key: keys.particles++,
-          initial_grid: matchingCopy[0].initial_grid.map((grid) =>
-            grid.map((row, row_index) =>
-              row.map((cell, cell_index) => (cell > 0 ? 100 : 0)),
-            ),
+          initial_grid: matchingCopy[0]?.initial_grid.map((grid) =>
+            grid.map((row) => row.map((cell) => (cell > 0 ? 100 : 0))),
           ),
         },
       };

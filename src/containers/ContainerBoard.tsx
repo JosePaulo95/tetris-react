@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { connect, ConnectedProps } from 'react-redux';
+import { type ConnectedProps, connect } from 'react-redux';
 
 import BoardContainer from '../components/BoardContainer';
 import GridView from '../components/GridView';
@@ -14,7 +14,7 @@ import {
   handleUserInput,
 } from '../handlers';
 import { userController } from '../input/keyboardInput';
-import { BlocksState } from '../types/block';
+import type { BlocksState } from '../types/block';
 
 type RootState = {
   blocks: BlocksState;
@@ -37,6 +37,8 @@ function ContainerBoard({ blocks, ticks, dispatch }: ContainerBoardProps) {
     try {
       handleMatches(blocks, ticks, dispatch);
       handleResetPiece(blocks, dispatch);
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
       handleFloatingsGoingDown(blocks, ticks, dispatch);
       handlePieceGoingDown(blocks, ticks, dispatch);
       handleUserInput(

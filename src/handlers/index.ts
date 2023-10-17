@@ -1,11 +1,6 @@
-import { Dispatch } from 'react';
+import type { Dispatch } from 'react';
 
-import {
-  countCombinations,
-  countExactCombinations,
-  hasAnyCombinations,
-  isEmptyPiece,
-} from '../controller';
+import { countExactCombinations, isEmptyPiece } from '../controller';
 
 //TODO considerar o uso de UseCallbacks
 
@@ -14,8 +9,10 @@ const isTimeToMoveDown = (ticks: number) => {
 };
 
 export const handleMatches = async (
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   blocks: any,
-  ticks: number,
+  _ticks: number,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   dispatch: Dispatch<any>,
 ): Promise<void> => {
   const matches_count = countExactCombinations(blocks.board);
@@ -27,8 +24,9 @@ export const handleMatches = async (
 };
 
 export const handleFloatingsGoingDown = (
-  blocks: any,
+  _blocks: never,
   ticks: number,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   dispatch: Dispatch<any>,
 ) => {
   if (ticks % 2 == 0) {
@@ -38,8 +36,10 @@ export const handleFloatingsGoingDown = (
 };
 
 export const handlePieceGoingDown = (
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   blocks: any,
   ticks: number,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   dispatch: Dispatch<any>,
 ) => {
   if (isTimeToMoveDown(ticks) && !isEmptyPiece(blocks.piece)) {
@@ -51,6 +51,7 @@ export const handlePieceGoingDown = (
 export const handleUserInput = (
   inputx: number | undefined,
   inputy: number | undefined,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   dispatch: Dispatch<any>,
 ) => {
   if (inputx && inputx > 0) {
@@ -74,6 +75,7 @@ export const handleUserInput = (
   }
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const handleResetPiece = (blocks: any, dispatch: Dispatch<any>) => {
   if (isEmptyPiece(blocks.piece) && blocks.floating.length == 0) {
     dispatch({ type: 'piece/reset' });
@@ -82,6 +84,7 @@ export const handleResetPiece = (blocks: any, dispatch: Dispatch<any>) => {
   }
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const handleCollision = (collision: Error, dispatch: Dispatch<any>) => {
   switch (collision.message) {
     case 'piece-down-move-collision':

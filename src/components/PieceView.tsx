@@ -1,8 +1,8 @@
-import { motion, Variants } from 'framer-motion';
+import { type Variants, motion } from 'framer-motion';
 
 import BlockFactory from '../factories/BlockFactory';
 import styles from '../styles/blocks.module.css';
-import { Block } from '../types';
+import type { Block } from '../types';
 
 type PieceViewProps = {
   piece: Block;
@@ -31,23 +31,23 @@ const variants: Variants = {
       // stiffness: 70,
     },
   }),
-  show: (piece) => ({
+  show: () => ({
     scaleX: [0, 1],
     scaleY: [0, 1],
   }),
-  biggerSplash: (piece) => ({
+  biggerSplash: () => ({
     // scaleY: [0.5, 1],
     scaleX: [0.95, 1.05, 0.95, 1],
     // ease: 'easeIn',
   }),
-  smallerSplash: (piece) => ({
+  smallerSplash: () => ({
     scaleX: [5],
   }),
-  match: (piece) => ({
+  match: () => ({
     // scaleY: [1, 0],
     // opacity: [0.3, 0.3],
   }),
-  static: (piece) => ({}),
+  static: () => ({}),
 };
 const PieceView = ({ piece, section }: PieceViewProps) => {
   return (

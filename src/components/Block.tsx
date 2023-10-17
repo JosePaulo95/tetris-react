@@ -1,4 +1,4 @@
-import { motion, Variants } from 'framer-motion';
+import { type Variants, motion } from 'framer-motion';
 
 import styles from '../styles/blocks.module.css';
 
@@ -20,7 +20,7 @@ const mapClass = (type: number) => {
 };
 
 const variants: Variants = {
-  match: (piece) => ({
+  match: () => ({
     y: [0, 30],
     scale: [1.2, 0],
     rotateZ: [0, -45],
