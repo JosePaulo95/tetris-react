@@ -1,10 +1,10 @@
-import { Block } from '../types';
-import PieceView from './PieceView';
+import type { Block } from '../types'
+import PieceView from './PieceView'
 
 type GroupPieceViewProps = {
-  pieces: Block[];
-  section?: string;
-};
+  pieces: Block[]
+  section?: string
+}
 
 const GroupPieceView = ({ pieces, section }: GroupPieceViewProps) => {
   return (
@@ -12,10 +12,10 @@ const GroupPieceView = ({ pieces, section }: GroupPieceViewProps) => {
       {pieces.map(
         (piece: Block, index: number): React.ReactElement => (
           <PieceView key={index} piece={piece} section={section} />
-        ),
+        )
       )}
     </>
-  );
-};
+  )
+}
 
-export default GroupPieceView;
+export default GroupPieceView

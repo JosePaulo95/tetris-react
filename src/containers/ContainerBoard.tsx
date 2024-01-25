@@ -1,53 +1,57 @@
-import { useEffect } from 'react';
-import { connect, ConnectedProps } from 'react-redux';
+import { useEffect } from 'react'
+import { connect, type ConnectedProps } from 'react-redux'
 
-import BoardContainer from '../components/BoardContainer';
-import GridView from '../components/GridView';
-import GroupPieceView from '../components/GroupPieceView';
-import PieceView from '../components/PieceView';
+import BoardContainer from '../components/BoardContainer'
+import GridView from '../components/GridView'
+import GroupPieceView from '../components/GroupPieceView'
+import PieceView from '../components/PieceView'
 import {
   handleCollision,
   handleFloatingsGoingDown,
   handleMatches,
   handlePieceGoingDown,
   handleResetPiece,
-  handleUserInput,
-} from '../handlers';
-import { userController } from '../input/keyboardInput';
-import { BlocksState } from '../types/block';
+  handleUserInput
+} from '../handlers'
+import { userController } from '../input/keyboardInput'
+import type { BlocksState } from '../types/block'
 
 type RootState = {
-  blocks: BlocksState;
-  ticks: number;
-};
+  blocks: BlocksState
+  ticks: number
+}
 
 const mapStateToProps = (state: RootState): RootState => ({
   blocks: state.blocks,
-  ticks: state.ticks,
-});
+  ticks: state.ticks
+})
 
-const connector = connect(mapStateToProps);
+const connector = connect(mapStateToProps)
 
-type PropsFromRedux = ConnectedProps<typeof connector>;
+type PropsFromRedux = ConnectedProps<typeof connector>
 
-export type ContainerBoardProps = PropsFromRedux;
+export type ContainerBoardProps = PropsFromRedux
 
 function ContainerBoard({ blocks, ticks, dispatch }: ContainerBoardProps) {
   useEffect(() => {
     try {
-      handleMatches(blocks, ticks, dispatch);
-      handleResetPiece(blocks, dispatch);
-      handleFloatingsGoingDown(blocks, ticks, dispatch);
-      handlePieceGoingDown(blocks, ticks, dispatch);
+      // eslint-disable-next-line @typescript-eslint/no-floating-promises
+      handleMatches(blocks, ticks, dispatch)
+      handleResetPiece(blocks, dispatch)
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-expect-error
+      handleFloatingsGoingDown(blocks, ticks, dispatch)
+      handlePieceGoingDown(blocks, ticks, dispatch)
       handleUserInput(
         userController.current_input_x,
         userController.current_input_y,
-        dispatch,
-      );
+        dispatch
+      )
     } catch (collision) {
-      handleCollision(collision as Error, dispatch);
+      handleCollision(collision as Error, dispatch)
     }
-  }, [ticks]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [ticks])
 
   return (
     <BoardContainer>
@@ -67,9 +71,9 @@ function ContainerBoard({ blocks, ticks, dispatch }: ContainerBoardProps) {
       <GridView grid={blocks.board} section="front"></GridView>
       <GroupPieceView pieces={blocks.matching} section="front"></GroupPieceView>
 
-      {/* <GridView grid={displayCurrentGrid(blocks.piece)}></GridView> isso aqui mostra grid do dados ajuda a debugar*/}
+      {/* <GridView grid={displayCurrentGrid(blocks.piece)}></GridView> isso aqui mostra grid do dados ajuda a debugar */}
     </BoardContainer>
-  );
+  )
 }
 
-export default connector(ContainerBoard);
+export default connector(ContainerBoard)

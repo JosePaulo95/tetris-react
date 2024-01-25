@@ -1,34 +1,32 @@
-import { connect, ConnectedProps } from 'react-redux';
+import { connect, type ConnectedProps } from 'react-redux'
 
-import Score from '../components/Score';
-import ScoreContainer from '../components/ScoreContainer';
-import styles from '../styles/score.module.css';
+import ScoreContainer from '../components/ScoreContainer'
+import styles from '../styles/score.module.css'
 
 type RootState = {
-  score: number;
-};
+  score: number
+}
 
 const mapStateToProps = (state: RootState): RootState => ({
-  score: state.score,
-});
+  score: state.score
+})
 
-const connector = connect(mapStateToProps);
+const connector = connect(mapStateToProps)
 
-type PropsFromRedux = ConnectedProps<typeof connector>;
+type PropsFromRedux = ConnectedProps<typeof connector>
 
-type ContainerAudioProps = PropsFromRedux;
+type ContainerAudioProps = PropsFromRedux
 
-function ContainerScore({ score, dispatch }: ContainerAudioProps) {
+function ContainerScore({ score }: ContainerAudioProps) {
   return (
     <ScoreContainer>
       <div className={styles.highScore}>
         <span className={styles.scoreValue}>{7500}</span>
-        <img src="./icons/crown-icon.svg" alt="" />
+        <img alt="" src="./icons/crown-icon.svg" />
       </div>
       <span className={styles.scoreValue}>{score}</span>
-      <></>
     </ScoreContainer>
-  );
+  )
 }
 
-export default connector(ContainerScore);
+export default connector(ContainerScore)

@@ -1,22 +1,22 @@
-import { Howl } from 'howler';
-import { useEffect } from 'react';
-import { connect, ConnectedProps } from 'react-redux';
+import { Howl } from 'howler'
+import { useEffect } from 'react'
+import { connect, type ConnectedProps } from 'react-redux'
 
 type RootState = {
   audio: {
-    name: string;
-  };
-};
+    name: string
+  }
+}
 
 const mapStateToProps = (state: RootState): RootState => ({
-  audio: state.audio,
-});
+  audio: state.audio
+})
 
-const connector = connect(mapStateToProps);
+const connector = connect(mapStateToProps)
 
-type PropsFromRedux = ConnectedProps<typeof connector>;
+type PropsFromRedux = ConnectedProps<typeof connector>
 
-type AudioContainerProps = PropsFromRedux;
+type AudioContainerProps = PropsFromRedux
 
 function AudioContainer({ audio }: AudioContainerProps) {
   const audioMap = new Map<string, string>([
@@ -24,22 +24,23 @@ function AudioContainer({ audio }: AudioContainerProps) {
     ['rotation_move', 'drop_001.ogg'],
     ['max_down_move', ''],
     ['piece_join', 'click_003.ogg'],
-    ['combination', 'maximize_006.ogg'],
-  ]);
+    ['combination', 'maximize_006.ogg']
+  ])
   useEffect(() => {
-    const fileName = audioMap.get(audio.name);
+    const fileName = audioMap.get(audio.name)
 
     const sound = new Howl({
       src: `./audio/${fileName}`,
       format: 'ogg',
-      volume: 0.3,
-    });
+      volume: 0.3
+    })
 
     // Toca o áudio quando o componente é montado
-    sound.play();
-  }, [audio]);
+    sound.play()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [audio])
 
-  return <></>;
+  return <></>
 }
 
-export default connector(AudioContainer);
+export default connector(AudioContainer)

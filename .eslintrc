@@ -1,0 +1,105 @@
+{
+  "env": {
+    "browser": true,
+    "es2022": true,
+    "node": true
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    },
+    "import/extensions": [".js", ".jsx", ".ts", ".tsx"],
+    "import/parsers": {
+      "@typescript-eslint/parser": [".ts", ".tsx"]
+    },
+    "import/resolver": {
+      "typescript": {
+        "project": "./tsconfig.json"
+      }
+    }
+  },
+  "plugins": [
+    "react",
+    "react-hooks",
+    "@typescript-eslint",
+    "promise",
+    "prettier",
+    "testing-library",
+    "jest-dom",
+    "jest",
+    "jsx-a11y",
+    "simple-import-sort"
+  ],
+  "extends": [
+    "standard-with-typescript",
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:react-hooks/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:promise/recommended",
+    "plugin:jsx-a11y/recommended",
+    "plugin:import/errors",
+    "plugin:import/typescript",
+    "prettier",
+    "plugin:prettier/recommended",
+    "plugin:jest-dom/recommended",
+    "plugin:testing-library/react",
+    "plugin:jest/style"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
+  "rules": {
+    "simple-import-sort/imports": "error",
+    "@typescript-eslint/prefer-nullish-coalescing": "off",
+    "@typescript-eslint/strict-boolean-expressions": "off",
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/consistent-type-definitions": "off",
+    "@typescript-eslint/no-floating-promises": [
+      "error",
+      {
+        "ignoreVoid": false
+      }
+    ],
+    "react/jsx-sort-props": "warn",
+    "object-shorthand": "warn",
+    "@typescript-eslint/no-var-requires": "off",
+    "@typescript-eslint/ban-ts-comment": "off",
+    "no-console": "error",
+    "react/jsx-filename-extension": [1, { "extensions": [".ts", ".tsx"] }],
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/no-unused-vars": "error",
+    "react/jsx-uses-react": "error",
+    "react/jsx-uses-vars": "error",
+    "jsx-a11y/anchor-is-valid": "off",
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
+    "react/prop-types": "off",
+    "react/react-in-jsx-scope": "off",
+    "@typescript-eslint-in-jsx-scope": "off",
+    "@typescript-eslint/no-non-null-assertion": "warn",
+    "space-before-function-paren": "off",
+    "@typescript-eslint/naming-convention": "off",
+    "eslint-disable-next-line": "off",
+    "react/display-name": "off",
+    "prettier/prettier": "error",
+    "@typescript-eslint/no-invalid-void-type": "off"
+  },
+  "overrides": [
+    {
+      "files": ["**/__tests__/?(*.)+(spec|test).tsx?"],
+      "plugins": ["jest-dom", "testing-library", "jest"],
+      "extends": [
+        "plugin:jest-dom/recommended",
+        "plugin:testing-library/react",
+        "plugin:jest/recommended",
+        "plugin:jest/style"
+      ]
+    }
+  ]
+}
