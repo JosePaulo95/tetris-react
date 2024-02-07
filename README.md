@@ -1,37 +1,25 @@
-# Vite + React + Typescript + Eslint + Prettier
+# React-tetris!
 
-A starter for React with Typescript with the fast Vite and all static code testing with Eslint and formatting with Prettier.
+A minimalist tetris game made with React.js.
+![Preview](preview.gif)
 
-![Vite + React + Typescript + Eslint + Prettier](/resources/screenshot.png)
+## How to play
 
-I found out about Vite and I wanted to have a boilerplate for the technologies that I use. You can find more about these in the following links: [Vite](https://github.com/vitejs/vite), [React](https://reactjs.org/), [Typescript](https://www.typescriptlang.org/), [Eslint](https://eslint.org/), [Prettier](https://prettier.io/).
+You can play it here:
+The rules are...
 
-## Installation
+## Project description
 
-Clone the repo and run `yarn install`
+I made this game primarily to study Redux and Error throw. Although it has some code smells, it is generally well made, and more importantly for a game: has great time sessions and replays rate. Its main features are:
 
-or Run command
+- Rudimentar AI balancement
+- Redux for state management
+- Errors for triggers
+- Modular architecture of piece and blocks
+- Pseudo 3d visuals and VFX
 
-```
-npx degit TheSwordBreaker/vite-reactts-eslint-prettier project-name
-```
+## Installation Instructions
 
-## Start
+The project uses this base TS React template with linting and more:
 
-After the successfull installation of the packages: `yarn dev`
-
-## Steps in Vscode
-
-#### (works with better with this template)
-
-1. Install Eslint and prettier extension for vs code.
-2. Make Sure Both are enabled
-3. Make sure all packages are Installed. (Mostly Eslint and prettier in node_modules)
-4. Enable formatOnSave of vs code
-5. Open a .tsx file and check if the bottom right corners of vs code have Eslint and Prettier with a double tick
-
-![Screenshot (253)_LI](https://user-images.githubusercontent.com/52120562/162486286-7383a737-d555-4f9b-a4dd-c4a81deb7b96.jpg)
-
-If Everything is Good Then It Should Work, but let me new if something else happens
-
-Made with ❤️ by theSwordBreaker(we Destory all types of sword ⚡)
+## Contact and license
