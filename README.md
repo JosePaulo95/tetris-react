@@ -13,10 +13,10 @@ Use directional inputs or swipe on mobile to move sideways, swipe up to rotate, 
 
 I made this game primarily to study Redux and Error handling. Although it has some code smells, it is generally well made, and more importantly for a game: has great time sessions and replay rate. Key features include:
 
+- Modular architecture of piece and blocks
 - Rudimentar AI balancement
 - Redux for state management
-- Errors for triggers
-- Modular architecture of piece and blocks
+- Errors as collision triggers
 - Pseudo 3d visuals and VFX
 
 ## Installation Instructions
