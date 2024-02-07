@@ -6,6 +6,7 @@ A minimalist tetris game made with React.js.
 ## How to play
 
 You can play it here: https://tetris-react-lmnz.vercel.app/
+
 Use directional inputs or swipe on mobile to move sideways, swipe up to rotate, and swipe down for a faster fall.
 
 ## Project description
@@ -20,7 +21,7 @@ I made this game primarily to study Redux and Error handling. Although it has so
 
 ## Installation Instructions
 
-The project uses this base TS React template with linting and more: https://github.com/TheSwordBreaker/vite-reactts-eslint-prettier. Run the commands below for install dependencies and run the project locally:
+The project uses this base TS React template with linting and more: https://github.com/TheSwordBreaker/vite-reactts-eslint-prettier. You can run the commands below for install dependencies and run the project locally:
 
 ```bash
 yarn
